@@ -1,0 +1,51 @@
+---
+import { business } from '../../data/business';
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+const { phone, storePhone, mapUrl } = business;
+const PHONE = phone;
+const STORE_PHONE = storePhone;
+const MAP_URL = mapUrl;
+---
+<section class="subhero" style={css({ paddingBottom: 64 })}>
+  <div class="container">
+    <div class="section-eyebrow">문의</div>
+    <h1 style={css({ fontFamily: "'Gowun Batang', serif", fontSize: "clamp(34px, 5.6vw, 54px)", maxWidth: 720 })}>
+      전화 한 통이면,<br />시작할 수 있어요
+    </h1>
+    <p class="sub">
+      어디서부터 해야 할지 모르셔도 괜찮아요. “거실 커튼 얼마예요?” 한마디면 충분해요.<br />
+      대략적인 가격대와 진행 방법을 바로 안내해 드릴게요.
+    </p>
+
+    <div style={css({ display: "flex", flexWrap: "wrap", gap: 14, alignItems: "stretch", margin: "8px 0 28px" })}>
+      <a href={`tel:${STORE_PHONE}`} style={css({
+        display: "flex", flexDirection: "column", gap: 4,
+        background: "var(--canvas)", border: "1px solid var(--hairline)",
+        borderRadius: "var(--rounded-lg)", padding: "16px 24px", textDecoration: "none",
+        minWidth: 200,
+      })}>
+        <span style={css({ fontSize: 12.5, fontWeight: 600, color: "var(--steel)", letterSpacing: "0.04em" })}>매장 전화</span>
+        <span style={css({ fontSize: 25, fontWeight: 700, color: "var(--ink-deep)", letterSpacing: "-0.5px", display: "flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" })}>
+          <Icon name="phone" size={18} /> {STORE_PHONE}
+        </span>
+      </a>
+      <a href={`tel:${PHONE}`} style={css({
+        display: "flex", flexDirection: "column", gap: 4,
+        background: "var(--canvas)", border: "1px solid var(--hairline)",
+        borderRadius: "var(--rounded-lg)", padding: "16px 24px", textDecoration: "none",
+        minWidth: 200,
+      })}>
+        <span style={css({ fontSize: 12.5, fontWeight: 600, color: "var(--steel)", letterSpacing: "0.04em" })}>휴대폰</span>
+        <span style={css({ fontSize: 25, fontWeight: 700, color: "var(--ink-deep)", letterSpacing: "-0.5px", display: "flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" })}>
+          <Icon name="phone" size={18} /> {PHONE}
+        </span>
+      </a>
+    </div>
+
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href={`tel:${PHONE}`}><Icon name="phone" /> 지금 전화 상담하기</a>
+      <a class="btn btn-secondary btn-lg" href={MAP_URL} target="_blank" rel="noopener"><Icon name="pin" /> 매장에서 원단 직접 보기</a>
+    </div>
+  </div>
+</section>

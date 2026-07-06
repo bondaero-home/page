@@ -1,0 +1,26 @@
+---
+import { css } from '../../lib/css';
+---
+<section class="block-tight">
+  <div class="container">
+    <div style={css({ background: "var(--surface)", border: "1px solid var(--hairline)", borderRadius: "var(--rounded-xl)", padding: "44px 44px 46px" })}>
+      <div style={css({ display: "grid", gridTemplateColumns: "1fr auto", gap: 32, alignItems: "center" })} class="area-grid">
+        <div>
+          <div class="section-eyebrow">서비스 지역</div>
+          <h2 style={css({ fontFamily: "'Gowun Batang', serif", fontSize: "clamp(26px, 3.6vw, 34px)", fontWeight: 700, letterSpacing: "-0.5px", margin: "0 0 14px", color: "var(--ink-deep)" })}>서비스 지역</h2>
+          <p style={css({ fontSize: 17, lineHeight: 1.8, color: "var(--slate)", margin: 0, maxWidth: 560, wordBreak: "keep-all" })}>
+            오창 과학단지, 청주시, 오송이 주 서비스 지역이에요. 이 지역은 <strong style={css({ color: "var(--ink-deep)" })}>방문 실측이 무료</strong>예요. 그 외 지역은 전화로 문의해 주시면 가능 여부를 안내해 드려요.
+          </p>
+        </div>
+        <div style={css({ display: "flex", flexDirection: "column", gap: 10, minWidth: 210 })}>
+          {["오창 과학단지", "청주시", "오송"].map((a) => (
+            <div style={css({ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14, background: "var(--canvas)", border: "1px solid var(--hairline)", borderRadius: "var(--rounded-md)", padding: "13px 18px" })}>
+              <span style={css({ fontSize: 15.5, fontWeight: 600, color: "var(--ink-deep)", whiteSpace: "nowrap" })}>{a}</span>
+              <span style={css({ fontSize: 12, fontWeight: 700, color: "var(--primary)", background: "var(--tint-mint)", padding: "3px 10px", borderRadius: "var(--rounded-full)", whiteSpace: "nowrap" })}>실측 무료</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+import { business } from '../../data/business';
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+
+const items = [
+  ["빛을 완전히 막고 푹 자고 싶어요", "암막커튼", "#blackout"],
+  ["빛은 들어오는데, 밖에서 안 비쳤으면 좋겠어요", "쉬폰커튼", "#sheer"],
+  ["암막은 필요한데 집이 답답해 보이는 건 싫어요", "이중커튼", "#double"],
+  ["빛을 세밀하게 조절하고 깔끔하게 두고 싶어요", "콤비블라인드", "#combi"],
+  ["원목 느낌으로 고급스럽게 하고 싶어요", "우드블라인드", "#wood"],
+  ["좁은 공간이나 주방에 간결하게", "롤스크린", "#roll"],
+  ["주방·욕실처럼 물기 많은 곳, 관리 쉬운 걸로", "알루미늄블라인드", "#alum"],
+  ["저층이라 사생활 보호가 제일 중요해요", "쉬폰+암막/콤비 조합", `tel:${business.phone}`],
+  ["외풍 막아주는 도톰한 걸 찾아요", "암막·기능성 원단", "#blackout"],
+];
+---
+<section class="block" style={css({ background: "var(--surface-soft)" })}>
+  <div class="container">
+    <div style={css({ marginBottom: 40 })}>
+      <div class="section-eyebrow">빠른 선택 가이드</div>
+      <h2 class="section-title">이런 고민, 어떤 제품이 맞을까요?</h2>
+      <p class="section-lede" style={css({ marginTop: 12 })}>
+        평소 많이 듣는 고민으로 정리했어요. 눌러서 자세한 설명을 확인하세요.
+      </p>
+    </div>
+    <div class="qguide">
+      {items.map(([q, r, href]) => (
+        <a href={href}>
+          <span class="q">"{q}"</span>
+          <span class="r">{r} <Icon name="arrow-right" size={13} /></span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

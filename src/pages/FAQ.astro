@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PromoBanner from '../components/PromoBanner.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileFloatingCall from '../components/MobileFloatingCall.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import FaqIntro from '../components/faq/FaqIntro.astro';
+import CategoryNav from '../components/faq/CategoryNav.astro';
+import CategoryBlock from '../components/faq/CategoryBlock.astro';
+import { css } from '../lib/css';
+import { CATEGORIES } from '../data/faq';
+
+const title = '자주 묻는 질문 — 커튼·블라인드 | 본대로홈 (청주 오창)';
+const description =
+  '커튼 가격대, 방문 실측, 제작 기간, 발주 취소, 커튼 vs 블라인드, A/S까지. 청주 오창 맞춤 커튼 전문점이 자주 묻는 질문에 답해드려요.';
+---
+<BaseLayout title={title} description={description}>
+  <PromoBanner />
+  <Header />
+  <main>
+    <FaqIntro />
+    <section class="block" style={css({ paddingTop: 64 })}>
+      <div class="container" style={css({ maxWidth: 820 })}>
+        <CategoryNav />
+        {CATEGORIES.map((c, i) => (
+          <CategoryBlock cat={c} startOpen={i === 0} />
+        ))}
+      </div>
+    </section>
+    <FinalCTA
+      titleHtml="여기 없는 질문은,<br />전화 한 통이면 됩니다"
+      leadHtml="궁금한 게 더 있으시면 편하게 전화 주세요. 진행 방법과 대략적인 가격대를 바로 알려드려요.<br />청주·오창·오송 방문 실측 무료입니다."
+      primaryLabel="지금 전화 상담하기"
+      secondaryLabel="매장 방문하기"
+    />
+  </main>
+  <Footer />
+  <MobileFloatingCall />
+</BaseLayout>

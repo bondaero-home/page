@@ -1,0 +1,18 @@
+---
+import { css } from '../../lib/css';
+interface Props {
+  label: string;
+  aspect?: string;
+}
+const { label, aspect = "4/3" } = Astro.props;
+---
+<div style={css({
+  aspectRatio: aspect,
+  background: "repeating-linear-gradient(45deg, #E5E1D7 0px, #E5E1D7 1px, #F0EDE6 1px, #F0EDE6 18px)",
+  borderRadius: "var(--rounded-xl)",
+  display: "flex", alignItems: "center", justifyContent: "center",
+  color: "var(--steel)", fontSize: 13, fontFamily: "monospace", textAlign: "center",
+  padding: 24, lineHeight: 1.5,
+})}>
+  {label}
+</div>

@@ -1,0 +1,41 @@
+---
+interface Product {
+  id: string;
+  num: string;
+  title: string;
+  img?: string;
+  svg?: string;
+  lead: string;
+  desc: string;
+  who: string;
+  space: string;
+  note: string;
+}
+interface Props {
+  p: Product;
+  flip?: boolean;
+}
+const { p, flip } = Astro.props;
+---
+<div class={"prod" + (flip ? " prod--flip" : "")} id={p.id}>
+  <div class="prod-media">
+    {p.img ? <img src={p.img} alt={p.title + " 시공 사례"} loading="lazy" /> : <Fragment set:html={p.svg} />}
+  </div>
+  <div class="prod-content">
+    <div class="prod-num">{p.num}</div>
+    <h3>{p.title}</h3>
+    <p class="lead">{p.lead}</p>
+    <p class="desc">{p.desc}</p>
+    <div class="prod-facts">
+      <div>
+        <div class="k">이런 분께</div>
+        <div class="v">{p.who}</div>
+      </div>
+      <div>
+        <div class="k">추천 공간</div>
+        <div class="v">{p.space}</div>
+      </div>
+    </div>
+    <div class="prod-note" set:html={"<b>참고</b> · " + p.note} />
+  </div>
+</div>

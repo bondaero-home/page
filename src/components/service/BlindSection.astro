@@ -1,0 +1,53 @@
+---
+import { css } from '../../lib/css';
+import ProductRow from './ProductRow.astro';
+
+/* aluminum has no photo yet — metallic-slat SVG placeholder in brand tones */
+const AlumSwatch = `<svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+  <rect width="400" height="300" fill="#cfd2cd" />
+  ${Array.from({ length: 17 }).map((_, i) => `
+  <g>
+    <rect x="0" y="${i * 18}" width="400" height="13" fill="#b9beb6" />
+    <rect x="0" y="${i * 18}" width="400" height="3" fill="#e7e9e4" />
+    <line x1="0" y1="${i * 18 + 13}" x2="400" y2="${i * 18 + 13}" stroke="#9aa096" stroke-width="1.5" />
+  </g>`).join('')}
+  <rect x="0" y="0" width="400" height="12" fill="#8e948a" />
+  <rect x="300" y="12" width="10" height="276" fill="#8e948a" opacity="0.7" />
+</svg>`;
+
+const items = [
+  { id: "combi", num: "블라인드 01", title: "콤비블라인드", img: "/images/service-combi-blind.webp",
+    lead: "빛을 세밀하게 조절하고 인테리어가 깔끔해집니다.",
+    desc: "투명·불투명 띠가 겹쳐 있어 위아래로 맞추면 빛 양을 미세하게 조절해요. 군더더기 없이 깔끔한 느낌입니다.",
+    who: "빛을 단계별로 조절하고 싶은 분, 깔끔한 정리를 원하는 분.",
+    space: "사무실, 회의실, 거실.",
+    note: "완전 암막은 아니에요. 빛 틈이 약간 생길 수 있습니다." },
+  { id: "wood", num: "블라인드 02", title: "우드블라인드", img: "/images/service-wood-blind.webp",
+    lead: "원목 질감으로 고급스러운 분위기를 더합니다.",
+    desc: "나무 슬랫(가로 날)의 각도로 빛과 시야를 조절해요. 차분하고 묵직한 분위기가 납니다.",
+    who: "차분한 집중 공간을 원하는 분, 원목 인테리어를 좋아하는 분.",
+    space: "서재, 카페, 거실.",
+    note: "원목 특성상 다른 블라인드보다 무겁고 가격대가 높은 편이에요." },
+  { id: "roll", num: "블라인드 03", title: "롤스크린", img: "/images/service-roll-screen.webp",
+    lead: "공간을 차지하지 않아 좁은 공간에 알맞습니다.",
+    desc: "천을 위로 말아 올리는 방식이라 단정하고 자리를 덜 차지해요. 원단은 빛 차단형·기능성으로도 고를 수 있습니다.",
+    who: "작은 창, 주방, 간결한 마감을 원하는 분.",
+    space: "주방, 작은 창, 욕실 인접 공간.",
+    note: "좌우 빛 틈이 생길 수 있어요. 용도에 맞는 원단으로 안내드립니다." },
+  { id: "alum", num: "블라인드 04", title: "알루미늄블라인드", svg: AlumSwatch,
+    lead: "물기·습기에 강하고 관리가 쉽습니다.",
+    desc: "금속 슬랫이라 습한 곳에서도 변형이 적고 닦기 쉬워요.",
+    who: "주방·욕실에 관리 편한 제품을 찾는 분.",
+    space: "주방, 욕실, 다용도실.",
+    note: "슬랫이 얇아 충격에 휘어질 수 있어요. 사용 공간에 맞게 안내드립니다." },
+];
+---
+<section class="block" id="blinds" style={css({ background: "var(--surface-soft)" })}>
+  <div class="container">
+    <div style={css({ marginBottom: 56 })}>
+      <div class="section-eyebrow">블라인드</div>
+      <h2 class="section-title">블라인드 종류</h2>
+    </div>
+    {items.map((p, i) => <ProductRow p={p} flip={i % 2 === 1} />)}
+  </div>
+</section>

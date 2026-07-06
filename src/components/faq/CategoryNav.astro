@@ -1,0 +1,15 @@
+---
+// 카테고리 내비게이션 (점프 링크)
+import { css } from '../../lib/css';
+import { CATEGORIES } from '../../data/faq';
+---
+<div style={css({ display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center", marginBottom: 56 })}>
+  {CATEGORIES.map((c) => (
+    <a href={`#${c.id}`} style={css({
+      fontSize: 14, fontWeight: 600, color: "var(--charcoal)",
+      background: "var(--canvas)", border: "1px solid var(--hairline-strong)",
+      borderRadius: "var(--rounded-full)", padding: "9px 18px", textDecoration: "none",
+      whiteSpace: "nowrap",
+    })}>{c.title}</a>
+  ))}
+</div>

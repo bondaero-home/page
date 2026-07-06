@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { css } from '../lib/css';
+import PromoBanner from '../components/PromoBanner.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileFloatingCall from '../components/MobileFloatingCall.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import ProcessIntro from '../components/process/ProcessIntro.astro';
+import StepsSummaryMobile from '../components/process/StepsSummaryMobile.astro';
+import StepsDetail from '../components/process/StepsDetail.astro';
+import Schedule from '../components/process/Schedule.astro';
+import PreNotice from '../components/process/PreNotice.astro';
+import { STEPS_SUMMARY } from '../components/process/data';
+
+const title = '상담부터 설치까지 — 서비스 진행 과정 | 본대로홈 (청주 오창)';
+const description = '매장 상담 → 원단 확인 → 방문 실측 → 맞춤 제작 → 설치. 발주 후 약 일주일 안에 설치까지. 청주·오창·오송 방문 실측 무료, 오창 커튼 전문점.';
+---
+<BaseLayout title={title} description={description}>
+  <PromoBanner />
+  <Header />
+  <main>
+    <ProcessIntro />
+    <section class="block" style={css({ background: "var(--surface-soft)", paddingTop: 80, paddingBottom: 80 })}>
+      <div class="container">
+        <div style={css({ marginBottom: 48 })}>
+          <div class="section-eyebrow">전체 흐름</div>
+          <h2 class="section-title">전체 6단계, 한눈에 보기</h2>
+        </div>
+        {/* 데스크톱 */}
+        <div class="steps-summary-desktop" style={css({ position: "relative" })}>
+          <div style={css({ position: "absolute", top: 27, left: "8.33%", right: "8.33%", height: 1, background: "var(--hairline-strong)", zIndex: 0 })} />
+          {STEPS_SUMMARY.map((s, i) => (
+            <div style={css({ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "0 8px" })}>
+              <div style={css({
+                width: 54, height: 54, borderRadius: "50%",
+                background: i === 0 || i === 5 ? "var(--primary)" : "var(--canvas)",
+                border: `2px solid ${i === 0 || i === 5 ? "var(--primary)" : "var(--hairline-strong)"}`,
+                color: i === 0 || i === 5 ? "#fff" : "var(--ink)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 13, fontWeight: 700, letterSpacing: "0.04em",
+                marginBottom: 16, boxShadow: "0 0 0 5px var(--surface-soft)", flexShrink: 0,
+              })}>{s.n}</div>
+              <div style={css({ fontSize: 14, fontWeight: 700, color: "var(--ink-deep)", marginBottom: 6, wordBreak: "keep-all" })}>{s.name}</div>
+              <div style={css({ fontSize: 12, color: "var(--steel)", lineHeight: 1.55, wordBreak: "keep-all" })}>{s.desc}</div>
+            </div>
+          ))}
+        </div>
+        {/* 모바일 */}
+        <StepsSummaryMobile />
+      </div>
+    </section>
+    <StepsDetail />
+    <Schedule />
+    <PreNotice />
+    <FinalCTA
+      titleHtml="진행이 궁금하시면,<br />전화 한 통이면 됩니다"
+      leadHtml="어디서부터 시작할지 모르셔도 괜찮아요. 전화 주시면 진행 순서와 대략적인 일정·가격대를 바로 안내해 드려요.<br />청주·오창·오송 방문 실측 무료입니다."
+      primaryLabel="지금 전화 상담하기"
+      secondaryLabel="매장 방문하기"
+    />
+  </main>
+  <Footer />
+  <MobileFloatingCall />
+</BaseLayout>
+
+<style is:global>
+  .step-detail-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 860px) {
+    .step-detail-row {
+      grid-template-columns: 1fr !important;
+    }
+    .step-detail-row > *:first-child {
+      order: 0 !important;
+    }
+    .step-detail-row > *:last-child {
+      order: 1 !important;
+    }
+  }
+
+  /* 6단계 요약 그리드 반응형 */
+  .steps-summary-desktop {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+  @media (max-width: 860px) {
+    .steps-summary-desktop {
+      display: none;
+    }
+    .steps-summary-mobile {
+      display: flex !important;
+    }
+  }
+</style>

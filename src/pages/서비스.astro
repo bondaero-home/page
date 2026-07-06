@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PromoBanner from '../components/PromoBanner.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileFloatingCall from '../components/MobileFloatingCall.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import ServiceIntro from '../components/service/ServiceIntro.astro';
+import QuickGuide from '../components/service/QuickGuide.astro';
+import CurtainSection from '../components/service/CurtainSection.astro';
+import BlindSection from '../components/service/BlindSection.astro';
+import SpaceGuide from '../components/service/SpaceGuide.astro';
+import PriceGuide from '../components/service/PriceGuide.astro';
+import FabricTrust from '../components/service/FabricTrust.astro';
+---
+<BaseLayout
+  title="커튼·블라인드 종류와 선택 가이드 | 본대로홈 (청주 오창)"
+  description="암막커튼, 쉬폰커튼, 이중커튼, 콤비·우드·롤스크린·알루미늄블라인드. 공간별 추천과 장단점, 대략적 가격대까지. 청주 오창 맞춤 커튼 전문점."
+>
+  <PromoBanner />
+  <Header />
+  <main>
+    <ServiceIntro />
+    <QuickGuide />
+    <CurtainSection />
+    <BlindSection />
+    <SpaceGuide />
+    <PriceGuide />
+    <FabricTrust />
+    <FinalCTA
+      titleHtml="어떤 게 맞을지<br />함께 골라 드릴게요"
+      leadHtml="전화 한 통이면 공간에 맞는 제품과 대략적 가격대를 바로 안내해 드려요.<br />청주·오창·오송 방문 실측 무료입니다."
+      primaryLabel="지금 전화 상담하기"
+      secondaryLabel="매장 방문하기"
+    />
+  </main>
+  <Footer />
+  <MobileFloatingCall />
+</BaseLayout>

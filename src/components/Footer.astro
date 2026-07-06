@@ -1,0 +1,63 @@
+---
+import { business } from '../data/business';
+import Icon from './Icon.astro';
+const { phone, storePhone } = { phone: business.phone, storePhone: business.storePhone };
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
+          <img src="/images/mark.png" alt="본대로홈 로고" width="28" height="28" style={{ borderRadius: '7px', display: 'block', objectFit: 'cover', flexShrink: 0 }} />
+          <span class="name" style={{ whiteSpace: 'nowrap', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: '21px', lineHeight: 1, marginBottom: 0, letterSpacing: '0.01em', WebkitTextStrokeWidth: '0.4px', WebkitTextStrokeColor: 'currentColor' }}>본대로홈</span>
+        </div>
+        <p>
+          청주 오창 맞춤 커튼·블라인드 전문점.<br />
+          커튼 전문 12년, 함께 고민하고 직접 만들어 드립니다.
+        </p>
+        <div style={{ marginTop: '18px', display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', color: 'var(--steel)', lineHeight: 1.7 }}>
+          <div>대표 {business.owner} · 사업자등록 {business.bizRegistration}</div>
+          <div>충북 청주시 청원구 오창읍 오청대로 315 · 올리브 상가 138호</div>
+          <div>영업시간 10:30 – 19:00 (일·공휴일 휴무)</div>
+        </div>
+      </div>
+      <div>
+        <h6>페이지</h6>
+        <ul>
+          <li><a href="/">메인</a></li>
+          <li><a href="/서비스.html">서비스</a></li>
+          <li><a href="/서비스과정.html">서비스 과정</a></li>
+          <li><a href="/FAQ.html">FAQ</a></li>
+          <li><a href="/블로그.html">블로그</a></li>
+          <li><a href="/문의.html">문의</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>제품</h6>
+        <ul>
+          <li><a href="/서비스.html#blackout">암막커튼</a></li>
+          <li><a href="/서비스.html#sheer">쉬폰커튼</a></li>
+          <li><a href="/서비스.html#double">이중커튼</a></li>
+          <li><a href="/서비스.html#combi">콤비블라인드</a></li>
+          <li><a href="/서비스.html#wood">우드블라인드</a></li>
+          <li><a href="/서비스.html#roll">롤스크린</a></li>
+          <li><a href="/서비스.html#alum">알루미늄블라인드</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>문의</h6>
+        <ul>
+          <li><span style={{ color: 'var(--steel)', marginRight: '6px' }}>매장</span><a href={`tel:${storePhone}`} style={{ color: 'var(--ink)', fontWeight: 600 }}>{storePhone}</a></li>
+          <li><span style={{ color: 'var(--steel)', marginRight: '6px' }}>휴대폰</span><a href={`tel:${phone}`} style={{ color: 'var(--ink)', fontWeight: 600 }}>{phone}</a></li>
+          <li>평일 10:30 – 19:00</li>
+          <li>일요일 · 공휴일 휴무</li>
+          <li style={{ marginTop: '12px' }}><a href={`tel:${phone}`} class="btn btn-primary" style={{ padding: '8px 14px' }}><Icon name="phone" /> 전화 상담</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 본대로홈. All rights reserved.</div>
+      <div>청주 오창 · 오송 · 청원 지역 출장 무료</div>
+    </div>
+  </div>
+</footer>

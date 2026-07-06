@@ -1,0 +1,103 @@
+---
+// parts-mid-v2.jsx의 로컬 Icon(name, size, stroke) — 정제된 라인 아이콘 세트.
+// 파운데이션 Icon.astro와는 다른 별도 컴포넌트.
+interface Props {
+  name: string;
+  size?: number;
+  stroke?: number;
+}
+const { name, size = 24, stroke = 1.4 } = Astro.props;
+const common = {
+  width: size,
+  height: size,
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: 'currentColor',
+  'stroke-width': stroke,
+  'stroke-linecap': 'round',
+  'stroke-linejoin': 'round',
+};
+---
+{name === 'window' && (
+  <svg {...common}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="1.2" />
+    <line x1="12" y1="3.5" x2="12" y2="20.5" />
+    <line x1="3.5" y1="12" x2="20.5" y2="12" />
+    <path d="M6.5 3.5 V 20.5" stroke-opacity="0.35" />
+  </svg>
+)}
+{name === 'loom' && (
+  <svg {...common}>
+    <ellipse cx="12" cy="12" rx="4" ry="7" />
+    <path d="M8 8 C 11 9, 13 9, 16 8" />
+    <path d="M8 12 C 11 13, 13 13, 16 12" />
+    <path d="M8 16 C 11 17, 13 17, 16 16" />
+    <line x1="12" y1="3" x2="12" y2="5" />
+    <line x1="12" y1="19" x2="12" y2="21" />
+  </svg>
+)}
+{name === 'needle' && (
+  <svg {...common}>
+    <rect x="2.8" y="16.8" width="18.4" height="3.4" rx="0.7" />
+    <path d="M5.2 16.8 V 8.4 C 5.2 7.7, 5.8 7.2, 6.4 7.2 H 17.6 C 18.3 7.2, 18.8 7.7, 18.8 8.4 V 13" />
+    <line x1="18.8" y1="13.2" x2="18.8" y2="15.4" stroke-width={stroke + 0.4} />
+    <circle cx="11.4" cy="5.6" r="1.3" />
+    <line x1="11.4" y1="6.9" x2="11.4" y2="8" stroke-opacity="0.45" />
+    <circle cx="7.6" cy="11.5" r="1.7" stroke-opacity="0.4" />
+  </svg>
+)}
+{name === 'phone' && (
+  <svg {...common}>
+    <path d="M5 4.5 C 5 4, 5.5 3.5, 6 3.5 H 8.2 C 8.7 3.5, 9.1 3.9, 9.2 4.4 L 9.9 7.6 C 10 8.1, 9.8 8.5, 9.4 8.8 L 8.1 9.7 C 9.3 12.4, 11.6 14.7, 14.3 15.9 L 15.2 14.6 C 15.5 14.2, 15.9 14, 16.4 14.1 L 19.6 14.8 C 20.1 14.9, 20.5 15.3, 20.5 15.8 V 18 C 20.5 18.5, 20 19, 19.5 19 C 11.5 19, 5 12.5, 5 4.5 Z" />
+  </svg>
+)}
+{name === 'swatch' && (
+  <svg {...common}>
+    <rect x="4" y="6" width="11" height="14" rx="1.5" transform="rotate(-8 9.5 13)" />
+    <rect x="9" y="4" width="11" height="14" rx="1.5" transform="rotate(8 14.5 11)" />
+  </svg>
+)}
+{name === 'ruler' && (
+  <svg {...common}>
+    <rect x="3" y="9" width="18" height="6" rx="1" transform="rotate(-12 12 12)" />
+    <path d="M6.3 11.6 L 6.8 12.6 M9.3 10.6 L 9.8 11.6 M12.3 9.6 L 12.8 10.6 M15.3 8.6 L 15.8 9.6 M18.3 7.6 L 18.8 8.6" />
+  </svg>
+)}
+{name === 'clipboard' && (
+  <svg {...common}>
+    <rect x="5" y="4.5" width="14" height="16" rx="1.5" />
+    <rect x="9" y="3" width="6" height="3" rx="0.6" />
+    <line x1="8.5" y1="11" x2="15.5" y2="11" />
+    <line x1="8.5" y1="14" x2="15.5" y2="14" />
+    <line x1="8.5" y1="17" x2="13" y2="17" />
+  </svg>
+)}
+{name === 'scissors' && (
+  <svg {...common}>
+    <circle cx="7" cy="7" r="2.6" />
+    <circle cx="7" cy="17" r="2.6" />
+    <line x1="9" y1="9" x2="20" y2="20" />
+    <line x1="9" y1="15" x2="20" y2="4" />
+  </svg>
+)}
+{name === 'hangrod' && (
+  <svg {...common}>
+    <line x1="3.5" y1="6" x2="20.5" y2="6" />
+    <circle cx="3.8" cy="6" r="1.1" fill="currentColor" stroke="none" />
+    <circle cx="20.2" cy="6" r="1.1" fill="currentColor" stroke="none" />
+    <path d="M7 7 V 19 M11 7 V 19 M15 7 V 19 M19 7 V 19" stroke-opacity="0.55" />
+  </svg>
+)}
+{name === 'pin' && (
+  <svg {...common}>
+    <path d="M12 21 C 7 15.5, 5 12.5, 5 9.2 A 7 7 0 0 1 19 9.2 C 19 12.5, 17 15.5, 12 21 Z" />
+    <circle cx="12" cy="9.3" r="2.3" />
+  </svg>
+)}
+{name === 'home' && (
+  <svg {...common}>
+    <path d="M3.8 11.5 L 12 4.5 L 20.2 11.5" />
+    <path d="M5.6 10.3 V 19.5 H 18.4 V 10.3" />
+    <path d="M10 19.5 V 14 H 14 V 19.5" />
+  </svg>
+)}

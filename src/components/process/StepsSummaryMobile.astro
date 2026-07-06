@@ -1,0 +1,22 @@
+---
+import { css } from '../../lib/css';
+import { STEPS_SUMMARY } from './data';
+---
+<div class="steps-summary-mobile" style={css({ display: "none", flexDirection: "column", gap: 0 })}>
+  {STEPS_SUMMARY.map((s, i) => (
+    <div style={css({ display: "flex", alignItems: "flex-start", gap: 16, paddingBottom: i < 5 ? 24 : 0, position: "relative", paddingLeft: 4 })}>
+      <div style={css({
+        width: 44, height: 44, borderRadius: "50%", flexShrink: 0,
+        background: i === 0 || i === 5 ? "var(--primary)" : "var(--canvas)",
+        border: `2px solid ${i === 0 || i === 5 ? "var(--primary)" : "var(--hairline-strong)"}`,
+        color: i === 0 || i === 5 ? "#fff" : "var(--ink)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontSize: 12, fontWeight: 700,
+      })}>{s.n}</div>
+      <div style={css({ paddingTop: 10 })}>
+        <div style={css({ fontSize: 16, fontWeight: 700, color: "var(--ink-deep)", marginBottom: 4 })}>{s.name}</div>
+        <div style={css({ fontSize: 14, color: "var(--steel)", lineHeight: 1.55, wordBreak: "keep-all" })}>{s.desc}</div>
+      </div>
+    </div>
+  ))}
+</div>

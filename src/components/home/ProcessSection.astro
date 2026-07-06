@@ -1,0 +1,40 @@
+---
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+import MidIcon from './MidIcon.astro';
+
+const steps = [
+  { n: "01", title: "매장 방문 또는 전화 문의", desc: "원하시는 공간과 제품을 편하게 말씀해 주세요", tint: "var(--tint-peach)", icon: "phone" },
+  { n: "02", title: "샘플 확인·상품 결정", desc: "매장에서 원단을 직접 보고 결정하실 수 있습니다", tint: "var(--tint-rose)", icon: "swatch" },
+  { n: "03", title: "방문 실측", desc: "창문 방향과 인테리어 색감까지 함께 보며 조율합니다", tint: "var(--tint-yellow)", icon: "ruler" },
+  { n: "04", title: "사이즈 측정·발주", desc: "정확한 사이즈 측정 후 공장에 발주합니다", tint: "var(--tint-mint)", icon: "clipboard" },
+  { n: "05", title: "맞춤 제작", desc: "발주 후 약 1주일 내 제작 완료", tint: "var(--tint-sky)", icon: "scissors" },
+  { n: "06", title: "설치", desc: "약속된 날짜에 방문해 설치해 드립니다", tint: "var(--tint-lavender)", icon: "hangrod" },
+];
+---
+<section class="block" id="process">
+  <div class="container">
+    <div style={css({ marginBottom: 48 })}>
+      <div class="section-eyebrow">서비스 과정</div>
+      <h2 class="section-title">어떻게 진행되나요?</h2>
+    </div>
+    <div class="steps">
+      {steps.map((s) => (
+        <div class="step">
+          <div class="step-icon" style={css({ background: s.tint, color: "var(--primary)" })}><MidIcon name={s.icon} size={20} stroke={2} /></div>
+          <div class="n">STEP {s.n}</div>
+          <h5>{s.title}</h5>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+    <div style={css({ marginTop: 28, padding: "16px 22px", background: "var(--surface)", border: "1px solid var(--hairline-strong)", borderLeft: "3px solid var(--brand-orange-deep)", borderRadius: 10, fontSize: 15, color: "var(--charcoal)", fontWeight: 500 })}>
+      ※ 맞춤 제작 특성상 <strong>발주 후에는 취소가 어렵습니다.</strong> 실측 시 색감·원단·길이까지 함께 충분히 결정합니다.
+    </div>
+    <div style={css({ marginTop: 24, textAlign: "center" })}>
+      <a class="btn-link t-body-m" href="/process" style={css({ display: "inline-flex", alignItems: "center", gap: 6 })}>
+        서비스 과정 자세히 보기 <Icon name="arrow-right" size={14} />
+      </a>
+    </div>
+  </div>
+</section>

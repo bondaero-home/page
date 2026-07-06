@@ -1,0 +1,96 @@
+---
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+import ImgPlaceholder from './ImgPlaceholder.astro';
+import type { StepDetailData } from './data';
+interface Props {
+  step: StepDetailData;
+  idx: number;
+}
+const { step, idx } = Astro.props;
+const flip = idx % 2 === 1;
+const hasImage = step.img || step.imgLabel;
+---
+<div style={css({
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: "clamp(28px, 5vw, 64px)",
+  alignItems: "center",
+})} class="step-detail-row">
+  {flip && (hasImage ? (
+    <div style={css({ borderRadius: "var(--rounded-xl)", overflow: "hidden", boxShadow: "var(--shadow-2)" })}>
+      {step.img
+        ? <img src={step.img} alt={step.imgAlt || step.name} loading="lazy" style={css({ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" })} />
+        : <ImgPlaceholder label={step.imgLabel!} />
+      }
+    </div>
+  ) : (
+    <div style={css({
+      aspectRatio: "4/3",
+      background: "var(--surface)",
+      border: "1px solid var(--hairline)",
+      borderRadius: "var(--rounded-xl)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      flexDirection: "column", gap: 8,
+    })}>
+      <div style={css({ fontSize: "clamp(64px, 10vw, 100px)", fontWeight: 800, color: "var(--hairline-strong)", letterSpacing: "-4px", lineHeight: 1 })}>{String(idx + 1).padStart(2, "0")}</div>
+      <div style={css({ fontSize: 15, color: "var(--steel)", fontWeight: 500 })}>{step.name}</div>
+    </div>
+  ))}
+
+  <div style={css({ display: "flex", flexDirection: "column", justifyContent: "center", gap: 0 })}>
+    <div style={css({ fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", color: "var(--brand-orange-deep)", marginBottom: 10, textTransform: "uppercase" })}>{step.n}</div>
+    <h3 style={css({ fontSize: "clamp(22px, 3vw, 28px)", fontWeight: 700, letterSpacing: "-0.4px", margin: "0 0 20px", color: "var(--ink-deep)", wordBreak: "keep-all" })}>{step.name}</h3>
+    <div style={css({ display: "flex", flexDirection: "column", gap: 12 })}>
+      {step.body.map((t) => (
+        <p style={css({ margin: 0, fontSize: 16, lineHeight: 1.75, color: "var(--slate)", wordBreak: "keep-all" })}>{t}</p>
+      ))}
+    </div>
+    {step.highlight && (
+      <div style={css({
+        marginTop: 20,
+        background: "var(--surface-soft)",
+        border: "1px solid var(--hairline)",
+        borderLeft: "3px solid var(--primary)",
+        borderRadius: "var(--rounded-md)",
+        padding: "14px 18px",
+        fontSize: 15, fontWeight: 500, color: "var(--charcoal)", lineHeight: 1.65, wordBreak: "keep-all"
+      })}>
+        {step.highlight}
+      </div>
+    )}
+    {step.cta && (
+      <div style={css({ marginTop: 28 })}>
+        <a
+          class={"btn btn-lg " + (step.cta.primary ? "btn-primary" : "btn-secondary")}
+          href={step.cta.href}
+          {...(step.cta.external ? { target: "_blank", rel: "noopener" } : {})}
+        >
+          {step.cta.primary ? <Icon name="phone" /> : <Icon name="pin" />}
+          {step.cta.text}
+        </a>
+      </div>
+    )}
+  </div>
+
+  {!flip && (hasImage ? (
+    <div style={css({ borderRadius: "var(--rounded-xl)", overflow: "hidden", boxShadow: "var(--shadow-2)" })}>
+      {step.img
+        ? <img src={step.img} alt={step.imgAlt || step.name} loading="lazy" style={css({ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" })} />
+        : <ImgPlaceholder label={step.imgLabel!} />
+      }
+    </div>
+  ) : (
+    <div style={css({
+      aspectRatio: "4/3",
+      background: "var(--surface)",
+      border: "1px solid var(--hairline)",
+      borderRadius: "var(--rounded-xl)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      flexDirection: "column", gap: 8,
+    })}>
+      <div style={css({ fontSize: "clamp(64px, 10vw, 100px)", fontWeight: 800, color: "var(--hairline-strong)", letterSpacing: "-4px", lineHeight: 1 })}>{String(idx + 1).padStart(2, "0")}</div>
+      <div style={css({ fontSize: 15, color: "var(--steel)", fontWeight: 500 })}>{step.name}</div>
+    </div>
+  ))}
+</div>

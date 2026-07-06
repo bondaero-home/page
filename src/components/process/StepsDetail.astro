@@ -1,0 +1,16 @@
+---
+import { css } from '../../lib/css';
+import StepDetail from './StepDetail.astro';
+import { STEPS_DETAIL } from './data';
+---
+<section class="block">
+  <div class="container">
+    <div style={css({ marginBottom: 56 })}>
+      <div class="section-eyebrow">단계별 상세</div>
+      <h2 class="section-title">단계별로 자세히 보면</h2>
+    </div>
+    <div style={css({ display: "flex", flexDirection: "column", gap: "clamp(56px, 8vw, 96px)" })}>
+      {STEPS_DETAIL.map((s, i) => <StepDetail step={s} idx={i} />)}
+    </div>
+  </div>
+</section>

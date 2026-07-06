@@ -1,0 +1,18 @@
+---
+import { business } from '../../data/business';
+import Icon from '../Icon.astro';
+---
+<section class="subhero">
+  <div class="container">
+    <div class="section-eyebrow">서비스 소개</div>
+    <h1>어떤 커튼이<br />우리 집에 맞을까요?</h1>
+    <p class="sub">
+      공간과 목적에 따라 맞는 제품이 달라요. 종류별 특징과 어울리는 공간을 정리했습니다.
+      고르기 어려우면 전화 한 통으로 함께 골라 드릴게요.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href={`tel:${business.phone}`}><Icon name="phone" /> 지금 전화 상담하기</a>
+      <a class="btn btn-secondary btn-lg" href={business.mapUrl} target="_blank" rel="noopener"><Icon name="pin" /> 매장에서 원단 직접 보기</a>
+    </div>
+  </div>
+</section>

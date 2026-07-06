@@ -1,0 +1,25 @@
+---
+import { business } from '../../data/business';
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+const { phone, mapUrl } = business;
+---
+<section class="subhero" style={css({ paddingBottom: 72 })}>
+  <div class="container">
+    <div class="section-eyebrow">서비스 과정</div>
+    <h1 style={css({ fontSize: "clamp(36px, 6vw, 60px)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-1.5px", margin: "0 0 20px", color: "var(--ink-deep)", wordBreak: "keep-all", maxWidth: 760 })}>
+      상담부터 설치까지,<br />이렇게 진행됩니다
+    </h1>
+    <p class="sub" style={css({ fontSize: 18, lineHeight: 1.75, color: "var(--slate)", margin: "0 0 28px", maxWidth: 640, wordBreak: "keep-all" })}>
+      매장에서 원단을 보고 → 댁으로 찾아가 실측하고 → 창에 꼭 맞게 제작해 → 설치까지.<br />
+      발주하면 약 일주일 안에 끝나요. 처음 맡기는 분도 걱정 없이 따라오실 수 있게 정리했어요.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href={`tel:${phone}`}><Icon name="phone" /> 지금 전화 상담하기</a>
+      <a class="btn btn-secondary btn-lg" href={mapUrl} target="_blank" rel="noopener"><Icon name="pin" /> 매장에서 원단 직접 보기</a>
+    </div>
+    <div style={css({ marginTop: 48, borderRadius: "var(--rounded-xl)", overflow: "hidden", boxShadow: "var(--shadow-2)" })}>
+      <img src="/images/process-hero-install.webp" alt="본대로홈 시공 — 거실 대형 창에 콤비블라인드 설치 현장" loading="lazy" style={css({ width: "100%", aspectRatio: "16/9", objectFit: "cover", display: "block" })} />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+---
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+import MidIcon from './MidIcon.astro';
+import CasePhoto from './CasePhoto.astro';
+
+const cases = [
+  { kind: "livingSheer", area: "청주 오창", spec: "30평 · 거실 쉬폰커튼", note: "자연 채광이 부드럽게 들어오는 거실로 마무리했습니다." },
+  { kind: "bedroomBlackout", area: "청주 오송", spec: "24평 · 안방 암막커튼", note: "야간 근무자 가정, 낮에도 완벽한 빛 차단으로 시공했습니다." },
+  { kind: "livingDouble", area: "청주 오창", spec: "33평 · 거실 이중커튼 (암막+쉬폰)", note: "낮과 밤의 채광을 자유롭게 조절하는 호텔식 마감입니다." },
+  { kind: "officeCombi", area: "청주 오창과학단지", spec: "사무실 · 콤비블라인드", note: "회의실 빛 조절을 위한 콤비블라인드 시공입니다." },
+];
+---
+<section class="block" id="cases" style={css({ background: "var(--surface-soft)" })}>
+  <div class="container">
+    <div style={css({ marginBottom: 48 })}>
+      <div class="section-eyebrow" style={css({ color: "var(--brand-purple-800)" })}>최근 시공 사례</div>
+      <h2 class="section-title">최근 시공 사례</h2>
+    </div>
+    <div class="grid grid-2">
+      {cases.map((c) => (
+        <div class="case">
+          <div class="thumb"><CasePhoto kind={c.kind} /></div>
+          <div class="body">
+            <div class="meta">
+              <span style={css({ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--primary)" })}><MidIcon name="pin" size={16} stroke={2} /> <span style={css({ color: "var(--steel)" })}>{c.area}</span></span>
+              <span style={css({ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--primary)" })}><MidIcon name="home" size={16} stroke={2} /> <span style={css({ color: "var(--steel)" })}>{c.spec}</span></span>
+            </div>
+            <p>{c.note}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style={css({ marginTop: 36, textAlign: "center" })}>
+      <a class="btn-link t-body-m" href="/blog" style={css({ display: "inline-flex", alignItems: "center", gap: 6 })}>
+        블로그에서 더 많은 사례 보기 <Icon name="arrow-right" size={14} />
+      </a>
+    </div>
+  </div>
+</section>

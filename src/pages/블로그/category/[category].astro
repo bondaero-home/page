@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BlogListShell from '../../../layouts/BlogListShell.astro';
+import PostGrid from '../../../components/blog/PostGrid.astro';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('blog')).filter((p) => !p.data.draft);
+  const categories = [...new Set(all.map((p) => p.data.category))];
+  return categories.map((category) => ({
+    params: { category },
+    props: {
+      category,
+      posts: all
+        .filter((p) => p.data.category === category)
+        .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()),
+    },
+  }));
+}
+
+const { category, posts } = Astro.props;
+---
+<BlogListShell
+  metaTitle={`${category} — 청주 오창 커튼·블라인드 | 본대로홈`}
+  metaDescription={`본대로홈 블로그 ${category} 모음. 청주 오창·오송 커튼·블라인드 ${category} 글을 확인하세요.`}
+  eyebrow="블로그 · 카테고리"
+  heading={category}
+  lead={`'${category}' 카테고리 글 ${posts.length}편`}
+>
+  <PostGrid posts={posts} />
+</BlogListShell>

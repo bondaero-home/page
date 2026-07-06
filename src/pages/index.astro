@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PromoBanner from '../components/PromoBanner.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileFloatingCall from '../components/MobileFloatingCall.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Hero from '../components/home/Hero.astro';
+import PriceSection from '../components/home/PriceSection.astro';
+import ValueCards from '../components/home/ValueCards.astro';
+import ServicesGrid from '../components/home/ServicesGrid.astro';
+import CasesSection from '../components/home/CasesSection.astro';
+import ProcessSection from '../components/home/ProcessSection.astro';
+import ReviewsSection from '../components/home/ReviewsSection.astro';
+import FAQSection from '../components/home/FAQSection.astro';
+import StoreSection from '../components/home/StoreSection.astro';
+---
+<BaseLayout
+  title="본대로홈 — 청주 오창 맞춤 커튼·블라인드 전문점 (v2)"
+  description="커튼 전문 12년, 방문 실측부터 맞춤 제작·설치까지. 청주 오창·오송 지역 맞춤 커튼·블라인드 전문점."
+>
+  <PromoBanner />
+  <Header />
+  <main>
+    <Hero />
+    <PriceSection />
+    <ValueCards />
+    <ServicesGrid />
+    <CasesSection />
+    <ProcessSection />
+    <ReviewsSection />
+    <FAQSection />
+    <StoreSection />
+    <FinalCTA />
+  </main>
+  <Footer />
+  <MobileFloatingCall />
+</BaseLayout>

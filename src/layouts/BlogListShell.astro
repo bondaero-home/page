@@ -1,0 +1,47 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import PromoBanner from '../components/PromoBanner.astro';
+import Footer from '../components/Footer.astro';
+import MobileFloatingCall from '../components/MobileFloatingCall.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import { css } from '../lib/css';
+import { business } from '../data/business';
+
+interface Props {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow?: string;
+  heading: string;
+  lead?: string;
+  noindex?: boolean;
+}
+const { metaTitle, metaDescription, eyebrow = '블로그', heading, lead, noindex = false } = Astro.props;
+---
+<BaseLayout title={metaTitle} description={metaDescription} noindex={noindex}>
+  <PromoBanner />
+  <Header />
+  <main>
+    <section class="subhero" style={css({ paddingBottom: 40 })}>
+      <div class="container">
+        <div class="section-eyebrow">{eyebrow}</div>
+        <h1 style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 'clamp(38px, 6vw, 56px)' })}>{heading}</h1>
+        {lead && <p class="sub" set:html={lead} />}
+        <div class="hero-ctas">
+          <a class="btn btn-primary btn-lg" href={`tel:${business.phone}`}>지금 전화 상담하기</a>
+        </div>
+      </div>
+    </section>
+    <section class="block" style={css({ paddingTop: 40 })}>
+      <div class="container">
+        <slot />
+      </div>
+    </section>
+    <FinalCTA
+      titleHtml="우리 집 커튼이 궁금하시면,<br />전화 한 통이면 됩니다"
+      leadHtml="비슷한 사례를 보셨다면 우리 집은 어떨지 바로 여쭤보세요.<br />청주·오창·오송 방문 실측 무료입니다."
+    />
+  </main>
+  <Footer />
+  <MobileFloatingCall />
+</BaseLayout>

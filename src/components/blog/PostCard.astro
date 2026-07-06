@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import { css } from '../../lib/css';
+import { formatDate } from '../../lib/related';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { post: CollectionEntry<'blog'>; }
+const { post } = Astro.props;
+const url = `/블로그/${post.id}.html`;
+const isCase = post.data.category === '시공사례';
+---
+<a href={url} class="blog-card" data-category={post.data.category} style={css({ display: 'block', height: '100%', textDecoration: 'none' })}>
+  <article style={css({ background: 'var(--canvas)', border: '1px solid var(--hairline)', borderRadius: 'var(--rounded-lg)', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', transition: 'box-shadow 200ms ease, transform 200ms ease, border-color 200ms ease' })}>
+    <div style={css({ position: 'relative' })}>
+      <Image src={post.data.heroImage} alt={post.data.heroImageAlt} width={720} height={405} widths={[360, 720]} sizes="(max-width: 600px) 100vw, 360px" style={css({ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block', borderBottom: '1px solid var(--hairline)' })} />
+      <span style={css({ position: 'absolute', top: 14, left: 14, display: 'inline-flex', alignItems: 'center', fontSize: 12, fontWeight: 700, letterSpacing: '0.02em', padding: '4px 11px', borderRadius: 'var(--rounded-full)', color: isCase ? '#fff' : 'var(--brand-orange-deep)', background: isCase ? 'var(--primary)' : 'var(--tint-mint)', whiteSpace: 'nowrap' })}>
+        {post.data.category}
+      </span>
+    </div>
+    <div style={css({ padding: '22px 24px 24px', display: 'flex', flexDirection: 'column', flex: 1 })}>
+      <h3 style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 20, fontWeight: 700, lineHeight: 1.4, letterSpacing: '-0.2px', margin: '0 0 12px', color: 'var(--ink-deep)', wordBreak: 'keep-all' })}>{post.data.title}</h3>
+      <p style={css({ fontSize: 14.5, lineHeight: 1.65, color: 'var(--slate)', margin: '0 0 18px', wordBreak: 'keep-all', flex: 1 })}>{post.data.description}</p>
+      <div style={css({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginTop: 'auto' })}>
+        <span style={css({ fontSize: 12.5, color: 'var(--steel)', letterSpacing: '0.02em' })}>{post.data.location} · {post.data.product}</span>
+        <span style={css({ fontSize: 12.5, color: 'var(--stone)' })}>{formatDate(post.data.pubDate)}</span>
+      </div>
+    </div>
+  </article>
+</a>

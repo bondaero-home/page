@@ -1,0 +1,28 @@
+---
+import { css } from '../../lib/css';
+---
+<section class="block-tight">
+  <div class="container" style={css({ maxWidth: 880 })}>
+    <div style={css({ marginBottom: 28 })}>
+      <div class="section-eyebrow">미리 알아두세요</div>
+      <h2 class="section-title" style={css({ fontSize: "clamp(28px, 4vw, 36px)" })}>맞춤 제작이라 미리 알려드려요</h2>
+    </div>
+    <div style={css({
+      background: "var(--canvas)",
+      border: "1px solid var(--hairline)",
+      borderLeft: "4px solid var(--primary)",
+      borderRadius: "var(--rounded-lg)",
+      padding: "28px 32px",
+      fontSize: 16, lineHeight: 1.8, color: "var(--charcoal)", wordBreak: "keep-all",
+    })}>
+      <p style={css({ margin: "0 0 16px" })}>
+        본대로홈의 커튼·블라인드는 전부 고객님 창 크기에 맞춰 만드는 <strong style={css({ color: "var(--ink)" })}>맞춤 제작</strong>이에요.
+        그래서 공장에 발주가 들어간 뒤에는 취소가 어려워요.
+      </p>
+      <p style={css({ margin: 0 })}>
+        대신 그 전까지는 부담 갖지 않으셔도 돼요. 매장에서 원단을 보고, 댁에서 실측하고,
+        견적을 충분히 상의한 다음에 발주를 넣으니까요. 정확한 금액도 실측 후에 확정해서 안내해 드려요.
+      </p>
+    </div>
+  </div>
+</section>

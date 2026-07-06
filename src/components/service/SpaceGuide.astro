@@ -1,0 +1,47 @@
+---
+import { business } from '../../data/business';
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+
+const rows = [
+  ["거실", "쉬폰커튼 · 이중커튼", "채광을 살리고, 필요할 때 암막까지 조절"],
+  ["안방·침실", "암막커튼 · 이중커튼", "숙면, 확실한 빛 차단"],
+  ["다이닝룸", "쉬폰커튼", "밝고 부드러운 분위기"],
+  ["주방", "롤스크린 · 알루미늄블라인드", "간결, 관리 편의"],
+  ["욕실·다용도실", "알루미늄블라인드", "습기에 강함"],
+  ["서재", "우드블라인드", "차분한 집중 분위기"],
+  ["사무실·회의실", "콤비블라인드", "빛 조절, 깔끔함"],
+  ["저층 (사생활 중요)", "비침 적은 쉬폰 + 암막/콤비", "채광은 살리되 시야 차단"],
+];
+---
+<section class="block">
+  <div class="container">
+    <div style={css({ marginBottom: 40 })}>
+      <div class="section-eyebrow">공간별 추천</div>
+      <h2 class="section-title">공간별 추천</h2>
+      <p class="section-lede" style={css({ marginTop: 12 })}>
+        집안 공간마다 맞는 제품이 달라요. 자주 찾으시는 조합을 정리했습니다.
+      </p>
+    </div>
+    <table class="space-table">
+      <thead>
+        <tr><th style={css({ width: 180 })}>공간</th><th style={css({ width: 280 })}>추천 제품</th><th>이유</th></tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td class="sp">{r[0]}</td>
+            <td class="pr">{r[1]}</td>
+            <td class="rs">{r[2]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <div style={css({ marginTop: 28, textAlign: "center" })}>
+      <a class="btn btn-secondary btn-lg" href={business.mapUrl} target="_blank" rel="noopener">
+        <Icon name="pin" /> 매장에서 원단 직접 보기
+      </a>
+      <p style={css({ marginTop: 12, fontSize: 14, color: "var(--steel)" })}>카탈로그 사진과 실제 원단은 다릅니다. 매장에서 직접 확인하시길 권해 드려요.</p>
+    </div>
+  </div>
+</section>

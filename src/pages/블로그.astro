@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import BlogListShell from '../layouts/BlogListShell.astro';
+import PostGrid from '../components/blog/PostGrid.astro';
+import { css } from '../lib/css';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const counts = {
+  all: posts.length,
+  시공사례: posts.filter((p) => p.data.category === '시공사례').length,
+  가이드: posts.filter((p) => p.data.category === '가이드').length,
+};
+const tabs = [
+  { id: 'all', label: '전체' },
+  { id: '시공사례', label: '시공 사례' },
+  { id: '가이드', label: '가이드' },
+];
+---
+<BlogListShell
+  metaTitle="블로그 — 청주 오창 커튼·블라인드 시공 사례 | 본대로홈"
+  metaDescription="청주 오창·오송 실제 커튼·블라인드 시공 사례와 제품 선택 가이드. 우리 집 창과 비슷한 사례를 찾아보세요."
+  heading="본대로홈 이야기"
+  lead="실제 시공 사례와 커튼 고르는 법을 한 편씩 올려요.<br />우리 집 창과 비슷한 사례를 찾아보고, 궁금한 건 전화로 편하게 물어보세요."
+>
+  <div id="blog-tabs" style={css({ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 36, borderBottom: '1px solid var(--hairline)' })}>
+    {tabs.map((t, i) => (
+      <button
+        type="button"
+        class="blog-tab"
+        data-filter={t.id}
+        aria-pressed={i === 0 ? 'true' : 'false'}
+        style={css({ appearance: 'none', cursor: 'pointer', background: 'transparent', border: 'none', padding: '10px 4px', marginBottom: -1, fontSize: 15, fontFamily: 'inherit', display: 'inline-flex', alignItems: 'center', gap: 7 })}
+      >
+        {t.label}
+        <span class="tab-count">{counts[t.id as keyof typeof counts]}</span>
+      </button>
+    ))}
+  </div>
+
+  <PostGrid posts={posts} />
+</BlogListShell>
+
+<style>
+  .blog-tab { font-weight: 500; color: var(--steel); border-bottom: 2px solid transparent; }
+  .blog-tab .tab-count { font-size: 12px; font-weight: 600; color: var(--stone); }
+  .blog-tab[aria-pressed='true'] { font-weight: 700; color: var(--ink-deep); border-bottom-color: var(--primary); }
+  .blog-tab[aria-pressed='true'] .tab-count { color: var(--primary); }
+</style>
+
+<script>
+  // 카테고리 탭 클라이언트 필터(점진적 향상 — JS가 없어도 모든 글이 DOM에 노출됨).
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.blog-tab');
+  const items = document.querySelectorAll<HTMLElement>('.blog-grid-item');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const f = tab.dataset.filter;
+      tabs.forEach((t) => t.setAttribute('aria-pressed', String(t === tab)));
+      items.forEach((it) => {
+        it.style.display = f === 'all' || it.dataset.category === f ? '' : 'none';
+      });
+    });
+  });
+</script>

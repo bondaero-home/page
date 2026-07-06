@@ -1,0 +1,47 @@
+---
+import { css } from '../../lib/css';
+
+const markStyle = css({
+  background: "linear-gradient(transparent 56%, color-mix(in srgb, var(--primary) 24%, transparent) 56%)",
+  padding: "0 1px", fontWeight: 600, color: "var(--ink-deep)",
+  boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone",
+});
+
+const figureStyle = css({ background: "var(--canvas)", border: "1px solid var(--hairline)", borderRadius: "var(--rounded-lg)", padding: "26px 28px", margin: 0, display: "flex", flexDirection: "column" });
+const quoteMarkStyle = css({ fontFamily: "'Gowun Batang', serif", fontSize: 36, lineHeight: 0.8, color: "color-mix(in srgb, var(--primary) 40%, var(--hairline))", marginBottom: 10 });
+const blockquoteStyle = css({ margin: 0, fontSize: 16, lineHeight: 1.75, fontWeight: 400, color: "var(--slate)", wordBreak: "keep-all", flex: 1 });
+const captionStyle = css({ marginTop: 18, fontSize: 13, color: "var(--steel)" });
+---
+<section class="block" style={css({ background: "var(--surface-soft)" })}>
+  <div class="container">
+    <div style={css({ marginBottom: 36, maxWidth: 680 })}>
+      <div class="section-eyebrow">후기</div>
+      <h2 class="section-title" style={css({ fontSize: "clamp(28px, 4vw, 40px)" })}>고객님들이 남겨주신 이야기</h2>
+    </div>
+    <div class="review-grid">
+      <figure style={figureStyle}>
+        <div aria-hidden="true" style={quoteMarkStyle}>“</div>
+        <blockquote style={blockquoteStyle}>커튼 고를 줄도 모르고 갔는데, <span style={markStyle}>대표님이 우리 집 창 방향이랑 가구 색까지 같이 봐주시면서</span> 하나하나 같이 정해 주셨어요. 그냥 파는 게 아니라 <span style={markStyle}>함께 고민하고 완성해 가는 과정</span>이라 오히려 즐거웠어요. 결과물도 너무 마음에 들어요.</blockquote>
+        <figcaption style={captionStyle}>— 네이버 플레이스 후기</figcaption>
+      </figure>
+      <figure style={figureStyle}>
+        <div aria-hidden="true" style={quoteMarkStyle}>“</div>
+        <blockquote style={blockquoteStyle}>설치하고 나서 기장이 살짝 길었는데, <span style={markStyle}>미싱이 매장에 있어서 그 자리에서 바로 수선</span>해 주셨어요. 공장에 다시 보내면 며칠 걸린다던데 여기는 안 그래서 편했어요. <span style={markStyle}>직접 바느질이 되니까 맞춤 수정이 자유로운 점</span>이 제일 좋았어요.</blockquote>
+        <figcaption style={captionStyle}>— 구글 후기</figcaption>
+      </figure>
+      <figure style={figureStyle}>
+        <div aria-hidden="true" style={quoteMarkStyle}>“</div>
+        <blockquote style={blockquoteStyle}>솔직히 동네 가게라 <span style={markStyle}>처음엔 큰 기대를 안 했어요.</span> 그런데 원단 추천부터 마무리까지 너무 꼼꼼하셔서 깜짝 놀랐어요. <span style={markStyle}>지금은 지인들한테도 다 추천</span>하고 있어요. 커튼 바꿀 일 있으면 무조건 또 올 거예요.</blockquote>
+        <figcaption style={captionStyle}>— 카카오톡 상담 (비식별)</figcaption>
+      </figure>
+      <figure style={figureStyle}>
+        <div aria-hidden="true" style={quoteMarkStyle}>“</div>
+        <blockquote style={blockquoteStyle}>여러 군데 알아봤는데 <span style={markStyle}>본대로홈 대표님의 인테리어 감각이 확실히 다르더라고요.</span> 제가 막연하게 말한 분위기를 정확히 잡아서 원단이랑 색을 골라 주셨어요. 거실이 완전히 달라 보여서 만족스러워요.</blockquote>
+        <figcaption style={captionStyle}>— 네이버 플레이스 후기</figcaption>
+      </figure>
+    </div>
+    <p style={css({ marginTop: 18, fontSize: 13, color: "var(--stone)", wordBreak: "keep-all" })}>
+      * 네이버·구글·카카오톡에 남겨주신 실제 후기에서 개인정보를 가린 뒤 옮겼어요.
+    </p>
+  </div>
+</section>

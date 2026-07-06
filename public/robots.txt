@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bondaerohome.com/sitemap-index.xml

@@ -1,0 +1,25 @@
+---
+import PostCard from './PostCard.astro';
+import type { CollectionEntry } from 'astro:content';
+interface Props { posts: CollectionEntry<'blog'>[]; }
+const { posts } = Astro.props;
+---
+<div class="blog-grid">
+  {posts.map((p) => (
+    <div class="blog-grid-item" data-category={p.data.category}>
+      <PostCard post={p} />
+    </div>
+  ))}
+</div>
+
+<style is:global>
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .blog-card article { will-change: transform; }
+  a.blog-card:hover article {
+    box-shadow: var(--shadow-2);
+    transform: translateY(-3px);
+    border-color: var(--hairline-strong) !important;
+  }
+  @media (max-width: 920px) { .blog-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; } }
+  @media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } }
+</style>

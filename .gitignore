@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+
+# 기존 프로토타입(무빌드 React-CDN) 원본 — 참고용 로컬 보관, 리포에는 미포함
+_legacy/
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# os / editor
+.DS_Store
+*.log

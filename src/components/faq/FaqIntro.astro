@@ -1,0 +1,19 @@
+---
+// FAQ 인트로 — 페이지의 유일한 <h1>.
+import { css } from '../../lib/css';
+import { business } from '../../data/business';
+import Icon from '../Icon.astro';
+---
+<section class="subhero" style={css({ paddingBottom: 56 })}>
+  <div class="container">
+    <div class="section-eyebrow">자주 묻는 질문</div>
+    <h1 style={css({ maxWidth: 640 })}>전화하기 전에,<br />궁금한 것부터 풀어보세요</h1>
+    <p class="sub" style={css({ maxWidth: 600 })}>
+      가격·실측·취소·A/S까지 가장 많이 주시는 질문을 모았어요.
+      찾으시는 답이 없으면 전화 한 통 주시면 바로 알려드려요.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href={`tel:${business.phone}`}><Icon name="phone" /> 지금 전화 상담하기</a>
+    </div>
+  </div>
+</section>

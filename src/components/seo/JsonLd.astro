@@ -1,0 +1,8 @@
+---
+// 임의의 JSON-LD 객체를 <script type="application/ld+json">로 출력.
+interface Props {
+  schema: Record<string, unknown> | Record<string, unknown>[];
+}
+const { schema } = Astro.props;
+---
+<script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />

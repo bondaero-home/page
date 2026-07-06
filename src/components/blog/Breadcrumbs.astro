@@ -1,0 +1,19 @@
+---
+import { css } from '../../lib/css';
+interface Crumb { label: string; href?: string; }
+interface Props { items: Crumb[]; }
+const { items } = Astro.props;
+---
+<nav aria-label="위치" style={css({ fontSize: 13, color: 'var(--steel)', marginBottom: 4 })}>
+  <ol style={css({ listStyle: 'none', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 6, margin: 0, padding: 0 })}>
+    {items.map((c, i) => (
+      <li style={css({ display: 'inline-flex', alignItems: 'center', gap: 6 })}>
+        {c.href
+          ? <a href={c.href} style={css({ color: 'var(--steel)', textDecoration: 'none' })}>{c.label}</a>
+          : <span aria-current="page" style={css({ color: 'var(--charcoal)' })}>{c.label}</span>
+        }
+        {i < items.length - 1 && <span aria-hidden="true" style={css({ color: 'var(--stone)' })}>›</span>}
+      </li>
+    ))}
+  </ol>
+</nav>

@@ -1,0 +1,30 @@
+---
+import { css } from '../../lib/css';
+
+const CALL_HELP = [
+  { k: "대략적인 가격대", v: "창 크기·원단·기능을 여쭤보고 예상 범위를 알려드려요." },
+  { k: "진행 방법", v: "상담부터 실측·제작·설치까지 어떻게 흘러가는지 짚어드려요." },
+  { k: "일정", v: "입주·이사 날짜에 맞춰 언제 시작하면 좋을지 함께 계산해 드려요." },
+];
+---
+<section class="block">
+  <div class="container">
+    <div style={css({ marginBottom: 40, maxWidth: 680 })}>
+      <div class="section-eyebrow">전화 상담</div>
+      <h2 class="section-title">전화 주시면 이렇게 도와드려요</h2>
+      <p class="section-lede" style={css({ marginTop: 10 })}>처음 맡기는 분도 부담 갖지 않으셔도 돼요. 전화 한 통으로 아래를 바로 안내해 드려요.</p>
+    </div>
+    <div class="help-grid">
+      {CALL_HELP.map((c, i) => (
+        <div style={css({ background: "var(--canvas)", border: "1px solid var(--hairline)", borderRadius: "var(--rounded-lg)", padding: "28px 26px" })}>
+          <div style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 32, fontWeight: 700, color: "color-mix(in srgb, var(--primary) 35%, var(--hairline))", letterSpacing: "-1px", marginBottom: 12 })}>{String(i + 1).padStart(2, "0")}</div>
+          <h3 style={css({ fontSize: 19, fontWeight: 700, color: "var(--ink-deep)", margin: "0 0 8px", wordBreak: "keep-all" })}>{c.k}</h3>
+          <p style={css({ fontSize: 15.5, lineHeight: 1.7, color: "var(--slate)", margin: 0, wordBreak: "keep-all" })}>{c.v}</p>
+        </div>
+      ))}
+    </div>
+    <div style={css({ marginTop: 24, background: "var(--surface-soft)", border: "1px solid var(--hairline)", borderLeft: "3px solid var(--primary)", borderRadius: "var(--rounded-md)", padding: "16px 20px", fontSize: 15.5, lineHeight: 1.7, color: "var(--charcoal)", wordBreak: "keep-all" })}>
+      정확한 금액은 방문 실측 후에 확정해 드려요. 전화는 부담 없이 주셔도 됩니다.
+    </div>
+  </div>
+</section>

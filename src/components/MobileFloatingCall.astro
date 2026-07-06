@@ -1,0 +1,7 @@
+---
+import { business } from '../data/business';
+import Icon from './Icon.astro';
+---
+<a href={`tel:${business.phone}`} class="mfloat" aria-label="전화 상담">
+  <Icon name="phone" size={22} />
+</a>

@@ -1,0 +1,33 @@
+---
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+
+const reviews = [
+  { quote: "대표님과 함께 고민하고 완성해 가는 과정이 즐거웠습니다.", who: "청주 오창 K씨 · 30평 거실 쉬폰커튼", src: "네이버 플레이스 리뷰" },
+  { quote: "가격이 합리적이고 직접 수선해 주셔서 빠르게 마무리되었어요.", who: "청주 오송 J씨 · 안방 암막커튼", src: "구글 리뷰" },
+  { quote: "지인 소개로 연락드렸는데, 처음에 기대 안 했는데 매우 만족스럽습니다.", who: "청주 ○○동 P씨 · 거실 이중커튼", src: "네이버 플레이스 리뷰" },
+];
+---
+<section class="block" style={css({ background: "var(--surface-soft)" })}>
+  <div class="container">
+    <div style={css({ marginBottom: 48 })}>
+      <div class="section-eyebrow" style={css({ color: "var(--brand-teal)" })}>고객 후기</div>
+      <h2 class="section-title">고객님들의 이야기</h2>
+    </div>
+    <div class="grid grid-3">
+      {reviews.map((r) => (
+        <div class="review">
+          <div style={css({ color: "var(--brand-yellow)", fontSize: 22, letterSpacing: 2, marginBottom: 14 })}>★★★★★</div>
+          <p class="quote">"{r.quote}"</p>
+          <div class="who">— {r.who}</div>
+          <div class="src">({r.src})</div>
+        </div>
+      ))}
+    </div>
+    <div style={css({ marginTop: 36, textAlign: "center" })}>
+      <a class="btn-link t-body-m" href="/contact#reviews" style={css({ display: "inline-flex", alignItems: "center", gap: 6 })}>
+        더 많은 후기 보기 <Icon name="arrow-right" size={14} />
+      </a>
+    </div>
+  </div>
+</section>

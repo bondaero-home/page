@@ -1,0 +1,62 @@
+---
+import { business } from '../../data/business';
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+const { phone } = business;
+
+const timeline = [
+  { label: "문의", sub: "전화 또는 매장 방문", days: null },
+  { label: "원단 확인", sub: "매장 방문", days: null },
+  { label: "방문 실측", sub: "댁 방문", days: null },
+  { label: "발주", sub: "사양 확정 후", days: "D+0" },
+  { label: "맞춤 제작", sub: "공장 제작", days: "D+1~5" },
+  { label: "설치", sub: "방문 설치 완료", days: "D+7 이내" },
+];
+---
+<section class="block" style={css({ background: "var(--surface-soft)" })}>
+  <div class="container" style={css({ maxWidth: 960 })}>
+    <div style={css({ marginBottom: 48, textAlign: "center" })}>
+      <div class="section-eyebrow">일정 안내</div>
+      <h2 class="section-title">발주하면, 약 일주일 안에 설치까지</h2>
+      <p class="section-lede" style={css({ marginTop: 12, marginLeft: "auto", marginRight: "auto", textAlign: "center" })}>
+        입주 날짜나 이사 일정이 정해져 있다면, 그에 맞춰 진행해 드려요.
+        언제 상담을 시작하면 좋을지도 전화로 안내해 드려요.
+      </p>
+    </div>
+
+    <div style={css({ position: "relative", paddingLeft: 32 })}>
+      <div style={css({ position: "absolute", left: 11, top: 12, bottom: 12, width: 2, background: "var(--hairline-strong)" })} />
+      <div style={css({ display: "flex", flexDirection: "column", gap: 0 })}>
+        {timeline.map((t, i) => (
+          <div style={css({ display: "flex", alignItems: "flex-start", gap: 20, paddingBottom: i < timeline.length - 1 ? 28 : 0, position: "relative" })}>
+            <div style={css({
+              position: "absolute", left: -32,
+              width: 24, height: 24, borderRadius: "50%",
+              background: i === timeline.length - 1 ? "var(--primary)" : "var(--canvas)",
+              border: `2px solid ${i === timeline.length - 1 ? "var(--primary)" : "var(--hairline-strong)"}`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              flexShrink: 0, marginTop: 2,
+            })}>
+              {i === timeline.length - 1 && (
+                <div style={css({ width: 8, height: 8, borderRadius: "50%", background: "#fff" })} />
+              )}
+            </div>
+            <div style={css({ flex: 1, paddingTop: 2 })}>
+              <div style={css({ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" })}>
+                <span style={css({ fontSize: 17, fontWeight: 700, color: "var(--ink-deep)" })}>{t.label}</span>
+                <span style={css({ fontSize: 14, color: "var(--steel)" })}>{t.sub}</span>
+                {t.days && (
+                  <span style={css({ fontSize: 13, fontWeight: 700, color: "var(--primary)", background: "var(--tint-mint)", padding: "2px 10px", borderRadius: "var(--rounded-full)" })}>{t.days}</span>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div style={css({ marginTop: 36, textAlign: "center" })}>
+      <a class="btn btn-primary btn-lg" href={`tel:${phone}`}><Icon name="phone" /> 지금 전화로 일정 상담하기</a>
+    </div>
+  </div>
+</section>

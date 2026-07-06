@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PromoBanner from '../components/PromoBanner.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileFloatingCall from '../components/MobileFloatingCall.astro';
+import InquiryIntro from '../components/contact/InquiryIntro.astro';
+import CallHelp from '../components/contact/CallHelp.astro';
+import StoreVisit from '../components/contact/StoreVisit.astro';
+import Directions from '../components/contact/Directions.astro';
+import ServiceArea from '../components/contact/ServiceArea.astro';
+import Reviews from '../components/contact/Reviews.astro';
+import About from '../components/contact/About.astro';
+import InquiryFinalCTA from '../components/contact/InquiryFinalCTA.astro';
+
+const title = '문의 — 전화 상담 및 매장 방문 안내 | 본대로홈 (청주 오창)';
+const description = '청주 오창 커튼 본대로홈 전화 상담·매장 방문 안내. 주소·영업시간·오시는 길. 오창·청주·오송 방문 실측 무료.';
+---
+<BaseLayout title={title} description={description}>
+  <PromoBanner />
+  <Header />
+  <main>
+    <InquiryIntro />
+    <CallHelp />
+    <StoreVisit />
+    <Directions />
+    <ServiceArea />
+    <Reviews />
+    <About />
+    <InquiryFinalCTA />
+  </main>
+  <Footer />
+  <MobileFloatingCall />
+</BaseLayout>
+
+<style is:global>
+  .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items: stretch; }
+  .review-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .cred-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  @media (max-width: 920px) {
+    .help-grid { grid-template-columns: 1fr; }
+    .visit-grid { grid-template-columns: 1fr; }
+    .review-grid { grid-template-columns: 1fr; }
+    .cred-grid { grid-template-columns: 1fr 1fr; }
+    .area-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 560px) {
+    .review-grid { grid-template-columns: 1fr; }
+    .cred-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import { business } from '../../data/business';
+import Icon from '../Icon.astro';
+---
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="trust" aria-label="신뢰 배지">
+      <span class="badge">● 경력 12년</span>
+      <span class="badge">● 공장 직영 협업</span>
+      <span class="badge">● 미싱 직접 보유</span>
+    </div>
+    <h1>
+      청주 오창<br />
+      맞춤 커튼·블라인드<br />
+      전문점
+    </h1>
+    <p class="sub">
+      커튼 전문 12년, 함께 고민하고 직접 만들어 드립니다.<br />
+      매장에서 원단을 직접 보시고, 댁에 맞는 커튼을 결정하세요.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href={`tel:${business.phone}`}>
+        <Icon name="phone" /> 지금 전화 상담하기
+      </a>
+      <a class="btn btn-secondary btn-lg" href={business.mapUrl} target="_blank" rel="noopener">
+        <Icon name="pin" /> 매장 위치 보기
+      </a>
+    </div>
+  </div>
+  <div class="container">
+    <div class="hero-photo">
+      <img src="/images/hero-curtain.webp" alt="청주 오창 우드블라인드 시공 사례" loading="eager" />
+    </div>
+  </div>
+</section>

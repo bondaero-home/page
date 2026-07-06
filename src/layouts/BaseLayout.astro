@@ -1,0 +1,102 @@
+---
+import '../styles/global.css';
+import { business } from '../data/business';
+import JsonLd from '../components/seo/JsonLd.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string; // 사이트 루트 기준 경로 또는 절대 URL
+  ogType?: string;
+  noindex?: boolean;
+}
+const {
+  title,
+  description = business.description,
+  image = business.ogImage,
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL('https://bondaerohome.com');
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImageUrl = image.startsWith('http') ? image : new URL(image, site).href;
+
+// 사이트 전역 LocalBusiness JSON-LD
+const localBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  '@id': `${site.origin}/#business`,
+  name: business.name,
+  description: business.description,
+  url: site.origin,
+  telephone: business.storePhone,
+  founder: { '@type': 'Person', name: business.owner },
+  image: new URL(business.ogImage, site).href,
+  priceRange: '₩₩',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: business.address.street,
+    addressLocality: business.address.locality,
+    addressRegion: business.address.region,
+    addressCountry: business.address.country,
+  },
+  areaServed: business.areaServed.map((a) => ({ '@type': 'City', name: a })),
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: business.hours.days,
+      opens: business.hours.open,
+      closes: business.hours.close,
+    },
+  ],
+  sameAs: [business.mapUrl],
+  makesOffer: ['암막커튼', '쉬폰커튼', '이중커튼', '콤비블라인드', '우드블라인드', '롤스크린', '버티컬블라인드', '알루미늄블라인드'].map((p) => ({
+    '@type': 'Offer',
+    itemOffered: { '@type': 'Service', name: `${p} 맞춤 제작·설치` },
+  })),
+};
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" type="image/png" href="/images/mark.png" />
+    <link rel="apple-touch-icon" href="/images/mark.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="ko_KR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Gowun+Batang:wght@400;700&display=swap"
+    />
+
+    <JsonLd schema={localBusiness} />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

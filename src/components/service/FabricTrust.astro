@@ -1,0 +1,23 @@
+---
+import { css } from '../../lib/css';
+---
+<section class="block-tight">
+  <div class="container">
+    <div class="card-tint tint-cream" style={css({ padding: "48px 44px", display: "grid", gridTemplateColumns: "auto 1fr", gap: 32, alignItems: "center" })}>
+      <div style={css({ width: 64, height: 64, borderRadius: 14, background: "rgba(255,255,255,0.6)", color: "var(--primary)", display: "grid", placeItems: "center", flexShrink: 0 })}>
+        <svg width={34} height={34} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width={1.4} stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="6" width="11" height="14" rx="1.5" transform="rotate(-8 9.5 13)" />
+          <rect x="9" y="4" width="11" height="14" rx="1.5" transform="rotate(8 14.5 11)" />
+        </svg>
+      </div>
+      <div>
+        <h2 style={css({ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px", margin: "0 0 12px", color: "var(--ink-deep)", wordBreak: "keep-all" })}>원단은 카탈로그가 아니라 소재로 고릅니다</h2>
+        <p style={css({ margin: 0, fontSize: 16, lineHeight: 1.75, color: "var(--charcoal)", wordBreak: "keep-all" })}>
+          본대로홈은 패션디자인산업기사·양장기능사 자격을 바탕으로 원단의 소재 특성과 봉제 구조를 직접 보고 추천해요.
+          카탈로그 사진만 보고 권하는 것과 다릅니다. 미싱을 직접 보유하고 있어 기장이 안 맞거나 수선이 필요할 때
+          공장에 다시 보내지 않고 현장에서 바로 처리합니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

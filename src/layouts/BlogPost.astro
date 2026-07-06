@@ -1,0 +1,212 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import PromoBanner from '../components/PromoBanner.astro';
+import Footer from '../components/Footer.astro';
+import MobileFloatingCall from '../components/MobileFloatingCall.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Breadcrumbs from '../components/blog/Breadcrumbs.astro';
+import PostCard from '../components/blog/PostCard.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { css } from '../lib/css';
+import { formatDate } from '../lib/related';
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+  related: CollectionEntry<'blog'>[];
+}
+const { entry, related } = Astro.props;
+const { data } = entry;
+
+const site = Astro.site ?? new URL('https://bondaerohome.com');
+const url = new URL(Astro.url.pathname, site).href;
+
+// 대표 이미지 절대 URL (JSON-LD·OG용)
+const heroImg = await getImage({ src: data.heroImage, format: 'webp', width: 1200 });
+const heroAbs = new URL(heroImg.src, site).href;
+
+const chips = [data.location, data.buildingType, data.area, data.product].filter(Boolean);
+
+const breadcrumb = [
+  { label: '홈', href: '/' },
+  { label: '블로그', href: '/블로그.html' },
+  { label: data.title },
+];
+
+// ── JSON-LD ──────────────────────────────────────────────
+const blogPosting = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${url}#article`,
+  headline: data.title,
+  description: data.description,
+  image: [heroAbs],
+  datePublished: data.pubDate.toISOString(),
+  dateModified: data.pubDate.toISOString(),
+  inLanguage: 'ko-KR',
+  keywords: data.tags.join(', '),
+  articleSection: data.category,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  author: { '@type': 'Organization', name: '본대로홈', url: site.origin },
+  publisher: {
+    '@type': 'Organization',
+    name: '본대로홈',
+    logo: { '@type': 'ImageObject', url: new URL('/images/mark.png', site).href },
+  },
+  spatialCoverage: { '@type': 'Place', name: data.location },
+};
+
+const faqPage = data.faq.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: data.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    }
+  : null;
+
+const breadcrumbList = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumb.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.label,
+    ...(c.href ? { item: new URL(c.href, site).href } : {}),
+  })),
+};
+---
+<BaseLayout title={`${data.title} | 본대로홈`} description={data.description} image={heroAbs} ogType="article">
+  <Fragment slot="head">
+    <JsonLd schema={blogPosting} />
+    {faqPage && <JsonLd schema={faqPage} />}
+    <JsonLd schema={breadcrumbList} />
+  </Fragment>
+
+  <PromoBanner />
+  <Header />
+  <main>
+    <article>
+      <header style={css({ background: 'var(--surface)', paddingTop: 40, paddingBottom: 56 })}>
+        <div class="container" style={css({ maxWidth: 820 })}>
+          <Breadcrumbs items={breadcrumb} />
+          <div style={css({ marginTop: 22 })}>
+            <span style={css({ display: 'inline-flex', alignItems: 'center', fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', padding: '5px 13px', borderRadius: 'var(--rounded-full)', color: '#fff', background: 'var(--primary)', whiteSpace: 'nowrap' })}>{data.category}</span>
+          </div>
+          <h1 style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 'clamp(30px, 5vw, 44px)', fontWeight: 700, lineHeight: 1.32, letterSpacing: '-0.6px', margin: '16px 0 0', color: 'var(--ink-deep)', wordBreak: 'keep-all' })}>{data.title}</h1>
+          <div style={css({ marginTop: 26, paddingTop: 24, borderTop: '1px solid var(--hairline)', display: 'flex', flexWrap: 'wrap', gap: '8px 10px', alignItems: 'center' })}>
+            {chips.map((m) => (
+              <span style={css({ fontSize: 13.5, fontWeight: 500, color: 'var(--slate)', background: 'var(--canvas)', border: '1px solid var(--hairline)', padding: '5px 12px', borderRadius: 'var(--rounded-full)', whiteSpace: 'nowrap' })}>{m}</span>
+            ))}
+            <span style={css({ fontSize: 13, color: 'var(--stone)', marginLeft: 'auto', whiteSpace: 'nowrap' })}>{formatDate(data.pubDate)}</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="block" style={css({ paddingTop: 48 })}>
+        <div class="container post-body" style={css({ maxWidth: 820 })}>
+          <div style={css({ marginBottom: 40 })}>
+            <figure class="post-figure" style={css({ margin: 0 })}>
+              <Image src={data.heroImage} alt={data.heroImageAlt} width={1200} height={800} widths={[480, 820, 1200]} sizes="(max-width: 860px) 100vw, 820px" loading="eager" fetchpriority="high" style={css({ width: '100%', height: 'auto', display: 'block', borderRadius: 'var(--rounded-xl)', boxShadow: 'var(--shadow-2)' })} />
+            </figure>
+          </div>
+
+          <slot />
+
+          {data.faq.length > 0 && (
+            <section style={css({ marginTop: 48 })} aria-labelledby="faq-heading">
+              <h2 id="faq-heading" style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 'clamp(20px, 3.06vw, 25px)', fontWeight: 700, letterSpacing: '-0.4px', margin: '0 0 20px', color: 'var(--ink-deep)' })}>자주 묻는 질문</h2>
+              <div style={css({ display: 'flex', flexDirection: 'column', gap: 12 })}>
+                {data.faq.map((f) => (
+                  <details class="faq">
+                    <summary><h3 style={css({ fontSize: 17, margin: 0, display: 'inline' })}>{f.q}</h3><span class="chev">›</span></summary>
+                    <div class="ans" style={css({ fontSize: 16, lineHeight: 1.8 })}>{f.a}</div>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+      </div>
+
+      {related.length > 0 && (
+        <section class="block" style={css({ background: 'var(--surface-soft)', paddingTop: 56, paddingBottom: 56 })} aria-labelledby="related-heading">
+          <div class="container" style={css({ maxWidth: 1100 })}>
+            <h2 id="related-heading" style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 26, fontWeight: 700, letterSpacing: '-0.5px', margin: '0 0 24px', color: 'var(--ink-deep)' })}>관련 글</h2>
+            <div class="blog-grid">
+              {related.map((p) => <PostCard post={p} />)}
+            </div>
+          </div>
+        </section>
+      )}
+    </article>
+
+    <FinalCTA
+      titleHtml="비슷한 고민이라면,<br />전화 한 통이면 됩니다"
+      leadHtml="우리 집 창에는 뭐가 맞을지 함께 보고 정해 드려요.<br />청주 오창·오송 지역, 방문 실측 무료입니다."
+    />
+  </main>
+  <Footer />
+  <MobileFloatingCall />
+</BaseLayout>
+
+<style>
+  .post-body :global(h2) {
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(20px, 3.06vw, 25px);
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    line-height: 1.35;
+    margin: 44px 0 18px;
+    color: var(--ink-deep);
+    word-break: keep-all;
+  }
+  .post-body :global(p) {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--slate);
+    margin: 0 0 18px;
+    word-break: keep-all;
+  }
+  .post-body :global(.post-figure) {
+    margin: 28px 0;
+  }
+  .post-body :global(.post-figure img) {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--rounded-xl);
+    box-shadow: var(--shadow-2);
+  }
+  .post-body :global(figcaption) {
+    margin-top: 10px;
+    font-size: 13.5px;
+    color: var(--steel);
+    text-align: center;
+    word-break: keep-all;
+  }
+  .post-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 15.5px;
+  }
+  .post-body :global(th), .post-body :global(td) {
+    border: 1px solid var(--hairline);
+    padding: 11px 14px;
+    text-align: left;
+  }
+  .post-body :global(th) {
+    background: var(--surface);
+    font-weight: 700;
+    color: var(--ink-deep);
+  }
+  .post-body :global(td) {
+    color: var(--slate);
+  }
+</style>

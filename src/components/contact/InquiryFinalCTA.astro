@@ -1,0 +1,26 @@
+---
+import { business } from '../../data/business';
+import { css } from '../../lib/css';
+import Icon from '../Icon.astro';
+const { phone, storePhone, mapUrl } = business;
+const PHONE = phone;
+const STORE_PHONE = storePhone;
+const MAP_URL = mapUrl;
+---
+<section class="block" style={css({ paddingTop: 0 })}>
+  <div class="container">
+    <div class="final-cta">
+      <h2>궁금한 건<br />전화로 편하게 물어보세요</h2>
+      <p>청주·오창·오송 방문 실측 무료. “거실 커튼 얼마예요?” 한마디면 시작이에요.</p>
+      <div style={css({ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" })}>
+        <a class="btn btn-primary btn-xl" href={`tel:${PHONE}`}><Icon name="phone" size={18} /> 지금 전화 상담하기</a>
+        <a class="btn btn-secondary-on-dark btn-xl" href={MAP_URL} target="_blank" rel="noopener"><Icon name="pin" size={18} /> 매장 방문하기</a>
+      </div>
+      <div style={css({ marginTop: 22, fontSize: 14, color: "var(--charcoal)", display: "flex", flexWrap: "wrap", justifyContent: "center", columnGap: 14, rowGap: 4 })}>
+        <span><span style={css({ color: "var(--steel)" })}>매장</span> {STORE_PHONE}</span>
+        <span><span style={css({ color: "var(--steel)" })}>휴대폰</span> {PHONE}</span>
+        <span style={css({ color: "var(--steel)" })}>평일 10:30 – 19:00</span>
+      </div>
+    </div>
+  </div>
+</section>

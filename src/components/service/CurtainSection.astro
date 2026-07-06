@@ -1,0 +1,34 @@
+---
+import { css } from '../../lib/css';
+import ProductRow from './ProductRow.astro';
+
+const items = [
+  { id: "blackout", num: "커튼 01", title: "암막커튼", img: "/images/service-blackout.webp",
+    lead: "빛을 완벽히 차단해 깊은 잠을 돕습니다.",
+    desc: "햇빛과 외부 빛을 거의 막아줘요. 도톰한 원단이라 외풍을 줄이는 효과도 있습니다.",
+    who: "야간 근무로 낮에 주무시는 분, 아이 낮잠 방, 빛 때문에 새벽에 자주 깨는 분.",
+    space: "안방·침실, 야간 근무자 가정.",
+    note: "빛 차단이 강한 만큼 닫으면 공간이 어두워져요. 답답한 느낌이 싫으면 쉬폰과 함께 거는 <b>이중커튼</b>을 권해 드립니다." },
+  { id: "sheer", num: "커튼 02", title: "쉬폰커튼", img: "/images/service-sheer.webp",
+    lead: "자연 채광을 부드럽게 들이는 차르르한 느낌.",
+    desc: "얇고 비치는 원단으로 햇빛을 은은하게 들여요. 공간이 넓고 환해 보이는 효과가 있습니다.",
+    who: "거실을 밝게 쓰고 싶은 분, 부드러운 분위기를 원하는 분.",
+    space: "거실, 다이닝룸.",
+    note: "빛을 완전히 막지는 못해요. 사생활 보호나 암막이 필요하면 안쪽에 암막을 더한 <b>이중커튼</b>이 맞습니다. 저층이라 시야 차단이 중요하면 비침이 적은 원단으로 골라 드려요." },
+  { id: "double", num: "커튼 03", title: "이중커튼 (암막+쉬폰)", img: "/images/service-double.webp",
+    lead: "낮과 밤의 채광을 자유롭게 조절합니다.",
+    desc: "안쪽 암막 + 바깥 쉬폰을 함께 거는 방식이에요. 낮에는 쉬폰만 쳐서 환하게, 밤에는 암막까지 쳐서 완전히 가립니다.",
+    who: "\"낮엔 환하고 밤엔 가리고 싶다\"는 분, 호텔 객실 같은 마감을 원하는 분.",
+    space: "거실, 침실.",
+    note: "두 겹이라 단일 커튼보다 비용이 올라가요. 대신 <b>채광 조절 폭이 가장 넓습니다.</b>" },
+];
+---
+<section class="block" id="curtains">
+  <div class="container">
+    <div style={css({ marginBottom: 56 })}>
+      <div class="section-eyebrow">커튼</div>
+      <h2 class="section-title">커튼 종류</h2>
+    </div>
+    {items.map((p, i) => <ProductRow p={p} flip={i % 2 === 1} />)}
+  </div>
+</section>
