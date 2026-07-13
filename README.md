@@ -23,9 +23,10 @@ src/
 │  ├─ 블로그/[...slug].astro    블로그 글 상세
 │  ├─ 블로그/category/[category].astro · 블로그/tag/[tag].astro   필터 페이지
 │  ├─ rss.xml.ts  ·  404.astro
-├─ content/blog/   ★ 블로그 글(마크다운) — 여기에 글을 추가
-│  ├─ *.md
-│  └─ images/      글에 쓰는 이미지 (영문 소문자-하이픈 파일명)
+├─ content/blog/   ★ 블로그 글 — 글 1편 = 폴더 1개
+│  └─ <영문-slug>/
+│     ├─ index.md  글 본문(frontmatter 포함)
+│     └─ images/   이 글의 사진 (01.jpg, 02.jpg … 번호 이름)
 ├─ content.config.ts   블로그 frontmatter 스키마(zod) — 필수 필드 검증
 ├─ layouts/        BaseLayout · BlogPost · BlogListShell
 ├─ components/     Header/Footer/공용 + home/ service/ process/ contact/ blog/ seo/
@@ -42,10 +43,11 @@ public/
 ## 블로그 글 추가하는 법
 
 ### 방법 A — 마크다운 파일 직접 (개발자)
-`src/content/blog/<영문-slug>.md` 생성. frontmatter 필수 필드:
+`src/content/blog/<영문-slug>/index.md` 생성 (글 1편 = 폴더 1개, 사진은 같은 폴더의 `images/`에 `01.jpg` 번호 이름으로). frontmatter 필수 필드:
 
 | 필드 | 예시 | 설명 |
 |---|---|---|
+| slug | "ochang-vertical-blind-privacy" | URL 주소(영문 소문자-하이픈). 폴더 이름과 동일하게 |
 | title | "청주 오창 …" | 글 제목 |
 | description | "…" | 검색 노출용 요약(메타) |
 | pubDate | 2026-07-06 | 발행일 |
@@ -60,9 +62,10 @@ public/
 
 필수 필드가 빠지면 `npm run build`가 **실패하며 어떤 글의 어떤 필드가 빠졌는지 한국어로** 알려줍니다.
 
-- 본문 이미지: `![검색용 alt](./images/파일.webp "독자용 캡션")` → `figure`+`figcaption`으로 렌더, WebP 자동 변환.
-- 이미지 파일명: **소문자 영문+하이픈**, `지역-제품-장면` (예: `ochang-vertical-blind-install-03.webp`). 한글·공백 금지.
-- 골든 샘플: [`src/content/blog/ochang-vertical-blind-privacy.md`](src/content/blog/ochang-vertical-blind-privacy.md) 참고.
+- 본문 이미지: `![검색용 alt](./images/01.jpg "독자용 캡션")` → `figure`+`figcaption`으로 렌더, WebP 자동 변환·리사이즈.
+- 이미지 파일명: **번호만** (`01.jpg`, `02.jpg` …, 본문 등장 순서). 글 폴더 안에 격리되므로 다른 글과 충돌하지 않는다. 한글·공백 금지.
+- **HEIC(아이폰 기본 포맷)은 빌드 불가.** JPG/PNG/WebP만 사용 — 아이폰은 설정→카메라→포맷→"높은 호환성"으로 JPG 촬영, 또는 전송 시 JPG 변환.
+- 골든 샘플: [`src/content/blog/ochang-vertical-blind-privacy/index.md`](src/content/blog/ochang-vertical-blind-privacy/index.md) 참고.
 
 ### 방법 B — 관리자 CMS (사장님, 배포 후)
 `bondaerohome.com/admin` 에서 브라우저로 글 작성 → GitHub 자동 커밋 → 자동 재배포.

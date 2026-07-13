@@ -1,11 +1,13 @@
 # 본대로홈 콘텐츠 관리(Sveltia CMS) 설정
 # 사장님이 /admin 에서 브라우저로 블로그 글을 작성 → GitHub 커밋 → Cloudflare 자동 재배포.
-# ※ 아직 연결하지 않음. 배포 단계에서 아래 backend 값을 채운다.
 
 backend:
   name: github
-  repo: TODO-배포시-입력/TODO-저장소이름 # 예: seon-biz/bondaerohome
-  branch: main # TODO-배포시-입력: 실제 기본 브랜치명
+  repo: seon-biz/bondearo
+  branch: main
+  # TODO(인증 장치 설치 시): GitHub OAuth 연동 후 아래 값을 채울 것.
+  # base_url: https://인증-워커-주소   # 예: Cloudflare Worker(sveltia-cms-auth) 배포 URL
+  # auth_endpoint: auth               # base_url 기준 인증 경로 (기본값 auth)
 
 # 사장님이 한글/공백 파일명으로 이미지를 올려도 영문 슬러그 파일명으로 자동 변환
 slug:
@@ -14,8 +16,9 @@ slug:
   sanitize_replacement: '-'
 
 # 미디어(이미지) 저장 위치 — 블로그 글이 참조하는 폴더
+# (전역 public_folder 는 절대 경로만 허용. 실제 글에서는 아래 컬렉션의 ./images 상대 경로가 쓰인다)
 media_folder: src/content/blog/images
-public_folder: ./images
+public_folder: /images
 
 collections:
   - name: blog
@@ -24,11 +27,12 @@ collections:
     description: 청주 오창·오송 커튼·블라인드 시공 사례와 가이드
     folder: src/content/blog
     create: true
-    # 파일명(=URL slug)은 영문 소문자-하이픈. 사장님이 아래 'URL 주소' 칸에 영문으로 입력.
+    # 글 1편 = 폴더 1개: src/content/blog/{slug}/index.md + 같은 폴더의 images/
     slug: '{{fields.slug}}'
+    path: '{{fields.slug}}/index'
     extension: md
     format: frontmatter
-    # 글별 이미지도 같은 규칙으로 슬러그화
+    # 글 폴더 안 images/ 에 사진 저장 (본문에서는 ./images/파일명 으로 참조)
     media_folder: images
     public_folder: ./images
     fields:
