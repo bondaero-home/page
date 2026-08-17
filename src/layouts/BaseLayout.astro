@@ -19,7 +19,12 @@ const {
 } = Astro.props;
 
 const site = Astro.site ?? new URL('https://bondaerohome.com');
-const canonical = new URL(Astro.url.pathname, site).href;
+// 정식 주소는 확장자 없는 형태다. Cloudflare Pages가 /서비스.html → 308 → /서비스 로 보내므로
+// canonical·og:url이 .html을 달고 있으면 리다이렉트되는 주소를 정규 주소로 선언하게 된다.
+// 아울러 한글 파일명 라우트의 pathname이 macOS 빌드에서 NFD(자모 분리)로 넘어오는데 그 주소는 실제로
+// 404다. pathname은 이미 퍼센트 인코딩돼 있어 디코드를 먼저 해야 normalize가 먹는다. (new URL이 재인코딩)
+const canonicalPath = decodeURIComponent(Astro.url.pathname).normalize('NFC').replace(/\.html$/, '');
+const canonical = new URL(canonicalPath, site).href;
 const ogImageUrl = image.startsWith('http') ? image : new URL(image, site).href;
 
 // 사이트 전역 LocalBusiness JSON-LD

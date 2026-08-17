@@ -21,7 +21,11 @@ const { entry, related } = Astro.props;
 const { data } = entry;
 
 const site = Astro.site ?? new URL('https://bondaerohome.com');
-const url = new URL(Astro.url.pathname, site).href;
+// 확장자 제거 + NFC 정규화 (이유는 BaseLayout의 canonical 주석 참고)
+const url = new URL(
+  decodeURIComponent(Astro.url.pathname).normalize('NFC').replace(/\.html$/, ''),
+  site,
+).href;
 
 // 대표 이미지 절대 URL (JSON-LD·OG용)
 const heroImg = await getImage({ src: data.heroImage, format: 'webp', width: 1200 });
@@ -31,7 +35,7 @@ const chips = [data.location, data.buildingType, data.area, data.product].filter
 
 const breadcrumb = [
   { label: '홈', href: '/' },
-  { label: '블로그', href: '/블로그.html' },
+  { label: '블로그', href: '/블로그' },
   { label: data.title },
 ];
 

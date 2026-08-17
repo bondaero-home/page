@@ -6,7 +6,7 @@ import type { CollectionEntry } from 'astro:content';
 
 interface Props { post: CollectionEntry<'blog'>; }
 const { post } = Astro.props;
-const url = `/블로그/${post.id}.html`;
+const url = `/블로그/${post.id}`;
 const isCase = post.data.category === '시공사례';
 ---
 <a href={url} class="blog-card" data-category={post.data.category} style={css({ display: 'block', height: '100%', textDecoration: 'none' })}>
