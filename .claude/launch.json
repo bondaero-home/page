@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "astro",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": ["-c", "PATH=/opt/homebrew/bin:$PATH /opt/homebrew/bin/npm run dev"],
       "port": 4321
     }
   ]
