@@ -5,9 +5,9 @@ backend:
   name: github
   repo: bondaero-home/page
   branch: main
-  # TODO(인증 장치 설치 시): GitHub OAuth 연동 후 아래 값을 채울 것.
-  # base_url: https://인증-워커-주소   # 예: Cloudflare Worker(sveltia-cms-auth) 배포 URL
-  # auth_endpoint: auth               # base_url 기준 인증 경로 (기본값 auth)
+  # GitHub OAuth 중개 워커(sveltia-cms-auth). 소스: Cloudflare Workers > sveltia-cms-auth
+  base_url: https://sveltia-cms-auth.hj269609.workers.dev
+  auth_endpoint: auth
 
 # 사장님이 한글/공백 파일명으로 이미지를 올려도 영문 슬러그 파일명으로 자동 변환
 slug:
