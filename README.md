@@ -67,9 +67,9 @@ public/
 - **HEIC(아이폰 기본 포맷)은 빌드 불가.** JPG/PNG/WebP만 사용 — 아이폰은 설정→카메라→포맷→"높은 호환성"으로 JPG 촬영, 또는 전송 시 JPG 변환.
 - 골든 샘플: [`src/content/blog/ochang-vertical-blind-privacy/index.md`](src/content/blog/ochang-vertical-blind-privacy/index.md) 참고.
 
-### 방법 B — 관리자 CMS (사장님, 배포 후)
+### 방법 B — 관리자 CMS (사장님)
 `bondaerohome.com/admin` 에서 브라우저로 글 작성 → GitHub 자동 커밋 → 자동 재배포.
-연결하려면 [`public/admin/config.yml`](public/admin/config.yml)의 `backend`(repo/branch)를 채워야 합니다. (아래 배포 TODO)
+**이미 연동돼 있어 바로 쓸 수 있습니다.** 설정은 [`public/admin/config.yml`](public/admin/config.yml) 참고.
 
 ## SEO / GEO
 
@@ -77,12 +77,22 @@ public/
 - 전역: **LocalBusiness** JSON-LD, `sitemap-index.xml`, `robots.txt`, RSS(`/rss.xml`), canonical, OG/Twitter, `llms.txt`.
 - 기준 도메인은 [`astro.config.mjs`](astro.config.mjs)의 `site: 'https://bondaerohome.com'`.
 
-## 배포 TODO (아직 안 함)
+## 배포
 
-1. GitHub 저장소 생성 → push
-2. Cloudflare Pages 연결 — 빌드 명령 `npm run build`, 출력 디렉터리 `dist`
-3. `public/admin/config.yml`의 `backend.repo`/`branch` 입력 + GitHub OAuth 연동 → 사장님 CMS 활성화
-4. (선택) 마케팅 페이지 이미지도 `astro:assets`로 최적화 + 파일명 규칙 리네이밍 — 현재 `public/images/`에서 원본 그대로 서빙 중
+**이미 라이브입니다.** 현재 경로 (2026-09-07 확인):
+
+```
+로컬 → git push origin main → GitHub bondaero-home/page → Cloudflare Pages 프로젝트 bondearo → bondaerohome.com
+```
+
+- `main`에 푸시하면 자동 재배포. 빌드 명령 `npm run build`, 출력 디렉터리 `dist`.
+- CMS 연동 완료 — `backend.repo: bondaero-home/page`, GitHub OAuth 중개는 `sveltia-cms-auth` 워커.
+- **주의:** `seon-biz/bondearo`는 예전 배포 소스였으나 지금은 끊겨 있습니다. 거기 푸시해도 배포되지 않습니다.
+- 연결 저장소를 확인할 때는 `git ls-remote <저장소> main` 해시와 `npx wrangler pages deployment list --project-name=bondearo`의 커밋 해시를 대조하세요. wrangler는 연결 저장소 이름을 보여주지 않습니다.
+
+## 남은 개선
+
+- (선택) 마케팅 페이지 이미지도 `astro:assets`로 최적화 + 파일명 규칙 리네이밍 — 현재 `public/images/`(약 10MB)에서 원본 그대로 서빙 중.
 
 ## 참고
 

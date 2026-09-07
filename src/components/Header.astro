@@ -12,9 +12,54 @@ import Icon from './Icon.astro';
       {navLinks.map((l) => <a href={l.href}>{l.label}</a>)}
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-primary" href={`tel:${business.phone}`}>
-        <Icon name="phone" /> 지금 전화 상담
+      <a class="btn btn-primary" href={`tel:${business.phone}`} aria-label="지금 전화 상담">
+        <Icon name="phone" /> <span class="nav-cta-label">지금 전화 상담</span>
       </a>
     </div>
+    <!-- 980px 이하에서만 노출. 이 버튼이 없으면 모바일에서 다른 페이지로 갈 방법이 없다. -->
+    <button class="nav-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="메뉴 열기">
+      <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav class="mobile-menu-links" aria-label="모바일 주 메뉴">
+      {navLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <a class="btn btn-primary mobile-menu-call" href={`tel:${business.phone}`}>
+      <Icon name="phone" /> 지금 전화 상담
+    </a>
   </div>
 </header>
+<div class="mobile-menu-backdrop" hidden></div>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const menu = document.querySelector<HTMLElement>('#mobile-menu');
+  const backdrop = document.querySelector<HTMLElement>('.mobile-menu-backdrop');
+
+  if (toggle && menu && backdrop) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+      menu.hidden = !open;
+      backdrop.hidden = !open;
+      // 메뉴 뒤 본문이 스크롤되지 않도록. 떠 있는 전화 버튼도 같이 숨긴다.
+      document.body.classList.toggle('menu-open', open);
+    };
+
+    toggle.addEventListener('click', () => setOpen(menu.hidden));
+    backdrop.addEventListener('click', () => setOpen(false));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // 가로로 넓혀 데스크톱 레이아웃이 되면 메뉴가 열린 채 남지 않도록 정리한다.
+    window.matchMedia('(min-width: 981px)').addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }
+</script>

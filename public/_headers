@@ -1,0 +1,10 @@
+# Cloudflare Pages 캐시 규칙. 없으면 전부 기본 4시간(max-age=14400)으로만 캐시된다.
+
+# Astro가 만든 자산은 파일명에 내용 해시가 붙는다 → 내용이 바뀌면 파일명도 바뀌므로 영구 캐시가 안전하다.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# public/images 는 파일명이 고정이라 영구 캐시를 걸면 교체해도 안 바뀐다.
+# 30일로 두고, 사진을 바꿀 때는 파일명을 함께 바꾸는 것을 권장.
+/images/*
+  Cache-Control: public, max-age=2592000
