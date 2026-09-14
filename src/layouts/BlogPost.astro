@@ -59,7 +59,7 @@ const blogPosting = {
     name: '본대로홈',
     logo: { '@type': 'ImageObject', url: new URL('/images/mark.png', site).href },
   },
-  spatialCoverage: { '@type': 'Place', name: data.location },
+  ...(data.location ? { spatialCoverage: { '@type': 'Place', name: data.location } } : {}),
 };
 
 const faqPage = data.faq.length

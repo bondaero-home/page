@@ -8,6 +8,8 @@ interface Props { post: CollectionEntry<'blog'>; }
 const { post } = Astro.props;
 const url = `/블로그/${post.id}`;
 const isCase = post.data.category === '시공사례';
+// 가이드 글에는 지역·제품이 없다. 빈 값을 걸러내 " · "만 덩그러니 남지 않게 한다.
+const meta = [post.data.location, post.data.product].filter(Boolean).join(' · ');
 ---
 <a href={url} class="blog-card" data-category={post.data.category} style={css({ display: 'block', height: '100%', textDecoration: 'none' })}>
   <article style={css({ background: 'var(--canvas)', border: '1px solid var(--hairline)', borderRadius: 'var(--rounded-lg)', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%', transition: 'box-shadow 200ms ease, transform 200ms ease, border-color 200ms ease' })}>
@@ -21,7 +23,7 @@ const isCase = post.data.category === '시공사례';
       <h3 style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 20, fontWeight: 700, lineHeight: 1.4, letterSpacing: '-0.2px', margin: '0 0 12px', color: 'var(--ink-deep)', wordBreak: 'keep-all' })}>{post.data.title}</h3>
       <p style={css({ fontSize: 14.5, lineHeight: 1.65, color: 'var(--slate)', margin: '0 0 18px', wordBreak: 'keep-all', flex: 1 })}>{post.data.description}</p>
       <div style={css({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginTop: 'auto' })}>
-        <span style={css({ fontSize: 12.5, color: 'var(--steel)', letterSpacing: '0.02em' })}>{post.data.location} · {post.data.product}</span>
+        <span style={css({ fontSize: 12.5, color: 'var(--steel)', letterSpacing: '0.02em' })}>{meta}</span>
         <span style={css({ fontSize: 12.5, color: 'var(--stone)' })}>{formatDate(post.data.pubDate)}</span>
       </div>
     </div>

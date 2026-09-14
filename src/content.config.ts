@@ -17,6 +17,25 @@ const 필수문자열 = (message: string) =>
 // 필수 값 존재 검사 후 다음 스키마로 넘기는 헬퍼 (누락 시 한국어, 형식 오류는 뒤 스키마가 처리)
 const 필수 = (message: string) => z.custom<unknown>((v) => v !== undefined && v !== null && v !== '', { message });
 
+// 시공사례 전용 필드: 값이 있으면 비어 있지 않은 문자열이어야 하고, 없어도 통과한다.
+// (시공사례에서의 누락은 아래 superRefine이 한국어 메시지로 잡는다)
+const 시공사례필드 = z
+  .custom<string>((v) => typeof v === 'string' && v.trim().length > 0, {
+    message: '빈 값은 넣을 수 없습니다. 값을 적거나 항목 자체를 지워 주세요.',
+  })
+  .optional();
+
+// 시공사례 글에서 반드시 있어야 하는 항목과 한국어 라벨
+const 시공사례_필수항목 = [
+  ['location', '지역'],
+  ['buildingType', '건물 유형'],
+  ['area', '면적'],
+  ['product', '제품'],
+  ['cost', '시공 비용'],
+  ['installTime', '설치 시간'],
+  ['leadTime', '제작 기간'],
+] as const;
+
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: ({ image }) =>
@@ -35,13 +54,15 @@ const blog = defineCollection({
       category: z.custom<'시공사례' | '가이드'>((v) => v === '시공사례' || v === '가이드', {
         message: '필수 항목: category(카테고리)는 "시공사례" 또는 "가이드"만 가능합니다.',
       }),
-      location: 필수문자열('필수 항목: location(지역)이 없습니다.'),
-      buildingType: 필수문자열('필수 항목: buildingType(건물 유형)이 없습니다.'),
-      area: 필수문자열('필수 항목: area(면적)가 없습니다.'),
-      product: 필수문자열('필수 항목: product(제품)가 없습니다.'),
-      cost: 필수문자열('필수 항목: cost(시공 비용)가 없습니다.'),
-      installTime: 필수문자열('필수 항목: installTime(설치 시간)이 없습니다.'),
-      leadTime: 필수문자열('필수 항목: leadTime(제작 기간)이 없습니다.'),
+      // 아래 7개는 "시공사례" 전용 항목이다. 가이드 글에는 현장이 없어 해당 값이
+      // 존재하지 않으므로 optional로 두고, 시공사례일 때만 superRefine에서 필수로 검사한다.
+      location: 시공사례필드,
+      buildingType: 시공사례필드,
+      area: 시공사례필드,
+      product: 시공사례필드,
+      cost: 시공사례필드,
+      installTime: 시공사례필드,
+      leadTime: 시공사례필드,
       tags: z.array(z.string()).default([]),
       heroImage: 필수('필수 항목: heroImage(대표 이미지)가 없습니다.').pipe(image()),
       heroImageAlt: 필수문자열('필수 항목: heroImageAlt(대표 이미지 대체텍스트)가 없습니다. 형식: 지역+공간+제품+장면'),
@@ -50,6 +71,18 @@ const blog = defineCollection({
         .array(z.object({ q: z.string().min(1), a: z.string().min(1) }))
         .default([]),
       draft: z.boolean().default(false),
+    })
+    .superRefine((data, ctx) => {
+      if (data.category !== '시공사례') return;
+      for (const [key, label] of 시공사례_필수항목) {
+        if (!data[key]) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: [key],
+            message: `필수 항목: ${key}(${label})가 없습니다. 시공사례 글에는 반드시 필요합니다.`,
+          });
+        }
+      }
     }),
 });
 
