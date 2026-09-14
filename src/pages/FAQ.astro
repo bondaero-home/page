@@ -8,14 +8,48 @@ import FinalCTA from '../components/FinalCTA.astro';
 import FaqIntro from '../components/faq/FaqIntro.astro';
 import CategoryNav from '../components/faq/CategoryNav.astro';
 import CategoryBlock from '../components/faq/CategoryBlock.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
 import { css } from '../lib/css';
 import { CATEGORIES } from '../data/faq';
 
 const title = '자주 묻는 질문 — 커튼·블라인드 | 본대로홈 (청주 오창)';
 const description =
   '커튼 가격대, 방문 실측, 제작 기간, 발주 취소, 커튼 vs 블라인드, A/S까지. 청주 오창 맞춤 커튼 전문점이 자주 묻는 질문에 답해드려요.';
+
+// ── JSON-LD ──────────────────────────────────────────────
+// 답변(a)은 내부 링크가 섞인 HTML 문자열이다. FAQPage의 answer가 허용하는 태그는
+// 제한적이고 style 속성은 그 목록에 없어서, 마크업을 걷어내고 본문만 넘긴다.
+const toPlainText = (html: string) =>
+  html
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${(Astro.site ?? new URL('https://bondaerohome.com')).origin}/FAQ#faq`,
+  inLanguage: 'ko-KR',
+  mainEntity: CATEGORIES.flatMap((c) =>
+    c.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: toPlainText(item.a) },
+    }))
+  ),
+};
 ---
 <BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <JsonLd schema={faqPage} />
+  </Fragment>
+
   <PromoBanner />
   <Header />
   <main>
