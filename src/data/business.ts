@@ -36,7 +36,7 @@ export const business = {
   naverPlaceId: '1928365165',
 
   // 홈페이지 대표 이미지(OG 기본)
-  ogImage: '/images/hero-curtain.webp',
+  ogImage: '/images/hero-curtain-v2.webp',
 } as const;
 
 // 페이지 상단 내비게이션.
