@@ -37,6 +37,14 @@ export const business = {
 
   // 홈페이지 대표 이미지(OG 기본)
   ogImage: '/images/hero-curtain-v2.webp',
+
+  // 검색엔진 소유 확인 코드. 각 도구에서 "HTML 태그" 방식을 고르면 주는
+  // content="..." 안쪽 값만 넣는다(태그 전체가 아니라 값만).
+  // 빈 문자열이면 <meta>를 아예 출력하지 않는다.
+  siteVerification: {
+    naver: '', // 네이버 서치어드바이저 → 사이트 소유확인 → HTML 태그
+    google: '', // 구글 서치콘솔 → 소유권 확인 → HTML 태그
+  },
 } as const;
 
 // 페이지 상단 내비게이션.

@@ -72,6 +72,14 @@ const localBusiness = {
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
 
+    <!-- 검색엔진 소유 확인 (business.ts의 siteVerification, 값이 있을 때만 출력) -->
+    {business.siteVerification.naver && (
+      <meta name="naver-site-verification" content={business.siteVerification.naver} />
+    )}
+    {business.siteVerification.google && (
+      <meta name="google-site-verification" content={business.siteVerification.google} />
+    )}
+
     <link rel="icon" type="image/png" href="/images/mark.png" />
     <link rel="apple-touch-icon" href="/images/mark.png" />
 
