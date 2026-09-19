@@ -8,3 +8,7 @@
 # 30일로 두고, 사진을 바꿀 때는 파일명을 함께 바꾸는 것을 권장.
 /images/*
   Cache-Control: public, max-age=2592000
+
+# public/videos 도 파일명이 고정이다. 교체할 때는 반드시 파일명의 버전을 올릴 것.
+/videos/*
+  Cache-Control: public, max-age=2592000

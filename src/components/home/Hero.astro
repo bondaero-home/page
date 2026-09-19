@@ -29,7 +29,27 @@ import Icon from '../Icon.astro';
   </div>
   <div class="container">
     <div class="hero-photo">
-      <img src="/images/hero-curtain-v2.webp" alt="청주 오창 거실 쉬어커튼 시공 사례" loading="eager" />
+      <video
+        class="hero-video"
+        src="/videos/hero-v1.mp4"
+        poster="/images/hero-curtain-v2.webp"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-label="청주 오창 거실 쉬어커튼 시공 영상"
+      ></video>
     </div>
   </div>
 </section>
+
+<script>
+  // 움직임 최소화를 켠 사용자에게는 재생하지 않고 포스터 이미지만 보여준다.
+  // (CSS로는 video 재생을 막을 수 없어 스크립트가 필요하다)
+  const video = document.querySelector<HTMLVideoElement>('.hero-video');
+  if (video && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    video.removeAttribute('autoplay');
+    video.pause();
+  }
+</script>
