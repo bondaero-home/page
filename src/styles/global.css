@@ -268,9 +268,16 @@ body.menu-open .mfloat { display: none; }
 .hero-photo img,
 .hero-photo .hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* 영상이 아직 안 뜬 구간에도 포스터가 같은 비율로 자리를 채우게 한다.
-   (object-fit 은 video 요소의 poster 에도 적용된다) */
-.hero-photo .hero-video { background: #6B8C5F; }
+/* 영상이 첫 프레임을 그리기 전까지 video 요소는 검게 칠해진다. 포스터와 같은
+   이미지를 컨테이너와 video 양쪽 배경에 깔아, 검은 화면이 보일 틈을 없앤다.
+   (poster 이미지는 영상의 첫 프레임과 동일한 그림이라 전환이 눈에 띄지 않는다) */
+.hero-photo,
+.hero-photo .hero-video {
+  background-image: url("/images/hero-poster-v1.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
 .hero-photo .ph-fallback {
   position: absolute; inset: 0;
