@@ -42,7 +42,7 @@ export const business = {
   // content="..." 안쪽 값만 넣는다(태그 전체가 아니라 값만).
   // 빈 문자열이면 <meta>를 아예 출력하지 않는다.
   siteVerification: {
-    naver: '', // 네이버 서치어드바이저 → 사이트 소유확인 → HTML 태그
+    naver: '4bed16d5e27abc8e67cd907fd5ae629c32d5951b', // 네이버 서치어드바이저 → 사이트 소유확인 → HTML 태그
     google: '', // 구글 서치콘솔 → 소유권 확인 → HTML 태그
   },
 } as const;
