@@ -18,7 +18,7 @@ const { phone, storePhone } = { phone: business.phone, storePhone: business.stor
         <div style={{ marginTop: '18px', display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', color: 'var(--steel)', lineHeight: 1.7 }}>
           <div>대표 {business.owner} · 사업자등록 {business.bizRegistration}</div>
           <div>{business.address.full}</div>
-          <div>영업시간 10:30 – 19:00 (일·공휴일 휴무)</div>
+          <div>영업시간 {business.hours.display} ({business.hours.holiday})</div>
         </div>
       </div>
       <div>
@@ -49,8 +49,8 @@ const { phone, storePhone } = { phone: business.phone, storePhone: business.stor
         <ul>
           <li><span style={{ color: 'var(--steel)', marginRight: '6px' }}>매장</span><a href={`tel:${storePhone}`} style={{ color: 'var(--ink)', fontWeight: 600 }}>{storePhone}</a></li>
           <li><span style={{ color: 'var(--steel)', marginRight: '6px' }}>휴대폰</span><a href={`tel:${phone}`} style={{ color: 'var(--ink)', fontWeight: 600 }}>{phone}</a></li>
-          <li>평일 10:30 – 19:00</li>
-          <li>일요일 · 공휴일 휴무</li>
+          <li>{business.hours.display}</li>
+          <li>{business.hours.holiday}</li>
           <li style={{ marginTop: '12px' }}><a href={`tel:${phone}`} class="btn btn-primary" style={{ padding: '8px 14px' }}><Icon name="phone" /> 전화 상담</a></li>
         </ul>
       </div>

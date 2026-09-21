@@ -34,7 +34,7 @@ const { phone, storePhone } = business;
         <div style={{ marginTop: '22px', fontSize: '14px', color: 'var(--charcoal)', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', columnGap: '14px', rowGap: '4px' }}>
           <span><span style={{ color: 'var(--steel)' }}>매장</span> {storePhone}</span>
           <span><span style={{ color: 'var(--steel)' }}>휴대폰</span> {phone}</span>
-          <span style={{ color: 'var(--steel)' }}>평일 10:30 – 19:00</span>
+          <span style={{ color: 'var(--steel)' }}>{business.hours.display}</span>
         </div>
       </div>
     </div>

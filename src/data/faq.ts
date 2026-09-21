@@ -127,7 +127,7 @@ export const CATEGORIES: FaqCategory[] = [
       },
       {
         q: '매장 위치랑 영업시간이 어떻게 되나요?',
-        a: `${business.address.full}예요. 영업시간은 오전 10시 30분부터 오후 7시까지고, 방문 전에 전화 주시면 더 편하게 안내해 드려요. 오시는 길은 ${l('/문의#directions', '문의 페이지 지도')}를 참고해 주세요.`,
+        a: `${business.address.full}예요. 영업시간은 ${business.hours.display}이고, ${business.hours.holiday}예요. 방문 전에 전화 주시면 더 편하게 안내해 드려요. 오시는 길은 ${l('/문의#directions', '문의 페이지 지도')}를 참고해 주세요.`,
       },
     ],
   },

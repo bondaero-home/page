@@ -23,7 +23,7 @@ const MAP_URL = mapUrl;
           <dt>주소</dt>
           <dd>{business.address.full}</dd>
           <dt>영업시간</dt>
-          <dd>평일 오전 10:30 – 오후 7:00<br /><span style={css({ color: "var(--steel)" })}>일요일 · 공휴일 휴무</span></dd>
+          <dd>{business.hours.display}<br /><span style={css({ color: "var(--steel)" })}>{business.hours.holiday}</span></dd>
           <dt>매장 전화</dt>
           <dd><a href={`tel:${STORE_PHONE}`} style={css({ color: "var(--link-blue)", fontWeight: 600 })}>{STORE_PHONE}</a></dd>
           <dt>휴대폰</dt>

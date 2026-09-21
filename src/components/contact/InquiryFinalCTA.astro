@@ -19,7 +19,7 @@ const MAP_URL = mapUrl;
       <div style={css({ marginTop: 22, fontSize: 14, color: "var(--charcoal)", display: "flex", flexWrap: "wrap", justifyContent: "center", columnGap: 14, rowGap: 4 })}>
         <span><span style={css({ color: "var(--steel)" })}>매장</span> {STORE_PHONE}</span>
         <span><span style={css({ color: "var(--steel)" })}>휴대폰</span> {PHONE}</span>
-        <span style={css({ color: "var(--steel)" })}>평일 10:30 – 19:00</span>
+        <span style={css({ color: "var(--steel)" })}>{business.hours.display}</span>
       </div>
     </div>
   </div>

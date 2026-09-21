@@ -23,7 +23,7 @@ export const business = {
   },
 
   hours: {
-    display: '평일 10:30 – 19:00',
+    display: '월~토 10:30 – 19:00',
     holiday: '일요일 · 공휴일 휴무',
     open: '10:30',
     close: '19:00',
