@@ -23,20 +23,22 @@ const rows = [
         집안 공간마다 맞는 제품이 달라요. 자주 찾으시는 조합을 정리했습니다.
       </p>
     </div>
-    <table class="space-table">
-      <thead>
-        <tr><th style={css({ width: 180 })}>공간</th><th style={css({ width: 280 })}>추천 제품</th><th>이유</th></tr>
-      </thead>
-      <tbody>
-        {rows.map((r) => (
-          <tr>
-            <td class="sp">{r[0]}</td>
-            <td class="pr">{r[1]}</td>
-            <td class="rs">{r[2]}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div class="space-table-scroll" tabindex="0" role="region" aria-label="공간별 추천 제품 표">
+      <table class="space-table">
+        <thead>
+          <tr><th style={css({ width: 180 })}>공간</th><th style={css({ width: 280 })}>추천 제품</th><th>이유</th></tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <td class="sp">{r[0]}</td>
+              <td class="pr">{r[1]}</td>
+              <td class="rs">{r[2]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
     <div style={css({ marginTop: 28, textAlign: "center" })}>
       <a class="btn btn-secondary btn-lg" href={business.mapUrl} target="_blank" rel="noopener">
         <Icon name="pin" /> 매장에서 원단 직접 보기

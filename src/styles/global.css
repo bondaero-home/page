@@ -357,6 +357,7 @@ section.block-tight { padding: var(--section) 0; }
 
 /* Store / map */
 .store-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: stretch; }
+.store-grid > * { min-width: 0; }
 .store-info { padding: 36px; background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--rounded-lg); display: flex; flex-direction: column; gap: 20px; }
 .store-info dl { display: grid; grid-template-columns: 90px 1fr; gap: 14px 20px; margin: 0; }
 .store-info dt { color: var(--steel); font-size: 14px; font-weight: 500; }
@@ -468,6 +469,8 @@ section.block-tight { padding: var(--section) 0; }
 .prod-note b { color: var(--ink); font-weight: 700; }
 
 /* space recommendation table */
+.space-table-scroll { max-width: 100%; overflow-x: auto; border-radius: var(--rounded-lg); -webkit-overflow-scrolling: touch; }
+.space-table-scroll:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
 .space-table { width: 100%; border-collapse: collapse; background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--rounded-lg); overflow: hidden; }
 .space-table th, .space-table td { text-align: left; padding: 16px 22px; font-size: 15px; border-bottom: 1px solid var(--hairline); vertical-align: top; word-break: keep-all; }
 .space-table thead th { background: var(--surface-soft); font-size: 12.5px; font-weight: 700; color: var(--steel); letter-spacing: 0.04em; text-transform: uppercase; }

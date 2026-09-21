@@ -32,7 +32,7 @@ import Icon from '../Icon.astro';
           <dt>휴무</dt>
           <dd style={css({ color: "var(--steel)" })}>일요일 · 공휴일</dd>
         </dl>
-        <div style={css({ display: "flex", gap: 10, marginTop: "auto", paddingTop: 8 })}>
+        <div style={css({ display: "flex", gap: 10, marginTop: "auto", paddingTop: 8, flexWrap: "wrap" })}>
           <a class="btn btn-primary" href={`tel:${business.phone}`}><Icon name="phone" /> 전화 상담</a>
           <a class="btn btn-secondary" href={business.mapUrl} target="_blank" rel="noopener"><Icon name="pin" /> 매장 위치 자세히 보기</a>
         </div>
