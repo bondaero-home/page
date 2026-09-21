@@ -48,8 +48,8 @@ export const business = {
 } as const;
 
 // 페이지 상단 내비게이션.
-// 확장자 없는 절대경로가 이 사이트의 정식 주소다. Cloudflare Pages는 /서비스.html 요청을
-// /서비스 로 308 리다이렉트하므로, .html을 달면 링크를 누를 때마다 왕복이 한 번 더 생긴다.
+// 확장자 없는 절대경로가 이 사이트의 정식 주소다. Workers Static Assets는
+// /서비스.html 요청을 /서비스로 리다이렉트하므로, .html을 달면 왕복이 한 번 더 생긴다.
 export const navLinks = [
   { href: '/서비스', label: '서비스' },
   { href: '/서비스과정', label: '서비스 과정' },

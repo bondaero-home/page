@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 import rehypeFigure from './src/lib/rehype-figure.mjs';
 
 // 사이트맵 URL 정규화.
-// 확장자는 붙이지 않는다. Cloudflare Pages가 /서비스.html → 308 → /서비스 로 리다이렉트하므로
+// 확장자는 붙이지 않는다. Workers Static Assets가 /서비스.html → /서비스 로 리다이렉트하므로
 // 정식 주소는 확장자 없는 형태이고, 사이트맵은 리다이렉트가 아닌 최종 주소를 실어야 한다.
 //
 // 남는 문제는 한글 경로의 유니코드 정규화다. 사이트맵은 페이지 목록을 pages 배열과 _routes 배열
@@ -17,7 +17,7 @@ const seen = new Set();
 // 배포 도메인 (canonical·sitemap·OG·JSON-LD 절대 URL의 단일 출처)
 export default defineConfig({
   site: 'https://bondaerohome.com',
-  // 기존 사이트의 한글 .html URL을 그대로 보존 (예: /서비스.html)
+  // 기존 .html 요청은 정식 확장자 없는 URL로 리다이렉트된다 (예: /서비스.html → /서비스).
   build: { format: 'file' },
   trailingSlash: 'never',
   integrations: [
