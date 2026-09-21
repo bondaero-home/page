@@ -9,8 +9,10 @@
 ```bash
 npm install       # 최초 1회
 npm run dev       # 개발 서버 (http://localhost:4321)
-npm run build     # 정적 빌드 → dist/
+npm run build     # 정적 빌드 → dist/ (한글 파일명 NFC 정규화 포함)
 npm run preview   # 빌드 결과 미리보기
+npm run workers:dev    # Workers Static Assets 로컬 미리보기 (빌드 후 실행)
+npm run workers:deploy # 수동 Workers 배포 (Cloudflare 로그인 필요)
 ```
 
 ## 폴더 구조
@@ -77,9 +79,9 @@ public/
 - 전역: **LocalBusiness** JSON-LD, `sitemap-index.xml`, `robots.txt`, RSS(`/rss.xml`), canonical, OG/Twitter, `llms.txt`.
 - 기준 도메인은 [`astro.config.mjs`](astro.config.mjs)의 `site: 'https://bondaerohome.com'`.
 
-## 배포
+## 배포 이전: Pages → Workers
 
-**이미 라이브입니다.** 현재 경로 (2026-09-07 확인):
+**현재 라이브 배포는 Pages입니다.** 전환 전 경로 (2026-09-07 확인):
 
 ```
 로컬 → git push origin main → GitHub bondaero-home/page → Cloudflare Pages 프로젝트 bondearo → bondaerohome.com
@@ -89,6 +91,16 @@ public/
 - CMS 연동 완료 — `backend.repo: bondaero-home/page`, GitHub OAuth 중개는 `sveltia-cms-auth` 워커.
 - **주의:** `seon-biz/bondearo`는 예전 배포 소스였으나 지금은 끊겨 있습니다. 거기 푸시해도 배포되지 않습니다.
 - 연결 저장소를 확인할 때는 `git ls-remote <저장소> main` 해시와 `npx wrangler pages deployment list --project-name=bondearo`의 커밋 해시를 대조하세요. wrangler는 연결 저장소 이름을 보여주지 않습니다.
+
+### Workers 이전 순서
+
+1. 이 저장소의 `wrangler.jsonc`는 Worker 이름 `bondaerohome-site`, 정적 파일 폴더 `dist`, 404 페이지를 설정한다. Astro 서버 어댑터나 Worker 스크립트는 필요 없다. `npm run build`는 macOS에서 분해형으로 출력되는 한글 파일명과 참조를 NFC로 맞춘다.
+2. Cloudflare **Workers & Pages → Create → Worker → Connect to Git**에서 `bondaero-home/page`의 `main`을 연결한다. 빌드 명령은 `npm run build`, 배포 명령은 `npx wrangler deploy`로 둔다. 이 Git 저장소의 루트가 Astro 프로젝트 루트이므로 Root directory는 기본값이다. Worker 이름을 `wrangler.jsonc`와 같은 `bondaerohome-site`로 지정한다.
+3. 먼저 `bondaerohome-site.<계정-subdomain>.workers.dev`에서 `/`, `/서비스`, `/블로그`, 글 상세, `/admin/`, `/rss.xml`, `/sitemap-index.xml`, 없는 URL의 404와 이미지·CSS를 확인한다. `/서비스.html` 같은 기존 주소가 확장자 없는 URL로 리다이렉트되는지도 확인한다. `/admin/`에서 실제 GitHub 로그인·글 저장은 별도로 검증한다.
+4. Pages 프로젝트 `bondearo`의 자동 배포를 끈다. Pages의 사용자 지정 도메인 `bondaerohome.com`을 해제하고, 해당 호스트의 Pages DNS 레코드가 남아 있으면 제거한 뒤 Worker의 **Settings → Domains & Routes → Add → Custom Domain**에서 `bondaerohome.com`을 연결한다. 이 순서에서는 일시적인 도메인 접속 중단이 생길 수 있으므로, 3번 검증과 계정의 DNS 상태 확인을 끝낸 뒤 전환한다. `www`를 별도로 쓰고 있다면 그 주소도 확인한다.
+5. 실제 도메인에서 위 경로와 CMS를 다시 확인한다. 문제가 생기면 Worker 도메인을 해제하고 Pages 도메인/DNS를 다시 연결한다. 전환이 안정화되기 전에는 Pages 프로젝트를 삭제하지 않는다.
+
+Workers의 Git 자동 배포가 정상 작동한 뒤에는 `main` 푸시가 Workers Builds로 이어진다. `sveltia-cms-auth`는 별도 Worker이므로 홈페이지 Worker와 합치지 않는다.
 
 ## 남은 개선
 
