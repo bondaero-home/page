@@ -14,11 +14,11 @@ export const business = {
   storePhone: '043-218-2554', // 매장 유선
 
   address: {
-    full: '충북 청주시 청원구 오창읍 오청대로 315번지 올리브 상가 138호',
-    street: '오청대로 315번지 올리브 상가 138호',
+    full: '충북 청주시 청원구 오창읍 오창대로 315번지 올리브상가 138호',
+    street: '오창대로 315번지 올리브상가 138호',
     locality: '청주시 청원구 오창읍',
     region: '충청북도',
-    postalCode: '', // TODO: 우편번호 확인 시 입력
+    postalCode: '28120',
     country: 'KR',
   },
 

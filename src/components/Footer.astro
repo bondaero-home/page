@@ -9,7 +9,7 @@ const { phone, storePhone } = { phone: business.phone, storePhone: business.stor
       <div class="footer-brand">
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
           <img src="/images/mark.png" alt="본대로홈 로고" width="28" height="28" style={{ borderRadius: '7px', display: 'block', objectFit: 'cover', flexShrink: 0 }} />
-          <span class="name" style={{ whiteSpace: 'nowrap', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: '21px', lineHeight: 1, marginBottom: 0, letterSpacing: '0.01em', WebkitTextStrokeWidth: '0.4px', WebkitTextStrokeColor: 'currentColor' }}>본대로홈</span>
+          <span class="name" style={{ whiteSpace: 'nowrap', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: '21px', lineHeight: 1, marginBottom: 0, letterSpacing: '0.01em', WebkitTextStrokeWidth: '0.4px', WebkitTextStrokeColor: 'currentColor' }}>{business.name}</span>
         </div>
         <p>
           청주 오창 맞춤 커튼·블라인드 전문점.<br />
@@ -17,7 +17,7 @@ const { phone, storePhone } = { phone: business.phone, storePhone: business.stor
         </p>
         <div style={{ marginTop: '18px', display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '13px', color: 'var(--steel)', lineHeight: 1.7 }}>
           <div>대표 {business.owner} · 사업자등록 {business.bizRegistration}</div>
-          <div>충북 청주시 청원구 오창읍 오청대로 315 · 올리브 상가 138호</div>
+          <div>{business.address.full}</div>
           <div>영업시간 10:30 – 19:00 (일·공휴일 휴무)</div>
         </div>
       </div>
