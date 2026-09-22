@@ -7,14 +7,14 @@ interface Props {
 const { kind } = Astro.props;
 
 const photoMap: Record<string, { src: string; alt: string }> = {
-  livingSheer:     { src: "/images/case-living-sheer-ochang-v2.webp",        alt: "청주 오창 거실 쉬폰커튼 시공" },
+  livingSheer:     { src: "/images/case-living-sheer-ochang-v3.webp",        alt: "청주 오창 거실 쉬폰커튼 시공" },
   bedroomBlackout: { src: "/images/case-bedroom-blackout-osong.webp",     alt: "청주 오송 안방 암막커튼 시공" },
   livingDouble:    { src: "/images/case-living-double-ochang.webp",       alt: "청주 오창 거실 이중커튼 시공" },
   officeCombi:     { src: "/images/case-office-combi-ochang-science.webp", alt: "청주 오창과학단지 사무실 콤비블라인드 시공" },
 };
 const photo = photoMap[kind];
 const placeholder = kind === "livingSheer"
-  ? "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACQAwCdASoYAA0APwFysFArJySisAgBYCAJQBUehDv5HUgd9v4AAP6bMpAqhrsPF2KtCVc5mcffSrg/pi2KxvdoyrvSjZsRbjfDCgAA"
+  ? "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwBACdASoYAA0APwForE6rJaQiMAgBYCAJQBOgBDwSLHItucj8bJMz0QAA/rfDLfA35V6jUQxMgi/TmhpMVqZgQ+yc1gll/iKmFTMkcw/vQu7EyEezZnog5AZti5FESL4hTlmKkJU9FwSYCJAV3wAA"
   : undefined;
 ---
 {photo && (
