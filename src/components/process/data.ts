@@ -64,8 +64,9 @@ export const STEPS_DETAIL: StepDetailData[] = [
       "실측한 사이즈와 결정한 사양 그대로 공장에 주문을 넣어요.",
       "본대로홈은 중간 유통 단계를 거치지 않고 공장과 직접 거래해요. 그래서 같은 원단·사양이라도 가격 거품을 덜어낼 수 있어요.",
     ],
-    img: "/images/process-order-fabric.webp",
-    imgAlt: "원단 카탈로그에서 결정한 사양 그대로 공장 발주",
+    img: "/images/process-order-fabric-v2.webp",
+    imgPlaceholder: "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAADwBACdASoYABIAPwFurVCrJiQiqA1RYCAJQBOkERgr6eAcjw3D5HCQT5ALkZdDw4gA9ynD/aUTX5JaQbtU5TpH8zKHCGUVIwkXdRMYq/KJb+aMk6H17RdkdWfgMg6V0dLpabNwj7zzRJmqAmlmG8YitiSW4hggM8TI3Az2lIMZL4I6bLKFoJaAHsmDHb7gkX7EYsUqhDQAAA==",
+    imgAlt: "커튼 주문서에 치수와 체크 표시를 작성하는 공장 발주 과정",
     cta: null,
   },
   {
