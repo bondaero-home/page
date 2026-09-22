@@ -6,19 +6,20 @@ interface Props {
 }
 const { kind } = Astro.props;
 
-const photoMap: Record<string, { src: string; alt: string }> = {
+const photoMap: Record<string, { src: string; alt: string; width?: number; height?: number }> = {
   livingSheer:     { src: "/images/case-living-sheer-ochang-v3.webp",        alt: "청주 오창 거실 쉬폰커튼 시공" },
   bedroomBlackout: { src: "/images/case-bedroom-blackout-osong-v3.webp",     alt: "청주 오송 안방 암막커튼 시공" },
-  livingDouble:    { src: "/images/case-living-double-ochang.webp",       alt: "청주 오창 거실 이중커튼 시공" },
+  livingDouble:    { src: "/images/case-living-double-ochang-v2.webp",    alt: "청주 오창 거실 이중커튼 시공", width: 600, height: 450 },
   officeCombi:     { src: "/images/case-office-combi-ochang-science.webp", alt: "청주 오창과학단지 사무실 콤비블라인드 시공" },
 };
 const photo = photoMap[kind];
 const placeholders: Record<string, string> = {
   livingSheer: "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwBACdASoYAA0APwForE6rJaQiMAgBYCAJQBOgBDwSLHItucj8bJMz0QAA/rfDLfA35V6jUQxMgi/TmhpMVqZgQ+yc1gll/iKmFTMkcw/vQu7EyEezZnog5AZti5FESL4hTlmKkJU9FwSYCJAV3wAA",
   bedroomBlackout: "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAwCdASoYAA0APwForE6rJaQiMAgBYCAJaQABH6/CcPr2yf7bh9AA/vQD2tw/c9aJ+4ZDg5k3RLS2SDdpRyptY0INogX/pShPmrRYAAA=",
+  livingDouble: "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAACwBACdASoYABIAPwF2slOrJySiqAgBYCAJZQDA3A9oS+ZYXJHT77luDoUf2RdAAPnvlU+PyyVfCr3T2Efcsff2ifLhOaFBYB9szlfrZFLDPKVm/kgps7zSRXHkedRxS3Ln44xo5lozWMh9gGD+8iIFVNa2+N27GTgAAA==",
 };
 const placeholder = placeholders[kind];
 ---
 {photo && (
-  <img src={photo.src} alt={photo.alt} width="800" height="440" loading="lazy" decoding="async" style={css({ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", backgroundImage: placeholder ? `url("${placeholder}")` : undefined, backgroundSize: "cover", backgroundPosition: "center" })} />
+  <img src={photo.src} alt={photo.alt} width={photo.width ?? 800} height={photo.height ?? 440} loading="lazy" decoding="async" style={css({ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", backgroundImage: placeholder ? `url("${placeholder}")` : undefined, backgroundSize: "cover", backgroundPosition: "center" })} />
 )}
