@@ -1,9 +1,14 @@
 ---
+import { css } from '../../lib/css';
+
 interface Product {
   id: string;
   num: string;
   title: string;
   img?: string;
+  width?: number;
+  height?: number;
+  placeholder?: string;
   svg?: string;
   lead: string;
   desc: string;
@@ -18,8 +23,8 @@ interface Props {
 const { p, flip } = Astro.props;
 ---
 <div class={"prod" + (flip ? " prod--flip" : "")} id={p.id}>
-  <div class="prod-media">
-    {p.img ? <img src={p.img} alt={p.title + " 시공 사례"} loading="lazy" /> : <Fragment set:html={p.svg} />}
+  <div class="prod-media" style={p.placeholder ? css({ backgroundImage: `url("${p.placeholder}")`, backgroundSize: "cover", backgroundPosition: "center" }) : undefined}>
+    {p.img ? <img src={p.img} alt={p.title + " 시공 사례"} width={p.width} height={p.height} loading="lazy" decoding="async" /> : <Fragment set:html={p.svg} />}
   </div>
   <div class="prod-content">
     <div class="prod-num">{p.num}</div>
