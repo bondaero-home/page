@@ -8,14 +8,14 @@ const { kind } = Astro.props;
 
 const photoMap: Record<string, { src: string; alt: string }> = {
   livingSheer:     { src: "/images/case-living-sheer-ochang-v3.webp",        alt: "청주 오창 거실 쉬폰커튼 시공" },
-  bedroomBlackout: { src: "/images/case-bedroom-blackout-osong-v2.webp",     alt: "청주 오송 안방 암막커튼 시공" },
+  bedroomBlackout: { src: "/images/case-bedroom-blackout-osong-v3.webp",     alt: "청주 오송 안방 암막커튼 시공" },
   livingDouble:    { src: "/images/case-living-double-ochang.webp",       alt: "청주 오창 거실 이중커튼 시공" },
   officeCombi:     { src: "/images/case-office-combi-ochang-science.webp", alt: "청주 오창과학단지 사무실 콤비블라인드 시공" },
 };
 const photo = photoMap[kind];
 const placeholders: Record<string, string> = {
   livingSheer: "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwBACdASoYAA0APwForE6rJaQiMAgBYCAJQBOgBDwSLHItucj8bJMz0QAA/rfDLfA35V6jUQxMgi/TmhpMVqZgQ+yc1gll/iKmFTMkcw/vQu7EyEezZnog5AZti5FESL4hTlmKkJU9FwSYCJAV3wAA",
-  bedroomBlackout: "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAABwAwCdASoYAA0APwFIu1grIqckmAFgIAlpAABc6f8YhcXQ30AA/e6vgWJLozCv2pRJ/tk3WX2+KU2gAAA=",
+  bedroomBlackout: "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAwCdASoYAA0APwForE6rJaQiMAgBYCAJaQABH6/CcPr2yf7bh9AA/vQD2tw/c9aJ+4ZDg5k3RLS2SDdpRyptY0INogX/pShPmrRYAAA=",
 };
 const placeholder = placeholders[kind];
 ---
