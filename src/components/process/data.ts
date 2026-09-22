@@ -18,6 +18,7 @@ export interface StepDetailData {
   img?: string;
   imgLabel?: string;
   imgAlt?: string;
+  imgPlaceholder?: string;
   cta?: { text: string; href: string; primary: boolean; external?: boolean } | null;
 }
 
@@ -84,8 +85,9 @@ export const STEPS_DETAIL: StepDetailData[] = [
     body: [
       "약속한 날에 방문해 설치까지 마무리해요. 발주부터 설치까지 보통 일주일 안이에요.",
     ],
-    img: "/images/process-install-curtain.webp",
-    imgAlt: "설치 완료 — 거실 쉬폰 커튼 시공",
+    img: "/images/process-install-curtain-v2.webp",
+    imgPlaceholder: "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAADQBACdASoYABIAPwFyr1KrJqQiqAqpYCAJYwCxHy/BI38Rgbzll+6XqvzqEvgu/AD8pCskvt1uUE6qFki4fg1Ej6q7V08aAiQhdWkwSxXnHuMDAbEgIz1vAEgckv5auSqktcvO7VLN3N52vOr5L3ZHotkx8ptWdrRd2DTvAXMBEPdeVA4HJVZ7c5sGTtAhyt8EoIjFkeWzap5ATdoAb48AAAA=",
+    imgAlt: "발코니 창에서 드릴을 들어 커튼·블라인드를 설치하는 작업자",
     cta: null,
   },
 ];

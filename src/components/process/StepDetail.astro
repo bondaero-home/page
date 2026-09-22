@@ -20,7 +20,7 @@ const hasImage = step.img || step.imgLabel;
   {flip && (hasImage ? (
     <div style={css({ borderRadius: "var(--rounded-xl)", overflow: "hidden", boxShadow: "var(--shadow-2)" })}>
       {step.img
-        ? <img src={step.img} alt={step.imgAlt || step.name} loading="lazy" style={css({ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" })} />
+        ? <img src={step.img} alt={step.imgAlt || step.name} width={step.imgPlaceholder ? 1200 : undefined} height={step.imgPlaceholder ? 900 : undefined} loading="lazy" decoding="async" style={css({ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block", backgroundImage: step.imgPlaceholder ? `url("${step.imgPlaceholder}")` : undefined, backgroundSize: "cover" })} />
         : <ImgPlaceholder label={step.imgLabel!} />
       }
     </div>
@@ -76,7 +76,7 @@ const hasImage = step.img || step.imgLabel;
   {!flip && (hasImage ? (
     <div style={css({ borderRadius: "var(--rounded-xl)", overflow: "hidden", boxShadow: "var(--shadow-2)" })}>
       {step.img
-        ? <img src={step.img} alt={step.imgAlt || step.name} loading="lazy" style={css({ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" })} />
+        ? <img src={step.img} alt={step.imgAlt || step.name} width={step.imgPlaceholder ? 1200 : undefined} height={step.imgPlaceholder ? 900 : undefined} loading="lazy" decoding="async" style={css({ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block", backgroundImage: step.imgPlaceholder ? `url("${step.imgPlaceholder}")` : undefined, backgroundSize: "cover" })} />
         : <ImgPlaceholder label={step.imgLabel!} />
       }
     </div>
