@@ -85,8 +85,8 @@ export const STEPS_DETAIL: StepDetailData[] = [
     body: [
       "약속한 날에 방문해 설치까지 마무리해요. 발주부터 설치까지 보통 일주일 안이에요.",
     ],
-    img: "/images/process-install-curtain-v2.webp",
-    imgPlaceholder: "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAADQBACdASoYABIAPwFyr1KrJqQiqAqpYCAJYwCxHy/BI38Rgbzll+6XqvzqEvgu/AD8pCskvt1uUE6qFki4fg1Ej6q7V08aAiQhdWkwSxXnHuMDAbEgIz1vAEgckv5auSqktcvO7VLN3N52vOr5L3ZHotkx8ptWdrRd2DTvAXMBEPdeVA4HJVZ7c5sGTtAhyt8EoIjFkeWzap5ATdoAb48AAAA=",
+    img: "/images/process-install-curtain-v3.webp",
+    imgPlaceholder: "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAADQBACdASoYABIAPwFyr1KrJqQiqAqpYCAJYwCsAywAlL+IwN5y0g8vVfnUOZJNUAD8pCsUIH7oPqDOIHbPQu4bWgST0PsA5It1aYb7OLpK9ICyOqoBWsyBoFdXc9p739YX2H+5fXUcMxVmdudy8vqhX00WhKwEMkvUmK+ebQ/x6M2UK2ZU9n0wfg9O2dKiO5o4YNLcQwkgMiACCAA=",
     imgAlt: "발코니 창에서 드릴을 들어 커튼·블라인드를 설치하는 작업자",
     cta: null,
   },
