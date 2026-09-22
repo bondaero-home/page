@@ -324,7 +324,7 @@ section.block-tight { padding: var(--section) 0; }
 
 /* Case card */
 .case { background: var(--canvas); border-radius: var(--rounded-lg); border: 1px solid var(--hairline); overflow: hidden; }
-.case .thumb { aspect-ratio: 16/9; background: var(--tint-cream); position: relative; overflow: hidden; }
+.case .thumb { aspect-ratio: 800/440; background: var(--tint-cream); position: relative; overflow: hidden; }
 .case .body { padding: 24px 26px 26px; }
 .case .meta { display: flex; gap: 12px; font-size: 13px; color: var(--steel); margin-bottom: 8px; }
 .case h4 { margin: 0 0 8px; font-size: 17px; font-weight: 600; }
