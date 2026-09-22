@@ -20,7 +20,7 @@ const cases = [
     <div class="grid grid-2">
       {cases.map((c) => (
         <div class="case">
-          <div class="thumb" style={c.kind === "livingDouble" ? css({ aspectRatio: "4/3" }) : undefined}><CasePhoto kind={c.kind} /></div>
+          <div class="thumb"><CasePhoto kind={c.kind} /></div>
           <div class="body">
             <div class="meta">
               <span style={css({ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--primary)" })}><MidIcon name="pin" size={16} stroke={2} /> <span style={css({ color: "var(--steel)" })}>{c.area}</span></span>
