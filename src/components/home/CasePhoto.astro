@@ -7,14 +7,14 @@ interface Props {
 const { kind } = Astro.props;
 
 const photoMap: Record<string, { src: string; alt: string; width?: number; height?: number }> = {
-  livingSheer:     { src: "/images/case-living-sheer-ochang-v4.webp",        alt: "청주 오창 거실 쉬폰커튼 시공" },
+  livingSheer:     { src: "/images/case-living-sheer-ochang-v5.webp",        alt: "청주 오창 거실 쉬폰커튼 시공" },
   bedroomBlackout: { src: "/images/case-bedroom-blackout-osong-v3.webp",     alt: "청주 오송 안방 암막커튼 시공" },
   livingDouble:    { src: "/images/case-living-double-ochang-v3.png",     alt: "청주 오창 거실 이중커튼 시공", width: 600, height: 450 },
   officeCombi:     { src: "/images/case-office-combi-ochang-science.webp", alt: "청주 오창과학단지 사무실 콤비블라인드 시공" },
 };
 const photo = photoMap[kind];
 const placeholders: Record<string, string> = {
-  livingSheer: "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAADQAwCdASoYAA0APu1mqk2ppaQiMAgBMB2JZQDE2BwwIl45toP6doAA/ZhbKwIFifFYCAyNz3jpMt/kzHN3z4ATG1q6FvQ2P5xoIoIVPIxSwTE9z1GhmDfy4MPjQhnY54vyL0EaKatAC8R01qSqAAAA",
+  livingSheer: "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAAAQBACdASoYAA0APu1mq04ppaQiMAgBMB2JYwC7AB4YuwEEMrknm9P/gAD8opEBMtu3eXm8WupQPxrY36SIo23KS/pXGLXU6MKPQOAqjiWkBcxVBsc4XqwnUVLHqZ1n7EK6eTSNfVgkAyJE8gtLdUiK4j7oAAAA",
   bedroomBlackout: "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAwCdASoYAA0APwForE6rJaQiMAgBYCAJaQABH6/CcPr2yf7bh9AA/vQD2tw/c9aJ+4ZDg5k3RLS2SDdpRyptY0INogX/pShPmrRYAAA=",
   livingDouble: "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAABwBACdASoYABIAPwF2sVOrJyQiqAgBYCAJZQDE2BEWwXVW4ag0avU2LnMwAAD33F3Ja3L71NCl0rTA0qkrsqrCADc/USUeLOXBJ4u1Xj8YXIDK/lo82hyT9ts5+GjVMla4AvXvfeVADEcEb4FkIsDYnEBioi8TOBExr/JAAAA=",
 };
