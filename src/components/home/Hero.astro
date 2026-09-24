@@ -19,6 +19,11 @@ import Icon from '../Icon.astro';
   ></video>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="container hero-inner">
+    <div class="hero-mobile-copy">
+      <p class="hero-eyebrow">본대로홈 · 맞춤 커튼과 블라인드</p>
+      <h1>우리 집의 분위기를<br />바꾸는 커튼</h1>
+      <p class="sub">빛과 공간에 맞춰, 오래 보고 싶은 창가를 만듭니다.</p>
+    </div>
     <div class="hero-ctas">
       <a class="btn btn-primary btn-lg" href={`tel:${business.phone}`}>
         <Icon name="phone" /> 지금 전화 상담하기
@@ -35,16 +40,25 @@ import Icon from '../Icon.astro';
   const video = document.querySelector<HTMLVideoElement>('.hero-video');
   const toggle = document.querySelector<HTMLButtonElement>('.hero-video-toggle');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mobile = window.matchMedia('(max-width: 640px)');
   if (video && toggle) {
     const syncLabel = () => {
       toggle.textContent = video.paused ? '영상 재생' : '영상 일시정지';
     };
     const respectMotion = () => {
+      if (mobile.matches && !video.src.endsWith('/hero-v8-original.mp4')) {
+        video.src = '/videos/hero-v8-original.mp4';
+        video.load();
+      } else if (!mobile.matches && !video.src.endsWith('/hero.mp4')) {
+        video.src = '/videos/hero.mp4';
+        video.load();
+      }
       if (motion.matches) { video.removeAttribute('autoplay'); video.pause(); video.currentTime = 0; }
       syncLabel();
     };
     respectMotion();
     motion.addEventListener('change', respectMotion);
+    mobile.addEventListener('change', respectMotion);
     video.addEventListener('play', syncLabel);
     video.addEventListener('pause', syncLabel);
     toggle.hidden = false;
