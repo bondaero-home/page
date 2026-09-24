@@ -31,25 +31,71 @@ import Icon from '../Icon.astro';
     <div class="hero-photo">
       <video
         class="hero-video"
-        src="/videos/hero-v6.mp4"
-        poster="/images/hero-poster-v6.webp"
+        id="home-hero-video"
+        src="/videos/hero-v7.mp4"
+        poster="/images/hero-poster-v7.webp"
+        width="1280"
+        height="720"
         autoplay
         muted
         loop
         playsinline
         preload="auto"
-        aria-label="청주 오창 거실 쉬어커튼 시공 영상"
+        aria-label="본대로홈 매장의 레이스 커튼과 꽃무늬 원단 소개 영상"
       ></video>
+      <button class="hero-video-toggle" type="button" aria-controls="home-hero-video" hidden>영상 일시정지</button>
     </div>
   </div>
 </section>
 
 <script>
-  // 움직임 최소화를 켠 사용자에게는 재생하지 않고 포스터 이미지만 보여준다.
-  // (CSS로는 video 재생을 막을 수 없어 스크립트가 필요하다)
   const video = document.querySelector<HTMLVideoElement>('.hero-video');
-  if (video && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    video.removeAttribute('autoplay');
-    video.pause();
+  const toggle = document.querySelector<HTMLButtonElement>('.hero-video-toggle');
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (video && toggle) {
+    const syncLabel = () => {
+      toggle.textContent = video.paused ? '영상 재생' : '영상 일시정지';
+    };
+    const respectMotion = () => {
+      if (motion.matches) {
+        video.removeAttribute('autoplay');
+        video.pause();
+        video.currentTime = 0;
+      }
+      syncLabel();
+    };
+    respectMotion();
+    motion.addEventListener('change', respectMotion);
+    video.addEventListener('play', syncLabel);
+    video.addEventListener('pause', syncLabel);
+    toggle.hidden = false;
+    toggle.addEventListener('click', async () => {
+      if (video.paused) {
+        try { await video.play(); } catch { syncLabel(); }
+      } else {
+        video.pause();
+      }
+    });
   }
 </script>
+
+<style>
+  .hero-video-toggle {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: var(--surface-soft);
+    color: var(--ink-deep);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .hero-video-toggle:focus-visible {
+    outline: 3px solid var(--primary-deep);
+    outline-offset: 3px;
+  }
+</style>

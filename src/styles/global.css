@@ -273,7 +273,7 @@ body.menu-open .mfloat { display: none; }
    (poster 이미지는 영상의 첫 프레임과 동일한 그림이라 전환이 눈에 띄지 않는다) */
 .hero-photo,
 .hero-photo .hero-video {
-  background-image: url("/images/hero-poster-v6.webp");
+  background-image: url("/images/hero-poster-v7.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
