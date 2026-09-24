@@ -159,6 +159,8 @@ button { font-family: inherit; }
 .btn-dark          { background: var(--ink-deep); color: var(--on-dark); }
 .btn-secondary     { background: transparent; color: var(--ink); border-color: var(--hairline-strong); }
 .btn-secondary:hover{ background: var(--surface); }
+.hero .btn-secondary { background: rgba(255,255,255,.15); color: #fff; border-color: rgba(255,255,255,.9); }
+.hero .btn-secondary:hover { background: rgba(255,255,255,.25); color: #fff; border-color: #fff; }
 
 .btn-on-dark       { background: var(--on-dark); color: var(--ink); }
 .btn-on-dark:hover { background: #f0f0ed; }
