@@ -41,6 +41,7 @@ import Icon from '../Icon.astro';
   const toggle = document.querySelector<HTMLButtonElement>('.hero-video-toggle');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const mobile = window.matchMedia('(max-width: 640px)');
+  const floatingCall = document.querySelector<HTMLElement>('.mfloat');
   if (video && toggle) {
     const syncLabel = () => {
       toggle.textContent = video.paused ? '영상 재생' : '영상 일시정지';
@@ -59,6 +60,12 @@ import Icon from '../Icon.astro';
     respectMotion();
     motion.addEventListener('change', respectMotion);
     mobile.addEventListener('change', respectMotion);
+    if (floatingCall && 'IntersectionObserver' in window) {
+      const hero = document.querySelector<HTMLElement>('.hero');
+      if (hero) new IntersectionObserver(([entry]) => {
+        floatingCall.style.visibility = entry.isIntersecting && mobile.matches ? 'hidden' : 'visible';
+      }, { threshold: 0.08 }).observe(hero);
+    }
     video.addEventListener('play', syncLabel);
     video.addEventListener('pause', syncLabel);
     toggle.hidden = false;
