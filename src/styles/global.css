@@ -390,7 +390,7 @@ section.block-tight { padding: var(--section) 0; }
   .nav-inner { gap: 12px; }
   .nav-cta { margin-left: auto; }
   .mfloat { display: flex; }
-  .final-cta h2 { font-size: 36px; }
+  .final-cta h2 { font-size: 26px; }
   .final-cta { padding: 64px 24px; }
 }
 @media (max-width: 560px) {
