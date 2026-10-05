@@ -142,8 +142,8 @@ const breadcrumbList = {
         <section class="block" style={css({ background: 'var(--surface-soft)', paddingTop: 56, paddingBottom: 56 })} aria-labelledby="related-heading">
           <div class="container" style={css({ maxWidth: 1100 })}>
             <h2 id="related-heading" style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 26, fontWeight: 700, letterSpacing: "-0.5px", margin: '0 0 24px', color: 'var(--ink-deep)' })}>관련 글</h2>
-            <div class="blog-grid">
-              {related.map((p) => <PostCard post={p} />)}
+            <div class="related-grid">
+              {related.map((p) => <PostCard post={p} compact />)}
             </div>
           </div>
         </section>
@@ -160,6 +160,18 @@ const breadcrumbList = {
 </BaseLayout>
 
 <style>
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+  @media (max-width: 920px) {
+    .related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 420px) {
+    .related-grid { grid-template-columns: 1fr; }
+  }
+
   .post-body :global(h2) {
     font-family: 'Gowun Batang', serif;
     font-size: clamp(20px, 3.06vw, 25px);
