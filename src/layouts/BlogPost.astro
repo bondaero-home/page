@@ -100,9 +100,9 @@ const breadcrumbList = {
         <div class="container" style={css({ maxWidth: 820 })}>
           <Breadcrumbs items={breadcrumb} />
           <div style={css({ marginTop: 22 })}>
-            <span style={css({ display: 'inline-flex', alignItems: 'center', fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', padding: '5px 13px', borderRadius: 'var(--rounded-full)', color: '#fff', background: 'var(--primary)', whiteSpace: 'nowrap' })}>{data.category}</span>
+            <span style={css({ display: 'inline-flex', alignItems: 'center', fontSize: 12, fontWeight: 700, letterSpacing: "-0.5px", padding: '5px 13px', borderRadius: 'var(--rounded-full)', color: '#fff', background: 'var(--primary)', whiteSpace: 'nowrap' })}>{data.category}</span>
           </div>
-          <h1 style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 'clamp(30px, 5vw, 44px)', fontWeight: 700, lineHeight: 1.32, letterSpacing: '-0.6px', margin: '16px 0 0', color: 'var(--ink-deep)', wordBreak: 'keep-all' })}>{data.title}</h1>
+          <h1 style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 'clamp(30px, 5vw, 44px)', fontWeight: 700, lineHeight: 1.32, letterSpacing: "-0.5px", margin: '16px 0 0', color: 'var(--ink-deep)', wordBreak: 'keep-all' })}>{data.title}</h1>
           <div style={css({ marginTop: 26, paddingTop: 24, borderTop: '1px solid var(--hairline)', display: 'flex', flexWrap: 'wrap', gap: '8px 10px', alignItems: 'center' })}>
             {chips.map((m) => (
               <span style={css({ fontSize: 13.5, fontWeight: 500, color: 'var(--slate)', background: 'var(--canvas)', border: '1px solid var(--hairline)', padding: '5px 12px', borderRadius: 'var(--rounded-full)', whiteSpace: 'nowrap' })}>{m}</span>
@@ -124,7 +124,7 @@ const breadcrumbList = {
 
           {data.faq.length > 0 && (
             <section style={css({ marginTop: 48 })} aria-labelledby="faq-heading">
-              <h2 id="faq-heading" style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 'clamp(20px, 3.06vw, 25px)', fontWeight: 700, letterSpacing: '-0.4px', margin: '0 0 20px', color: 'var(--ink-deep)' })}>자주 묻는 질문</h2>
+              <h2 id="faq-heading" style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 'clamp(20px, 3.06vw, 25px)', fontWeight: 700, letterSpacing: "-0.5px", margin: '0 0 20px', color: 'var(--ink-deep)' })}>자주 묻는 질문</h2>
               <div style={css({ display: 'flex', flexDirection: 'column', gap: 12 })}>
                 {data.faq.map((f) => (
                   <details class="faq">
@@ -141,7 +141,7 @@ const breadcrumbList = {
       {related.length > 0 && (
         <section class="block" style={css({ background: 'var(--surface-soft)', paddingTop: 56, paddingBottom: 56 })} aria-labelledby="related-heading">
           <div class="container" style={css({ maxWidth: 1100 })}>
-            <h2 id="related-heading" style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 26, fontWeight: 700, letterSpacing: '-0.5px', margin: '0 0 24px', color: 'var(--ink-deep)' })}>관련 글</h2>
+            <h2 id="related-heading" style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 26, fontWeight: 700, letterSpacing: "-0.5px", margin: '0 0 24px', color: 'var(--ink-deep)' })}>관련 글</h2>
             <div class="blog-grid">
               {related.map((p) => <PostCard post={p} />)}
             </div>
@@ -164,7 +164,7 @@ const breadcrumbList = {
     font-family: 'Gowun Batang', serif;
     font-size: clamp(20px, 3.06vw, 25px);
     font-weight: 700;
-    letter-spacing: -0.4px;
+    letter-spacing: -0.5px;
     line-height: 1.35;
     margin: 44px 0 18px;
     color: var(--ink-deep);

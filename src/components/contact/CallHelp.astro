@@ -17,7 +17,7 @@ const CALL_HELP = [
     <div class="help-grid">
       {CALL_HELP.map((c, i) => (
         <div style={css({ background: "var(--canvas)", border: "1px solid var(--hairline)", borderRadius: "var(--rounded-lg)", padding: "28px 26px" })}>
-          <div style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 32, fontWeight: 700, color: "color-mix(in srgb, var(--primary) 35%, var(--hairline))", letterSpacing: "-1px", marginBottom: 12 })}>{String(i + 1).padStart(2, "0")}</div>
+          <div style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 32, fontWeight: 700, color: "color-mix(in srgb, var(--primary) 35%, var(--hairline))", letterSpacing: "-0.5px", marginBottom: 12 })}>{String(i + 1).padStart(2, "0")}</div>
           <h3 style={css({ fontSize: 19, fontWeight: 700, color: "var(--ink-deep)", margin: "0 0 8px", wordBreak: "keep-all" })}>{c.k}</h3>
           <p style={css({ fontSize: 15.5, lineHeight: 1.7, color: "var(--slate)", margin: 0, wordBreak: "keep-all" })}>{c.v}</p>
         </div>
