@@ -55,6 +55,12 @@ const localBusiness = {
       opens: business.hours.open,
       closes: business.hours.close,
     },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Saturday'],
+      opens: business.hours.open,
+      closes: business.hours.saturdayClose,
+    },
   ],
   sameAs: [business.mapUrl],
   makesOffer: ['암막커튼', '쉬폰커튼', '이중커튼', '콤비블라인드', '우드블라인드', '롤스크린', '버티컬블라인드', '알루미늄블라인드'].map((p) => ({

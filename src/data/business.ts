@@ -23,12 +23,14 @@ export const business = {
   },
 
   hours: {
-    display: '월~토 10:30 – 19:00',
+    display: '월~금 10:30 – 19:00 · 토요일 10:30 – 17:00',
+    weekdayDisplay: '월~금 10:30 – 19:00',
+    saturdayDisplay: '토요일 10:30 – 17:00',
     holiday: '일요일 · 공휴일 휴무',
     open: '10:30',
     close: '19:00',
-    // 일요일 휴무 → 월~토 영업
-    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    saturdayClose: '17:00',
+    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
   },
 
   areaServed: ['청주시', '오창', '오송', '청원구'],
