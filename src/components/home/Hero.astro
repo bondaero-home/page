@@ -3,13 +3,14 @@ import { business } from '../../data/business';
 import Icon from '../Icon.astro';
 ---
 <section class="hero hero--intro">
+  <div class="hero-film">
   <video
     class="hero-video"
     id="home-hero-video"
-    src="/videos/hero-v9-final-intro.mp4"
-    poster="/images/hero-poster-v9-final-intro.jpg"
-    width="1920"
-    height="1080"
+    src="/videos/hero-v8-original.mp4"
+    poster="/images/hero-poster-v10-quiet.jpg"
+    width="1280"
+    height="720"
     autoplay
     muted
     loop
@@ -17,21 +18,23 @@ import Icon from '../Icon.astro';
     preload="metadata"
     aria-label="본대로홈 맞춤 커튼과 블라인드 소개 영상"
   ></video>
+    <span class="hero-film-brand" aria-hidden="true">본대로홈</span>
+  </div>
   <div class="container hero-inner">
+    <button class="hero-video-toggle" type="button" aria-controls="home-hero-video" hidden>영상 일시정지</button>
     <div class="hero-copy">
       <h1>우리 집의 분위기를<br />바꾸는 커튼</h1>
       <p class="sub">빛과 공간에 맞춰, 오래 보고 싶은 창가를 만듭니다.</p>
     </div>
     <div class="hero-ctas">
       <a class="btn btn-primary btn-lg" href={`tel:${business.phone}`}>
-        <Icon name="phone" /> 지금 전화 상담하기
+        <Icon name="phone" /> 전화 상담
       </a>
       <a class="btn btn-secondary btn-lg" href={business.mapUrl} target="_blank" rel="noopener">
         <Icon name="pin" /> 매장 위치 보기
       </a>
     </div>
   </div>
-  <button class="hero-video-toggle" type="button" aria-controls="home-hero-video" hidden>영상 일시정지</button>
 </section>
 
 <style>
@@ -50,6 +53,16 @@ import Icon from '../Icon.astro';
     aspect-ratio: 16 / 9;
     object-fit: contain;
     filter: none;
+  }
+  .hero-film { position: relative; }
+  .hero-film-brand {
+    position: absolute;
+    right: 24px;
+    bottom: 20px;
+    color: #fff;
+    font-size: clamp(12px, 1.8vw, 24px);
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
   }
   .hero--intro .hero-inner {
     height: auto;
@@ -81,8 +94,13 @@ import Icon from '../Icon.astro';
     text-shadow: none;
   }
   .hero--intro .hero-video-toggle {
-    top: 12px;
-    bottom: auto;
+    position: static;
+    align-self: flex-end;
+    margin: 0 0 12px;
+    min-height: 36px;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.4;
   }
   @media (max-width: 560px) {
     .hero--intro .hero-inner { padding: 16px 20px; }
