@@ -7,8 +7,8 @@ import Icon from '../Icon.astro';
   <video
     class="hero-video"
     id="home-hero-video"
-    src="/videos/hero-v14-balanced-opening.mp4"
-    poster="/images/hero-poster-v14-balanced-opening.jpg"
+    src="/videos/hero-v15-natural-entrance.mp4"
+    poster="/images/hero-poster-v15-natural-entrance.jpg"
     width="1920"
     height="1080"
     autoplay
@@ -55,14 +55,26 @@ import Icon from '../Icon.astro';
     filter: none;
   }
   .hero-film { position: relative; }
+  .hero-film::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 24%;
+    background: linear-gradient(transparent, rgba(25, 23, 20, .22));
+    pointer-events: none;
+  }
   .hero-film-brand {
     position: absolute;
-    right: 24px;
-    bottom: 20px;
+    z-index: 1;
+    left: clamp(20px, 4vw, 64px);
+    bottom: clamp(16px, 3vw, 40px);
     color: #fff;
-    font-size: clamp(12px, 1.8vw, 24px);
-    font-weight: 500;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
+    font-family: 'Gowun Batang', serif;
+    font-size: clamp(20px, 2.5vw, 36px);
+    font-weight: 700;
+    line-height: 1.3;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+    pointer-events: none;
   }
   .hero--intro .hero-inner {
     height: auto;
