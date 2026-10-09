@@ -417,7 +417,7 @@ section.block-tight { padding: var(--section) 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero { background: #a8a194 url('/images/hero-poster-v8-original.jpg') center / cover no-repeat; }
+  .hero { background: #a8a194 url('/images/hero-poster-v9-final-intro.jpg') center / cover no-repeat; }
   .hero-video { display: none; }
 }
 
