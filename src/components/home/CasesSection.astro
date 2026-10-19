@@ -5,10 +5,10 @@ import MidIcon from './MidIcon.astro';
 import CasePhoto from './CasePhoto.astro';
 
 const cases = [
-  { kind: "livingSheer", area: "청주 오창", spec: "30평 · 거실 쉬폰커튼", note: "자연 채광이 부드럽게 들어오는 거실로 마무리했습니다." },
-  { kind: "bedroomBlackout", area: "청주 오송", spec: "24평 · 안방 암막커튼", note: "야간 근무자 가정, 낮에도 완벽한 빛 차단으로 시공했습니다." },
-  { kind: "livingDouble", area: "청주 오창", spec: "33평 · 거실 이중커튼 (암막+쉬폰)", note: "낮과 밤의 채광을 자유롭게 조절하는 호텔식 마감입니다." },
-  { kind: "officeCombi", area: "청주 오창과학단지", spec: "사무실 · 콤비블라인드", note: "회의실 빛 조절을 위한 콤비블라인드 시공입니다." },
+  { href: "/블로그/light-but-not-see-through-fabric", kind: "livingSheer", area: "청주 오창", spec: "30평 · 거실 쉬폰커튼", note: "자연 채광이 부드럽게 들어오는 거실로 마무리했습니다." },
+  { href: "/블로그/blackout-sheer-double-curtain", kind: "bedroomBlackout", area: "청주 오송", spec: "24평 · 안방 암막커튼", note: "야간 근무자 가정, 낮에도 완벽한 빛 차단으로 시공했습니다." },
+  { href: "/블로그/blackout-sheer-double-curtain", kind: "livingDouble", area: "청주 오창", spec: "33평 · 거실 이중커튼 (암막+쉬폰)", note: "낮과 밤의 채광을 자유롭게 조절하는 호텔식 마감입니다." },
+  { href: "/블로그/curtain-vs-blind", kind: "officeCombi", area: "청주 오창과학단지", spec: "사무실 · 콤비블라인드", note: "회의실 빛 조절을 위한 콤비블라인드 시공입니다." },
 ];
 ---
 <section class="block" id="cases" style={css({ background: "var(--surface-soft)" })}>
@@ -19,7 +19,7 @@ const cases = [
     </div>
     <div class="grid grid-2">
       {cases.map((c) => (
-        <div class="case">
+        <a class="case case-link" href={c.href} aria-label={`${c.spec} 관련 글 보기`}>
           <div class="thumb"><CasePhoto kind={c.kind} /></div>
           <div class="body">
             <div class="meta">
@@ -27,8 +27,9 @@ const cases = [
               <span style={css({ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--primary)" })}><MidIcon name="home" size={16} stroke={2} /> <span style={css({ color: "var(--steel)" })}>{c.spec}</span></span>
             </div>
             <p>{c.note}</p>
+            <span class="case-read-more">관련 글 보기 <Icon name="arrow-right" size={14} /></span>
           </div>
-        </div>
+        </a>
       ))}
     </div>
     <div style={css({ marginTop: 36, textAlign: "center" })}>
@@ -38,3 +39,10 @@ const cases = [
     </div>
   </div>
 </section>
+
+<style>
+  .case-link { display: block; color: inherit; text-decoration: none; }
+  .case-link:focus-visible { outline: 3px solid var(--primary); outline-offset: 4px; }
+  .case-read-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; color: var(--primary); font-size: 14px; font-weight: 600; }
+  .case-link:hover .case-read-more { text-decoration: underline; text-underline-offset: 4px; }
+</style>
