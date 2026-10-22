@@ -20,6 +20,7 @@ import Icon from '../Icon.astro';
   ></video>
     <div class="hero-brand-story">
       <p>한 땀의 정성으로,<br />우리 집에 꼭 맞는 커튼.</p>
+      <p class="hero-story-detail">설치 전 한 번 더 꼼꼼히 살펴,<br />고객님의 만족으로 마무리합니다.</p>
       <span>본대로홈</span>
     </div>
   <div class="hero-inner">
@@ -157,11 +158,13 @@ import Icon from '../Icon.astro';
     line-height: 1.6;
     word-break: keep-all;
   }
+  .hero--intro .hero-brand-story .hero-story-detail { font-family: inherit; font-size: clamp(14px, 1.3vw, 19px); line-height: 1.7; margin-bottom: 12px; color: rgba(255,255,255,.92); }
   .hero-brand-story span { font-size: clamp(13px, 1.2vw, 18px); opacity: .85; }
   .hero-film::after { height: 45%; background: linear-gradient(transparent, rgba(25, 23, 20, .38)); }
   @media (max-width: 760px) {
-    .hero-brand-story { top: 41%; width: calc(100% - 48px); }
-    .hero--intro .hero-brand-story p { font-size: clamp(17px, 4.4vw, 22px); line-height: 1.5; margin-bottom: 6px; }
+    .hero-brand-story { top: 36%; width: calc(100% - 48px); }
+    .hero--intro .hero-brand-story p { font-size: clamp(16px, 4.2vw, 22px); line-height: 1.4; margin-bottom: 4px; }
+    .hero--intro .hero-brand-story .hero-story-detail { font-size: clamp(11px, 3vw, 14px); line-height: 1.5; margin-bottom: 4px; }
     .hero-brand-story span { font-size: 11px; }
     .hero-film::after { height: 75%; }
   }
