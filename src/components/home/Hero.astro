@@ -7,7 +7,7 @@ import Icon from '../Icon.astro';
   <video
     class="hero-video"
     id="home-hero-video"
-    src="/videos/hero-v20-straightened-opening.mp4"
+    src="/videos/hero-v21-sewing-fabric.mp4"
     poster="/images/hero-poster-v20-straightened-opening.jpg"
     width="1920"
     height="1080"
@@ -19,7 +19,7 @@ import Icon from '../Icon.astro';
     aria-label="본대로홈 맞춤 커튼과 블라인드 소개 영상"
   ></video>
     <div class="hero-brand-story">
-      <p>한 땀의 정성에 당신의 취향을 담아,<br />공간에 맞추고 마지막까지 꼼꼼히 살핍니다.</p>
+      <p>한 땀의 정성으로,<br />우리 집에 꼭 맞는 커튼.</p>
       <span>본대로홈</span>
     </div>
   <div class="hero-inner">
@@ -141,8 +141,11 @@ import Icon from '../Icon.astro';
   .hero-brand-story {
     position: absolute;
     z-index: 1;
-    left: clamp(20px, 4vw, 64px);
-    bottom: clamp(28px, 4vw, 56px);
+    left: 50%;
+    top: 46%;
+    width: calc(100% - 40px);
+    transform: translate(-50%, -50%);
+    text-align: center;
     color: #fff;
     font-family: 'Gowun Batang', serif;
     text-shadow: 0 1px 8px #0006;
@@ -150,15 +153,15 @@ import Icon from '../Icon.astro';
   }
   .hero--intro .hero-brand-story p {
     margin: 0 0 12px;
-    font-size: clamp(18px, 2vw, 30px);
-    line-height: 1.8;
+    font-size: clamp(20px, 2.3vw, 34px);
+    line-height: 1.6;
     word-break: keep-all;
   }
   .hero-brand-story span { font-size: clamp(13px, 1.2vw, 18px); opacity: .85; }
   .hero-film::after { height: 45%; background: linear-gradient(transparent, rgba(25, 23, 20, .38)); }
   @media (max-width: 760px) {
-    .hero-brand-story { left: 16px; right: 16px; bottom: 74px; }
-    .hero--intro .hero-brand-story p { font-size: clamp(12px, 3.2vw, 18px); line-height: 1.6; margin-bottom: 4px; }
+    .hero-brand-story { top: 41%; width: calc(100% - 48px); }
+    .hero--intro .hero-brand-story p { font-size: clamp(17px, 4.4vw, 22px); line-height: 1.5; margin-bottom: 6px; }
     .hero-brand-story span { font-size: 11px; }
     .hero-film::after { height: 75%; }
   }
