@@ -42,8 +42,8 @@ export const STEPS_DETAIL: StepDetailData[] = [
       "온라인 사진과 실물은 다를 수 있어요. 그래서 매장에서 실제 원단의 두께·질감·색을 직접 만져보고 고르시는 걸 권해드려요.",
       "암막·쉬폰·이중커튼, 콤비·우드·롤스크린·알루미늄블라인드 중 공간에 맞는 제품을 함께 정해요.",
     ],
-    img: "/images/process-fabric-sample.webp",
-    imgAlt: "매장에서 원단 샘플북과 색상표를 직접 확인",
+    img: "/images/process-fabric-sample-v2.webp",
+    imgAlt: "매장에서 쉬폰과 두꺼운 커튼 원단을 손으로 만져 보며 비교하는 모습",
     cta: { text: "매장에서 원단 보기", href: mapUrl, primary: false, external: true },
   },
   {
