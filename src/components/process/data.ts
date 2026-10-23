@@ -18,6 +18,7 @@ export interface StepDetailData {
   img?: string;
   imgLabel?: string;
   imgAlt?: string;
+  imgFit?: "cover" | "contain";
   imgPlaceholder?: string;
   cta?: { text: string; href: string; primary: boolean; external?: boolean } | null;
 }
@@ -54,8 +55,9 @@ export const STEPS_DETAIL: StepDetailData[] = [
       "기장이 잘못 나오면 다시 방문해야 하니까, 처음 실측에서 꼼꼼히 봐서 재방문을 줄여요.",
     ],
     highlight: "청주·오창·오송 지역은 방문 실측이 무료예요. 그 외 지역은 전화로 문의해 주세요.",
-    img: "/images/process-measure.webp",
-    imgAlt: "창 크기를 줄자로 정확히 실측하는 모습",
+    img: "/images/process-measure-v2.gif",
+    imgFit: "contain",
+    imgAlt: "커튼 설치 위치에서 줄자로 창 치수를 꼼꼼하게 확인하는 모습",
     cta: { text: "지금 전화로 일정 잡기", href: `tel:${phone}`, primary: true },
   },
   {
