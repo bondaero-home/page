@@ -95,7 +95,7 @@ const breadcrumbList = {
   <PromoBanner />
   <Header />
   <main>
-    <article>
+    <article class:list={{ 'uniform-guide-images': data.slug === 'curtain-vs-blind-guide' }}>
       <header style={css({ background: 'var(--surface)', paddingTop: 40, paddingBottom: 56 })}>
         <div class="container" style={css({ maxWidth: 820 })}>
           <Breadcrumbs items={breadcrumb} />
@@ -205,6 +205,13 @@ const breadcrumbList = {
     display: block;
     border-radius: var(--rounded-xl);
     box-shadow: var(--shadow-2);
+  }
+  .uniform-guide-images .post-body :global(.post-figure img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: center;
   }
   .post-body :global(figcaption) {
     margin-top: 10px;
