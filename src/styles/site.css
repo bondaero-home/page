@@ -321,6 +321,20 @@ body.lock{overflow:hidden}
 .subhero-bright>img{filter:brightness(1.25) contrast(.9) saturate(1.05)}
 .subhero-bright .hero-shade{background:radial-gradient(ellipse 62% 80% at 27% 58%,rgba(20,22,18,.58) 0%,rgba(20,22,18,.28) 55%,rgba(20,22,18,0) 82%)}
 .subhero-bright h1,.subhero-bright p,.subhero-bright .crumb{text-shadow:0 1px 16px rgba(0,0,0,.35)}
+/* 서비스 과정 히어로: 휴대폰에서는 긴 문장 대신 아이콘 4단계 + 기간 배지 */
+.hero-flow,.hero-flow-time{display:none}
+@media (max-width:768px){
+  .subhero p.hero-lead{display:none}
+  .hero-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;list-style:none;margin:24px 0 0;padding:0;position:relative}
+  .hero-flow::before{content:"";position:absolute;left:12.5%;right:12.5%;top:23px;border-top:1.5px dashed rgba(255,255,255,.7)}
+  .hero-flow li{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+  .hero-flow .ic{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.94);color:var(--primary-deep);display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+  .hero-flow svg,.hero-flow-time svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .hero-flow b{font-size:13px;font-weight:700;color:#fff;line-height:1.3;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+  .hero-flow-time{display:inline-flex;align-items:center;gap:7px;margin-top:20px;padding:8px 16px 8px 12px;border-radius:999px;background:rgba(61,84,53,.88);color:#fff;font-size:14px;font-weight:500}
+  .hero-flow-time svg{width:18px;height:18px}
+  .hero-flow-time b{color:#dbeacf;font-weight:800;margin:0 1px}
+}
 .subhero .eyebrow{color:#cfe0c4}
 .subhero h1{color:#fff;font-size:58px;line-height:1.2;letter-spacing:-.05em;font-weight:800;max-width:760px}
 .subhero p{margin:20px 0 0;font-size:18px;max-width:640px;opacity:.92}
