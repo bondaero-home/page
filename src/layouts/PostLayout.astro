@@ -1,0 +1,230 @@
+---
+// 블로그 글 상세 — 디자인 v3 (2026-11). 레퍼런스: "본대로홈 시공사례 상세 페이지 시안"(2026-11-16)
+// 갤러리(대표 + 본문 사진) → 태그·제목 → 정보 카드(시공사례: 시공 정보 / 가이드: 요약·목차) → 본문 → FAQ → 이전/목록/다음 → 관련 글 → 상담 카드
+import { getImage } from 'astro:assets';
+import type { ImageMetadata, MarkdownHeading } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import { business } from '../data/business';
+
+type Post = CollectionEntry<'blog'>;
+interface Props {
+  entry: Post;
+  headings: MarkdownHeading[];
+  related: Post[];
+  prev?: Post; // 더 오래된 글
+  next?: Post; // 더 최근 글
+}
+const { entry, headings, related, prev, next } = Astro.props;
+const { data } = entry;
+const isCase = data.category === '시공사례';
+
+const site = Astro.site ?? new URL('https://bondaerohome.com');
+// 확장자 제거 + NFC 정규화 (이유는 BaseLayout의 canonical 주석 참고)
+const url = new URL(decodeURIComponent(Astro.url.pathname).normalize('NFC').replace(/\.html$/, ''), site).href;
+
+// ── 갤러리: 대표 이미지 + 본문 사진(마크다운 ![alt](./images/x "캡션")) ─────────────
+const allImages = import.meta.glob<{ default: ImageMetadata }>('/src/content/blog/*/images/*.{webp,jpg,jpeg,png}', { eager: true });
+const dir = '/' + (entry.filePath ?? `src/content/blog/${entry.id}/index.md`).replace(/\/[^/]+$/, '');
+const bodyImages: { meta: ImageMetadata; alt: string; cap: string }[] = [];
+for (const m of (entry.body ?? '').matchAll(/!\[([^\]]*)\]\(\.\/images\/([^\s)]+)(?:\s+"([^"]*)")?\)/g)) {
+  const mod = allImages[`${dir}/images/${m[2]}`];
+  if (mod) bodyImages.push({ meta: mod.default, alt: m[1], cap: m[3] ?? '' });
+}
+const sources = [{ meta: data.heroImage, alt: data.heroImageAlt, cap: '' }, ...bodyImages.filter((b) => b.meta.src !== data.heroImage.src)];
+const gallery = await Promise.all(
+  sources.map(async (s) => ({
+    // 원본보다 크게 늘리지 않는다(작은 원본을 키우면 화질은 그대로인데 용량만 커진다)
+    big: (await getImage({ src: s.meta, width: Math.min(1600, s.meta.width), format: 'webp' })).src,
+    thumb: (await getImage({ src: s.meta, width: Math.min(480, s.meta.width), format: 'webp' })).src,
+    alt: s.alt,
+    cap: s.cap,
+    tag: s.cap.startsWith('시공 전') ? '시공 전' : '',
+  })),
+);
+const galleryData = JSON.stringify(gallery.map((g) => ({ src: g.big, alt: g.alt, cap: g.cap })));
+const heroAbs = new URL((await getImage({ src: data.heroImage, format: 'webp', width: 1200 })).src, site).href;
+
+// ── 표시용 값 ─────────────────────────────────────────────
+const kdate = (d: Date) => `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`;
+const dot = (d: Date) => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+const toc = headings.filter((h) => h.depth === 2);
+const shortTitle = (t: string) => {
+  const s = t.split(' — ')[0].split('?')[0];
+  return s.length <= 22 ? s : s.slice(0, 21) + '…';
+};
+const pills = isCase
+  ? [{ t: data.category, c: 'cat' }, ...(data.product ? [{ t: data.product, c: '' }] : []), ...(data.buildingType ? [{ t: data.buildingType, c: 'soft' }] : [])]
+  : [{ t: data.category, c: 'cat' }, ...data.tags.slice(0, 2).map((t) => ({ t: `#${t}`, c: '' }))];
+
+// ── JSON-LD ──────────────────────────────────────────────
+const breadcrumb = [
+  { label: '홈', href: '/' },
+  { label: '블로그', href: '/블로그' },
+  { label: data.title },
+];
+const blogPosting = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${url}#article`,
+  headline: data.title,
+  description: data.description,
+  image: [heroAbs],
+  datePublished: data.pubDate.toISOString(),
+  dateModified: data.pubDate.toISOString(),
+  inLanguage: 'ko-KR',
+  keywords: data.tags.join(', '),
+  articleSection: data.category,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  author: { '@type': 'Organization', name: '본대로홈', url: site.origin },
+  publisher: {
+    '@type': 'Organization',
+    name: '본대로홈',
+    logo: { '@type': 'ImageObject', url: new URL('/images/mark.png', site).href },
+  },
+  ...(data.location ? { spatialCoverage: { '@type': 'Place', name: data.location } } : {}),
+};
+const faqPage = data.faq.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: data.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    }
+  : null;
+const breadcrumbList = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumb.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.label,
+    ...(c.href ? { item: new URL(c.href, site).href } : {}),
+  })),
+};
+
+const relatedCards = await Promise.all(
+  related.map(async (p) => ({ p, img: (await getImage({ src: p.data.heroImage, width: 640, format: 'webp' })).src })),
+);
+const PHONE_ICON = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>';
+const CHEV = '<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#232A20" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+---
+<BaseLayout title={`${data.title} | 본대로홈`} description={data.description} image={heroAbs} ogType="article">
+  <Fragment slot="head">
+    <JsonLd schema={blogPosting} />
+    {faqPage && <JsonLd schema={faqPage} />}
+    <JsonLd schema={breadcrumbList} />
+    <link rel="preload" as="image" href={gallery[0].big} />
+  </Fragment>
+
+  <SiteHeader />
+  <main id="main" class:list={['post-page', { 'uniform-guide-images': entry.id === 'curtain-vs-blind-guide' }]}>
+    <div class="pwrap">
+      <nav class="pcrumb" aria-label="현재 위치">
+        <a href="/">홈</a><span aria-hidden="true">/</span>
+        {isCase ? <a href="/블로그#cases">시공사례</a> : <a href="/블로그">블로그</a>}
+        <span aria-hidden="true">/</span><b>{shortTitle(data.title)}</b>
+      </nav>
+
+      <div class="gal" data-items={galleryData}>
+        <div class="gal-main" title={gallery.length > 1 ? '누르면 다음 사진' : undefined}>
+          <img src={gallery[0].big} alt={gallery[0].alt} fetchpriority="high" />
+          <span class="gal-cap">{gallery[0].cap}</span>
+          <span class="gal-count" hidden={gallery.length < 2}>1 / {gallery.length}</span>
+        </div>
+        {gallery.length > 1 && (
+          <div class="gal-thumbs">
+            {gallery.slice(1, 5).map((g, k) => (
+              <button type="button" data-i={k + 1} aria-label={`사진 ${k + 2} 보기`}>
+                <img src={g.thumb} alt="" loading="lazy" />
+                {g.tag && <span class="tag">{g.tag}</span>}
+                {k === 3 && gallery.length > 5 && <span class="more">+{gallery.length - 5}</span>}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <header class="phead">
+        <div class="pills">{pills.map((p) => <span class:list={['pill', p.c]}>{p.t}</span>)}</div>
+        <h1>{data.title}</h1>
+        <p class="pmeta"><time datetime={data.pubDate.toISOString().slice(0, 10)}>{kdate(data.pubDate)}</time> · {isCase ? data.product : '본대로홈'}</p>
+      </header>
+
+      <div class="pbody">
+        <article>
+          <div class="prose"><slot /></div>
+
+          {data.faq.length > 0 && (
+            <section class="pfaq" aria-labelledby="faq-heading">
+              <h2 id="faq-heading">자주 묻는 질문</h2>
+              <div class="acc">
+                {data.faq.map((f, i) => (
+                  <div class:list={['acc-item', { open: i === 0 }]}>
+                    <button type="button" aria-expanded={i === 0 ? 'true' : 'false'}><span class="acc-ic"></span>{f.q}<Fragment set:html={CHEV} /></button>
+                    <div class="acc-panel"><p>{f.a}</p></div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          <nav class="pnav" aria-label="글 이동">
+            {prev ? (
+              <a href={`/블로그/${prev.id}`}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E625A" stroke-width="1.6" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg><span><small>이전 글</small><strong>{prev.data.title}</strong></span></a>
+            ) : <span class="empty"></span>}
+            <a class="list" href="/블로그" aria-label="블로그 목록"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#232A20" stroke-width="1.6" aria-hidden="true"><rect x="4" y="4" width="6" height="6" /><rect x="14" y="4" width="6" height="6" /><rect x="4" y="14" width="6" height="6" /><rect x="14" y="14" width="6" height="6" /></svg></a>
+            {next ? (
+              <a class="nx" href={`/블로그/${next.id}`}><span><small>다음 글</small><strong>{next.data.title}</strong></span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5E625A" stroke-width="1.6" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></a>
+            ) : <span class="empty"></span>}
+          </nav>
+        </article>
+
+        <aside class="paside">
+          {isCase ? (
+            <section class="icard" aria-label="시공 정보">
+              <h2>시공 정보</h2>
+              <div class="igrid">
+                {data.location && <div><span>지역</span><b>{data.location}</b></div>}
+                {data.buildingType && <div><span>공간</span><b>{data.buildingType}{data.area ? ` · ${data.area}` : ''}</b></div>}
+                {data.product && <div><span>제품</span><b>{data.product}</b></div>}
+                {data.installTime && <div><span>설치 시간</span><b>{data.installTime}</b></div>}
+                {data.leadTime && <div><span>제작 기간</span><b>{data.leadTime}</b></div>}
+              </div>
+              {data.cost && <div class="icost"><span>시공 비용</span><b>{data.cost}</b></div>}
+              <div class="icta"><a href={`tel:${business.phone}`}><Fragment set:html={PHONE_ICON} />우리 집도 이렇게 상담받기</a><p>청주·오창·오송 방문 실측 무료</p></div>
+            </section>
+          ) : (
+            <section class="icard" aria-label="이 글 요약">
+              <h2>이 글 요약</h2>
+              <p class="isum">{data.description}</p>
+              {toc.length > 0 && <ol class="itoc">{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>}
+              <div class="icta"><a href={`tel:${business.phone}`}><Fragment set:html={PHONE_ICON} />궁금한 점 전화로 묻기</a><p>청주·오창·오송 방문 실측 무료</p></div>
+            </section>
+          )}
+        </aside>
+      </div>
+
+      {relatedCards.length > 0 && (
+        <section class="prel" aria-labelledby="related-heading">
+          <h2 id="related-heading">{isCase ? '비슷한 고민의 다른 글' : '함께 보면 좋은 글'}</h2>
+          <div class="prel-grid">
+            {relatedCards.map(({ p, img }) => (
+              <a href={`/블로그/${p.id}`}><div class="im"><img src={img} alt="" loading="lazy" /></div><span>{p.data.category} · {dot(p.data.pubDate)}</span><strong>{p.data.title}</strong></a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section class="pcta">
+        <span>우리 집 창은 어떨까요?</span>
+        <h2>창을 직접 보고<br />맞는 제품을 같이 골라 드려요</h2>
+        <p>청주·오창·오송 방문 실측 무료</p>
+        <div class="row"><a class="b1" href={`tel:${business.phone}`}>{business.phone} 전화하기</a><a class="b2" href="/문의#visit">매장 방문하기</a></div>
+      </section>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>

@@ -1,96 +1,95 @@
 ---
+// 서비스 과정 — 디자인 v3 (2026-11). 단계 앵커 #step-1 ~ #step-6 은 메인에서 연결됨
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { css } from '../lib/css';
-import PromoBanner from '../components/PromoBanner.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import MobileFloatingCall from '../components/MobileFloatingCall.astro';
-import FinalCTA from '../components/FinalCTA.astro';
-import ProcessIntro from '../components/process/ProcessIntro.astro';
-import StepsSummaryMobile from '../components/process/StepsSummaryMobile.astro';
-import StepsDetail from '../components/process/StepsDetail.astro';
-import Schedule from '../components/process/Schedule.astro';
-import PreNotice from '../components/process/PreNotice.astro';
-import { STEPS_SUMMARY } from '../components/process/data';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import { business } from '../data/business';
 
 const title = '상담부터 설치까지 — 서비스 진행 과정 | 본대로홈 (청주 오창)';
 const description = '매장 상담 → 원단 확인 → 방문 실측 → 맞춤 제작 → 설치. 발주 후 약 일주일 안에 설치까지. 청주·오창·오송 방문 실측 무료, 오창 커튼 전문점.';
 ---
 <BaseLayout title={title} description={description}>
-  <PromoBanner />
-  <Header />
-  <main>
-    <ProcessIntro />
-    <section class="block" style={css({ background: "var(--surface-soft)", paddingTop: 80, paddingBottom: 80 })}>
-      <div class="container">
-        <div style={css({ marginBottom: 48 })}>
-          <div class="section-eyebrow">전체 흐름</div>
-          <h2 class="section-title">전체 6단계, 한눈에 보기</h2>
-        </div>
-        {/* 데스크톱 */}
-        <div class="steps-summary-desktop" style={css({ position: "relative" })}>
-          <div style={css({ position: "absolute", top: 27, left: "8.33%", right: "8.33%", height: 1, background: "var(--hairline-strong)", zIndex: 0 })} />
-          {STEPS_SUMMARY.map((s, i) => (
-            <div style={css({ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "0 8px" })}>
-              <div style={css({
-                width: 54, height: 54, borderRadius: "50%",
-                background: i === 0 || i === 5 ? "var(--primary)" : "var(--canvas)",
-                border: `2px solid ${i === 0 || i === 5 ? "var(--primary)" : "var(--hairline-strong)"}`,
-                color: i === 0 || i === 5 ? "#fff" : "var(--ink)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 13, fontWeight: 700, letterSpacing: "0.04em",
-                marginBottom: 16, boxShadow: "0 0 0 5px var(--surface-soft)", flexShrink: 0,
-              })}>{s.n}</div>
-              <div style={css({ fontSize: 14, fontWeight: 700, color: "var(--ink-deep)", marginBottom: 6, wordBreak: "keep-all" })}>{s.name}</div>
-              <div style={css({ fontSize: 12, color: "var(--steel)", lineHeight: 1.55, wordBreak: "keep-all" })}>{s.desc}</div>
-            </div>
-          ))}
-        </div>
-        {/* 모바일 */}
-        <StepsSummaryMobile />
+  <SiteHeader />
+  <main id="main">
+<section class="subhero" aria-label="서비스 과정">
+  <img src="/images/process-hero-install.webp" alt="">
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap"><div class="container">
+    <div class="crumb"><a href="/">홈</a> / 서비스 과정</div>
+    <p class="eyebrow">How we work</p>
+    <h1>상담부터 설치까지,<br>이렇게 진행됩니다</h1>
+    <p>매장에서 원단을 보고 → 댁으로 찾아가 실측하고 → 창에 꼭 맞게 제작해 → 설치까지. 발주하면 약 일주일 안에 끝나요.</p>
+    <div class="actions"><a class="btn btn-white" href={`tel:${business.phone}`}>지금 전화 상담하기</a><a class="btn btn-ghost" href="/문의#visit">매장에서 원단 직접 보기</a></div>
+  </div></div>
+</section>
+
+<section class="hww" style="padding-top:110px">
+  <div class="container row">
+    <div><p class="eyebrow">Overview</p><h2 class="h2">전체 6단계,<br>한눈에 보기</h2></div>
+    <p>각 단계에 마우스를 올리면 설명이 보이고, 누르면 아래 자세한 설명으로 이동해요. 처음 맡기는 분도 걱정 없이 따라오실 수 있게 정리했어요.</p>
+  </div>
+</section>
+<section class="steps" aria-label="서비스 과정 6단계">
+  <a class="step" href="#step-1"><div class="step-bg"><img src="/images/process-store-interior-v5.webp" alt=""></div><div class="step-body"><div class="step-num">01</div><h3>매장 방문 또는<br>전화 문의</h3><p class="step-desc">원하시는 공간과 제품을 편하게 말씀해 주세요</p><span class="step-more">자세히 보기 →</span></div></a><a class="step" href="#step-2"><div class="step-bg"><img src="/images/process-fabric-sample-v2.webp" alt=""></div><div class="step-body"><div class="step-num">02</div><h3>샘플 확인·<br>상품 결정</h3><p class="step-desc">매장에서 원단을 직접 보고 결정하실 수 있습니다</p><span class="step-more">자세히 보기 →</span></div></a><a class="step" href="#step-3"><div class="step-bg"><img src="/images/process-measure-v3.webp" alt=""></div><div class="step-body"><div class="step-num">03</div><h3>방문<br>실측</h3><p class="step-desc">창문 방향과 인테리어 색감까지 함께 보며 조율합니다</p><span class="step-more">자세히 보기 →</span></div></a><a class="step" href="#step-4"><div class="step-bg"><img src="/images/process-order-fabric-v2.webp" alt=""></div><div class="step-body"><div class="step-num">04</div><h3>사이즈 측정·<br>발주</h3><p class="step-desc">정확한 사이즈 측정 후 공장에 발주합니다</p><span class="step-more">자세히 보기 →</span></div></a><a class="step" href="#step-5"><div class="step-bg"><img src="/images/process-sewing-factory.webp" alt=""></div><div class="step-body"><div class="step-num">05</div><h3>맞춤<br>제작</h3><p class="step-desc">발주 후 약 1주일 내 제작 완료</p><span class="step-more">자세히 보기 →</span></div></a><a class="step" href="#step-6"><div class="step-bg"><img src="/images/process-install-curtain-v4.webp" alt=""></div><div class="step-body"><div class="step-num">06</div><h3>설치</h3><p class="step-desc">약속된 날짜에 방문해 설치해 드립니다</p><span class="step-more">자세히 보기 →</span></div></a>
+</section>
+
+<section class="sec">
+  <div class="container">
+    <div class="sec-head"><div><p class="eyebrow">Step by step</p><h2 class="h2">단계별로<br>자세히 보면</h2></div><p>맞춤 제작 특성상 발주 후에는 취소가 어렵습니다. 그래서 발주 전 단계에서 충분히 보고, 재고, 상의해요.</p></div>
+    <article class="sd" id="step-1">
+      <div class="img-zoom"><img src="/images/process-store-interior-v5.webp" alt="매장 방문 또는 전화 문의" loading="lazy"></div>
+      <div><div class="big">01</div><p class="eyebrow" style="margin-bottom:10px">Step 01</p><h3>매장 방문 또는 전화 문의</h3><p>편한 방법으로 시작하세요. 전화로 “거실 커튼 얼마예요?” 하고 물어보셔도 되고, 매장에 들러 원단을 먼저 보셔도 돼요.</p><p>전화로 대략적인 가격대와 진행 방법을 먼저 안내해 드려요.</p><a class="btn btn-primary" href={`tel:${business.phone}`}>지금 전화 상담하기 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div>
+    </article><article class="sd" id="step-2">
+      <div class="img-zoom"><img src="/images/process-fabric-sample-v2.webp" alt="원단 샘플 확인 · 상품 결정" loading="lazy"></div>
+      <div><div class="big">02</div><p class="eyebrow" style="margin-bottom:10px">Step 02</p><h3>원단 샘플 확인 · 상품 결정</h3><p>온라인 사진과 실물은 다를 수 있어요. 그래서 매장에서 실제 원단의 두께·질감·색을 직접 만져보고 고르시는 걸 권해드려요.</p><p>암막·쉬폰·이중커튼, 콤비·우드·롤스크린·알루미늄블라인드 중 공간에 맞는 제품을 함께 정해요.</p><a class="btn btn-line" href="/문의#visit">매장에서 원단 보기 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div>
+    </article><article class="sd" id="step-3">
+      <div class="img-zoom"><img src="/images/process-measure-v3.webp" alt="방문 실측" loading="lazy"></div>
+      <div><div class="big">03</div><p class="eyebrow" style="margin-bottom:10px">Step 03</p><h3>방문 실측</h3><p>댁으로 직접 찾아가 창의 정확한 크기를 재요. 동시에 창이 어느 방향을 보는지, 기존 인테리어 색감은 어떤지까지 보고 어울리는 제품과 색을 함께 정해요.</p><p>기장이 잘못 나오면 다시 방문해야 하니까, 처음 실측에서 꼼꼼히 봐서 재방문을 줄여요.</p><p class="callout">청주·오창·오송 지역은 방문 실측이 무료예요. 그 외 지역은 전화로 문의해 주세요.</p><a class="btn btn-primary" href={`tel:${business.phone}`}>지금 전화로 일정 잡기 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div>
+    </article><article class="sd" id="step-4">
+      <div class="img-zoom"><img src="/images/process-order-fabric-v2.webp" alt="공장 발주" loading="lazy"></div>
+      <div><div class="big">04</div><p class="eyebrow" style="margin-bottom:10px">Step 04</p><h3>공장 발주</h3><p>실측한 사이즈와 결정한 사양 그대로 공장에 주문을 넣어요.</p><p>본대로홈은 중간 유통 단계를 거치지 않고 공장과 직접 거래해요. 그래서 같은 원단·사양이라도 가격 거품을 덜어낼 수 있어요.</p></div>
+    </article><article class="sd" id="step-5">
+      <div class="img-zoom"><img src="/images/process-sewing-factory.webp" alt="맞춤 제작" loading="lazy"></div>
+      <div><div class="big">05</div><p class="eyebrow" style="margin-bottom:10px">Step 05</p><h3>맞춤 제작</h3><p>공장에서 고객님 창 사이즈에 맞게 재단·봉제해요.</p><p>본대로홈은 미싱을 직접 보유하고 있어서, 기장이 안 맞거나 손볼 곳이 생기면 공장에 다시 보내지 않고 현장에서 바로 처리해요.</p></div>
+    </article><article class="sd" id="step-6">
+      <div class="img-zoom"><img src="/images/process-install-curtain-v4.webp" alt="설치" loading="lazy"></div>
+      <div><div class="big">06</div><p class="eyebrow" style="margin-bottom:10px">Step 06</p><h3>설치</h3><p>약속한 날에 방문해 설치까지 마무리해요. 발주부터 설치까지 보통 일주일 안이에요.</p></div>
+    </article>
+  </div>
+</section>
+
+<section class="sec sec-gray" id="schedule">
+  <div class="container">
+    <div class="sec-head center"><p class="eyebrow">Schedule</p><h2 class="h2">발주하면, 약 일주일 안에<br>설치까지</h2><p>입주 날짜나 이사 일정이 정해져 있다면, 그에 맞춰 진행해 드려요. 언제 상담을 시작하면 좋을지도 전화로 안내해 드려요.</p></div>
+    <ol class="tl"><li><div class="dot">01</div><b>문의</b><span>전화 또는 매장 방문</span></li><li><div class="dot">02</div><b>원단 확인</b><span>매장 방문</span></li><li><div class="dot">03</div><b>방문 실측</b><span>댁 방문</span></li><li><div class="dot">04</div><b>발주</b><span>사양 확정 후</span><em>D+0</em></li><li><div class="dot">05</div><b>맞춤 제작</b><span>공장 제작</span><em>D+1~5</em></li><li><div class="dot">06</div><b>설치</b><span>방문 설치 완료</span><em>D+7 이내</em></li></ol>
+    <div style="text-align:center;margin-top:56px"><a class="btn btn-dark" href={`tel:${business.phone}`}>지금 전화로 일정 상담하기 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="container">
+    <div class="notice">
+      <div><p class="eyebrow">Notice</p><h2 class="h2" style="font-size:34px">맞춤 제작이라<br>미리 알려드려요</h2></div>
+      <div>
+        <p>본대로홈의 커튼·블라인드는 전부 고객님 창 크기에 맞춰 만드는 맞춤 제작이에요. 그래서 공장에 발주가 들어간 뒤에는 취소가 어려워요.</p>
+        <p>대신 그 전까지는 부담 갖지 않으셔도 돼요. 매장에서 원단을 보고, 댁에서 실측하고, 견적을 충분히 상의한 다음에 발주를 넣으니까요. 정확한 금액도 실측 후에 확정해서 안내해 드려요.</p>
       </div>
-    </section>
-    <StepsDetail />
-    <Schedule />
-    <PreNotice />
-    <FinalCTA
-      titleHtml="진행이 궁금하시면,<br />전화 한 통이면 됩니다"
-      leadHtml="어디서부터 시작할지 모르셔도 괜찮아요. 전화 주시면 진행 순서와 대략적인 일정·가격대를 바로 안내해 드려요.<br />청주·오창·오송 방문 실측 무료입니다."
-      primaryLabel="지금 전화 상담하기"
-      secondaryLabel="매장 방문하기"
-    />
+    </div>
+  </div>
+</section>
+
+<section class="visit">
+  <div class="container">
+    <p class="eyebrow">Contact us</p>
+    <h2 class="h2">진행이 궁금하시면,<br>전화 한 통이면 됩니다</h2>
+    <p>어디서부터 시작할지 모르셔도 괜찮아요. 전화 주시면 진행 순서와 대략적인 일정·가격대를 바로 안내해 드려요. 청주·오창·오송 방문 실측 무료입니다.</p>
+    <div class="info"><span>매장 {business.storePhone} · 휴대폰 {business.phone}</span><span>{business.hours.display} · {business.hours.holiday}</span></div>
+    <div class="actions">
+      <a class="btn btn-primary" href={`tel:${business.phone}`}>지금 전화 상담하기 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+      <a class="btn btn-line" href="/문의#visit">매장 방문하기</a>
+    </div>
+  </div>
+</section>
   </main>
-  <Footer />
-  <MobileFloatingCall />
+  <SiteFooter />
 </BaseLayout>
-
-<style is:global>
-  .step-detail-row {
-    grid-template-columns: 1fr 1fr;
-  }
-  @media (max-width: 860px) {
-    .step-detail-row {
-      grid-template-columns: 1fr !important;
-    }
-    .step-detail-row > *:first-child {
-      order: 0 !important;
-    }
-    .step-detail-row > *:last-child {
-      order: 1 !important;
-    }
-  }
-
-  /* 6단계 요약 그리드 반응형 */
-  .steps-summary-desktop {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-  }
-  @media (max-width: 860px) {
-    .steps-summary-desktop {
-      display: none;
-    }
-    .steps-summary-mobile {
-      display: flex !important;
-    }
-  }
-</style>

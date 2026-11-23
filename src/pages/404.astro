@@ -1,34 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import PromoBanner from '../components/PromoBanner.astro';
-import Footer from '../components/Footer.astro';
-import MobileFloatingCall from '../components/MobileFloatingCall.astro';
-import { css } from '../lib/css';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
 import { business } from '../data/business';
 ---
 <BaseLayout title="페이지를 찾을 수 없어요 (404) | 본대로홈" noindex={true}>
-  <PromoBanner />
-  <Header />
-  <main>
-    <section class="subhero" style={css({ paddingTop: 80, paddingBottom: 80, textAlign: 'center' })}>
+  <SiteHeader />
+  <main id="main">
+    <section class="sec" style="text-align:center;padding:140px 0 120px">
       <div class="container">
-        <div class="section-eyebrow">404</div>
-        <h1 style={css({ fontFamily: "'Gowun Batang', serif", fontSize: 'clamp(30px, 5vw, 44px)' })}>페이지를 찾을 수 없어요</h1>
-        <p class="sub" style={css({ margin: '16px auto 0', maxWidth: 520 })}>
-          주소가 바뀌었거나 삭제된 페이지일 수 있어요.<br />아래에서 원하시는 곳으로 이동해 보세요.
-        </p>
-        <div class="hero-ctas" style={css({ justifyContent: 'center', marginTop: 28 })}>
-          <a class="btn btn-primary btn-lg" href="/">메인으로</a>
-          <a class="btn btn-secondary btn-lg" href="/블로그">블로그 보기</a>
-          <a class="btn btn-secondary btn-lg" href="/문의">문의하기</a>
+        <p class="eyebrow">404</p>
+        <h1 class="h2">페이지를 찾을 수 없어요</h1>
+        <p style="margin:20px auto 0;max-width:520px">주소가 바뀌었거나 삭제된 페이지일 수 있어요.<br />아래에서 원하시는 곳으로 이동해 보세요.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px">
+          <a class="btn btn-primary" href="/">메인으로</a>
+          <a class="btn btn-line" href="/블로그">블로그 보기</a>
+          <a class="btn btn-line" href="/문의">문의하기</a>
         </div>
-        <p style={css({ marginTop: 24, fontSize: 14, color: 'var(--steel)' })}>
-          바로 상담을 원하시면 <a href={`tel:${business.phone}`} style={css({ color: 'var(--primary)', fontWeight: 600 })}>{business.phone}</a>
-        </p>
+        <p style="margin-top:28px;font-size:14px;color:var(--muted)">바로 상담을 원하시면 <a href={`tel:${business.phone}`} style="color:var(--primary);font-weight:700">{business.phone}</a></p>
       </div>
     </section>
   </main>
-  <Footer />
-  <MobileFloatingCall />
+  <SiteFooter />
 </BaseLayout>

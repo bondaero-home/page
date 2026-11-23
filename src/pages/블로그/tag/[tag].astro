@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import BlogListShell from '../../../layouts/BlogListShell.astro';
-import PostGrid from '../../../components/blog/PostGrid.astro';
+import BlogList from '../../../layouts/BlogList.astro';
+import BlogCard from '../../../components/site/BlogCard.astro';
 
 export async function getStaticPaths() {
   const all = (await getCollection('blog')).filter((p) => !p.data.draft);
@@ -19,12 +19,15 @@ export async function getStaticPaths() {
 
 const { tag, posts } = Astro.props;
 ---
-<BlogListShell
+<BlogList
   metaTitle={`#${tag} — 청주 오창 커튼·블라인드 | 본대로홈`}
   metaDescription={`'${tag}' 태그 글 모음. 청주 오창·오송 커튼·블라인드 본대로홈 블로그.`}
-  eyebrow="블로그 · 태그"
+  eyebrow="Tag"
   heading={`#${tag}`}
   lead={`'${tag}' 태그 글 ${posts.length}편`}
+  crumb={`#${tag}`}
 >
-  <PostGrid posts={posts} />
-</BlogListShell>
+  <div class="bcards">
+    {posts.map((p) => <BlogCard post={p} />)}
+  </div>
+</BlogList>

@@ -1,0 +1,52 @@
+---
+// 블로그 목록 공통 틀(전체·카테고리·태그) — 디자인 v3 (2026-11)
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import { business } from '../data/business';
+
+interface Props {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow?: string;
+  heading: string;
+  lead?: string;
+  crumb?: string;
+  noindex?: boolean;
+}
+const { metaTitle, metaDescription, eyebrow = 'Our blog', heading, lead, crumb = '블로그', noindex = false } = Astro.props;
+const ARROW = '<svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>';
+---
+<BaseLayout title={metaTitle} description={metaDescription} noindex={noindex}>
+  <SiteHeader />
+  <main id="main">
+    <section class="subhero" aria-label={crumb}>
+      <img src="/images/case-living-sheer-ochang-v5.webp" alt="" />
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="wrap"><div class="container">
+        <div class="crumb"><a href="/">홈</a> / {crumb === '블로그' ? '블로그' : <Fragment><a href="/블로그">블로그</a> / {crumb}</Fragment>}</div>
+        <p class="eyebrow">{eyebrow}</p>
+        <h1 set:html={heading} />
+        {lead && <p set:html={lead} />}
+      </div></div>
+    </section>
+
+    <section class="sec blog-list" id="cases">
+      <div class="container">
+        <slot />
+      </div>
+    </section>
+
+    <section class="cta-compact">
+      <div class="container">
+        <h2>커튼이 궁금하신가요?</h2>
+        <p>청주·오창·오송 방문 실측 무료입니다.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href={`tel:${business.phone}`}>지금 전화 상담하기 <Fragment set:html={ARROW} /></a>
+          <a class="btn btn-line" href="/문의#visit">매장 방문하기</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

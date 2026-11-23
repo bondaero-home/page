@@ -1,0 +1,20 @@
+---
+// 블로그 목록 카드 — 디자인 v3 (레퍼런스 톤의 태그)
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+interface Props { post: CollectionEntry<'blog'>; }
+const { post } = Astro.props;
+const { data } = post;
+const d = data.pubDate;
+const dot = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+---
+<a class="bcard" data-cat={data.category} href={`/블로그/${post.id}`}>
+  <div class="im"><Image src={data.heroImage} alt="" width={720} height={540} loading="lazy" /></div>
+  <div class="pills">
+    <span class:list={['pill', { cat: data.category === '시공사례' }]}>{data.category}</span>
+    {data.tags[0] && <span class="pill soft">#{data.tags[0]}</span>}
+  </div>
+  <h3>{data.title}</h3>
+  <p>{data.description}</p>
+  <time datetime={d.toISOString().slice(0, 10)}>{dot}</time>
+</a>

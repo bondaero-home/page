@@ -21,8 +21,8 @@ npm run workers:deploy # 수동 Workers 배포 (Cloudflare 로그인 필요)
 src/
 ├─ pages/          각 페이지 (한글 .html URL 유지: 서비스.html 등)
 │  ├─ index.astro  서비스.astro  서비스과정.astro  FAQ.astro  문의.astro
-│  ├─ 블로그.astro              블로그 목록(카테고리 탭 필터)
-│  ├─ 블로그/[...slug].astro    블로그 글 상세
+│  ├─ 블로그.astro              블로그 목록(최근 시공사례 크게 + 분류 필터, /블로그#cases = 시공사례만)
+│  ├─ 블로그/[...slug].astro    블로그 글 상세(사진 갤러리·정보 카드·FAQ·이전/다음)
 │  ├─ 블로그/category/[category].astro · 블로그/tag/[tag].astro   필터 페이지
 │  ├─ rss.xml.ts  ·  404.astro
 ├─ content/blog/   ★ 블로그 글 — 글 1편 = 폴더 1개
@@ -30,11 +30,13 @@ src/
 │     ├─ index.md  글 본문(frontmatter 포함)
 │     └─ images/   이 글의 사진 (01.jpg, 02.jpg … 번호 이름)
 ├─ content.config.ts   블로그 frontmatter 스키마(zod) — 필수 필드 검증
-├─ layouts/        BaseLayout · BlogPost · BlogListShell
-├─ components/     Header/Footer/공용 + home/ service/ process/ contact/ blog/ seo/
+├─ layouts/        BaseLayout · PostLayout(글 상세) · BlogList(목록·카테고리·태그)
+├─ components/     site/(SiteHeader · SiteFooter · BlogCard) · seo/JsonLd
 ├─ data/business.ts  ★ 상호·주소·전화·영업시간 (단일 출처) — 여기만 고치면 전 페이지 반영
-├─ lib/            css.ts(스타일 헬퍼) · related.ts · rehype-figure.mjs
-└─ styles/global.css  디자인 시스템
+├─ data/faq.ts     FAQ 질문·답변 (화면과 FAQPage 구조화 데이터가 함께 사용)
+├─ lib/            related.ts · rehype-figure.mjs
+├─ scripts/site.js 공통 동작(모바일 메뉴·맨 위로·아코디언·블로그 필터·글 갤러리)
+└─ styles/site.css 디자인 시스템 v3 (2026-11 시안 기반)
 
 public/
 ├─ images/         마케팅 페이지 이미지 · mark.png

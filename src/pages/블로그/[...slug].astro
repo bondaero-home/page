@@ -1,19 +1,21 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import PostLayout from '../../layouts/PostLayout.astro';
 import { relatedPosts } from '../../lib/related';
 
 export async function getStaticPaths() {
-  const all = (await getCollection('blog')).filter((p) => !p.data.draft);
-  return all.map((entry) => ({
+  const all = (await getCollection('blog'))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+  return all.map((entry, i) => ({
     params: { slug: entry.id },
-    props: { entry, related: relatedPosts(all, entry, 4) },
+    props: { entry, related: relatedPosts(all, entry, 3), next: all[i - 1], prev: all[i + 1] },
   }));
 }
 
-const { entry, related } = Astro.props;
-const { Content } = await render(entry);
+const { entry, related, prev, next } = Astro.props;
+const { Content, headings } = await render(entry);
 ---
-<BlogPost entry={entry} related={related}>
+<PostLayout entry={entry} headings={headings} related={related} prev={prev} next={next}>
   <Content />
-</BlogPost>
+</PostLayout>

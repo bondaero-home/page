@@ -1,39 +1,170 @@
 ---
+// 서비스 소개 — 디자인 v3 (2026-11). 제품 사진은 public/images, 연락처는 business.ts
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PromoBanner from '../components/PromoBanner.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import MobileFloatingCall from '../components/MobileFloatingCall.astro';
-import FinalCTA from '../components/FinalCTA.astro';
-import ServiceIntro from '../components/service/ServiceIntro.astro';
-import QuickGuide from '../components/service/QuickGuide.astro';
-import CurtainSection from '../components/service/CurtainSection.astro';
-import BlindSection from '../components/service/BlindSection.astro';
-import SpaceGuide from '../components/service/SpaceGuide.astro';
-import PriceGuide from '../components/service/PriceGuide.astro';
-import FabricTrust from '../components/service/FabricTrust.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import { business } from '../data/business';
+
+const title = '커튼·블라인드 종류와 선택 가이드 | 본대로홈 (청주 오창)';
+const description = '암막커튼, 쉬폰커튼, 이중커튼, 콤비·우드·롤스크린·알루미늄블라인드. 공간별 추천과 장단점, 대략적 가격대까지. 청주 오창 맞춤 커튼 전문점.';
 ---
-<BaseLayout
-  title="커튼·블라인드 종류와 선택 가이드 | 본대로홈 (청주 오창)"
-  description="암막커튼, 쉬폰커튼, 이중커튼, 콤비·우드·롤스크린·알루미늄블라인드. 공간별 추천과 장단점, 대략적 가격대까지. 청주 오창 맞춤 커튼 전문점."
->
-  <PromoBanner />
-  <Header />
-  <main>
-    <ServiceIntro />
-    <QuickGuide />
-    <CurtainSection />
-    <BlindSection />
-    <SpaceGuide />
-    <PriceGuide />
-    <FabricTrust />
-    <FinalCTA
-      titleHtml="어떤 게 맞을지<br />함께 골라 드릴게요"
-      leadHtml="전화 한 통이면 공간에 맞는 제품과 대략적 가격대를 바로 안내해 드려요.<br />청주·오창·오송 방문 실측 무료입니다."
-      primaryLabel="지금 전화 상담하기"
-      secondaryLabel="매장 방문하기"
-    />
+<BaseLayout title={title} description={description}>
+  <SiteHeader />
+  <main id="main">
+<section class="subhero" aria-label="서비스">
+  <img src="/images/hero-curtain-v2.webp" alt="">
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap"><div class="container">
+    <div class="crumb"><a href="/">홈</a> / 서비스</div>
+    <p class="eyebrow">Our products</p>
+    <h1>어떤 커튼이<br>우리 집에 맞을까요?</h1>
+    <p>공간과 목적에 따라 맞는 제품이 달라요. 종류별 특징과 어울리는 공간을 정리했습니다. 고르기 어려우면 전화 한 통으로 함께 골라 드릴게요.</p>
+    <div class="actions"><a class="btn btn-white" href={`tel:${business.phone}`}>지금 전화 상담하기</a><a class="btn btn-ghost" href="/문의#visit">매장에서 원단 직접 보기</a></div>
+  </div></div>
+</section>
+
+<section class="sec sec-gray">
+  <div class="container">
+    <div class="sec-head">
+      <div><p class="eyebrow">Quick guide</p><h2 class="h2">이런 고민,<br>어떤 제품이 맞을까요?</h2></div>
+      <p>평소 많이 듣는 고민으로 정리했어요. 눌러서 자세한 설명을 확인하세요.</p>
+    </div>
+    <div class="qg">
+      <a href="#blackout"><q>빛을 완전히 막고 푹 자고 싶어요</q><span>암막커튼 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a><a href="#sheer"><q>빛은 들어오는데, 밖에서 안 비쳤으면 좋겠어요</q><span>쉬폰커튼 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a><a href="#double"><q>암막은 필요한데 집이 답답해 보이는 건 싫어요</q><span>이중커튼 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a><a href="#combi"><q>빛을 세밀하게 조절하고 깔끔하게 두고 싶어요</q><span>콤비블라인드 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a><a href="#wood"><q>원목 느낌으로 고급스럽게 하고 싶어요</q><span>우드블라인드 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a><a href="#roll"><q>좁은 공간이나 주방에 간결하게</q><span>롤스크린 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a><a href="#alum"><q>주방·욕실처럼 물기 많은 곳, 관리 쉬운 걸로</q><span>알루미늄블라인드 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a><a href="#space"><q>저층이라 사생활 보호가 제일 중요해요</q><span>쉬폰+암막/콤비 조합 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a><a href="#blackout"><q>외풍 막아주는 도톰한 걸 찾아요</q><span>암막·기능성 원단 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="curtains">
+  <div class="container">
+    <div class="sec-head"><div><p class="eyebrow">Curtains</p><h2 class="h2">커튼 종류</h2></div><p>원단과 겹 수에 따라 빛·시선·분위기가 달라져요.</p></div>
+    <article class="prod" id="blackout">
+      <div class="img-zoom"><img src="/images/service-blackout-v2.webp" alt="암막커튼" loading="lazy"></div>
+      <div>
+        <div class="num">커튼 01</div>
+        <h3>암막커튼</h3>
+        <p class="one">빛을 완벽히 차단해 깊은 잠을 돕습니다.</p>
+        <p>햇빛과 외부 빛을 거의 막아줘요. 도톰한 원단이라 외풍을 줄이는 효과도 있습니다.</p>
+        <dl><div><dt>이런 분께</dt><dd>야간 근무로 낮에 주무시는 분, 아이 낮잠 방, 빛 때문에 새벽에 자주 깨는 분.</dd></div><div><dt>추천 공간</dt><dd>안방·침실, 야간 근무자 가정.</dd></div></dl>
+        <p class="tip"><b>참고</b> · 빛 차단이 강한 만큼 닫으면 공간이 어두워져요. 답답한 느낌이 싫으면 쉬폰과 함께 거는 이중커튼을 권해 드립니다.</p>
+      </div>
+    </article><article class="prod" id="sheer">
+      <div class="img-zoom"><img src="/images/service-sheer-v3.webp" alt="쉬폰커튼" loading="lazy"></div>
+      <div>
+        <div class="num">커튼 02</div>
+        <h3>쉬폰커튼</h3>
+        <p class="one">자연 채광을 부드럽게 들이는 차르르한 느낌.</p>
+        <p>얇고 비치는 원단으로 햇빛을 은은하게 들여요. 공간이 넓고 환해 보이는 효과가 있습니다.</p>
+        <dl><div><dt>이런 분께</dt><dd>거실을 밝게 쓰고 싶은 분, 부드러운 분위기를 원하는 분.</dd></div><div><dt>추천 공간</dt><dd>거실, 다이닝룸.</dd></div></dl>
+        <p class="tip"><b>참고</b> · 빛을 완전히 막지는 못해요. 사생활 보호나 암막이 필요하면 안쪽에 암막을 더한 이중커튼이 맞습니다. 저층이라 시야 차단이 중요하면 비침이 적은 원단으로 골라 드려요.</p>
+      </div>
+    </article><article class="prod" id="double">
+      <div class="img-zoom"><img src="/images/service-double-v3.webp" alt="이중커튼 (암막+쉬폰)" loading="lazy"></div>
+      <div>
+        <div class="num">커튼 03</div>
+        <h3>이중커튼 (암막+쉬폰)</h3>
+        <p class="one">낮과 밤의 채광을 자유롭게 조절합니다.</p>
+        <p>안쪽 암막 + 바깥 쉬폰을 함께 거는 방식이에요. 낮에는 쉬폰만 쳐서 환하게, 밤에는 암막까지 쳐서 완전히 가립니다.</p>
+        <dl><div><dt>이런 분께</dt><dd>“낮엔 환하고 밤엔 가리고 싶다”는 분, 호텔 객실 같은 마감을 원하는 분.</dd></div><div><dt>추천 공간</dt><dd>거실, 침실.</dd></div></dl>
+        <p class="tip"><b>참고</b> · 두 겹이라 단일 커튼보다 비용이 올라가요. 대신 채광 조절 폭이 가장 넓습니다.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec sec-gray" id="blinds">
+  <div class="container">
+    <div class="sec-head"><div><p class="eyebrow">Blinds</p><h2 class="h2">블라인드 종류</h2></div><p>빛 조절 방식과 관리 편의가 제품마다 달라요.</p></div>
+    <article class="prod" id="combi">
+      <div class="img-zoom"><img src="/images/service-combi-blind-v2.webp" alt="콤비블라인드" loading="lazy"></div>
+      <div>
+        <div class="num">블라인드 01</div>
+        <h3>콤비블라인드</h3>
+        <p class="one">빛을 세밀하게 조절하고 인테리어가 깔끔해집니다.</p>
+        <p>투명·불투명 띠가 겹쳐 있어 위아래로 맞추면 빛 양을 미세하게 조절해요. 군더더기 없이 깔끔한 느낌입니다.</p>
+        <dl><div><dt>이런 분께</dt><dd>빛을 단계별로 조절하고 싶은 분, 깔끔한 정리를 원하는 분.</dd></div><div><dt>추천 공간</dt><dd>사무실, 회의실, 거실.</dd></div></dl>
+        <p class="tip"><b>참고</b> · 완전 암막은 아니에요. 빛 틈이 약간 생길 수 있습니다.</p>
+      </div>
+    </article><article class="prod" id="wood">
+      <div class="img-zoom"><img src="/images/service-wood-blind-v2.webp" alt="우드블라인드" loading="lazy"></div>
+      <div>
+        <div class="num">블라인드 02</div>
+        <h3>우드블라인드</h3>
+        <p class="one">원목 질감으로 고급스러운 분위기를 더합니다.</p>
+        <p>나무 슬랫(가로 날)의 각도로 빛과 시야를 조절해요. 차분하고 묵직한 분위기가 납니다.</p>
+        <dl><div><dt>이런 분께</dt><dd>차분한 집중 공간을 원하는 분, 원목 인테리어를 좋아하는 분.</dd></div><div><dt>추천 공간</dt><dd>서재, 카페, 거실.</dd></div></dl>
+        <p class="tip"><b>참고</b> · 원목 특성상 다른 블라인드보다 무겁고 가격대가 높은 편이에요.</p>
+      </div>
+    </article><article class="prod" id="roll">
+      <div class="img-zoom"><img src="/images/service-roll-screen-v6.webp" alt="롤스크린" loading="lazy"></div>
+      <div>
+        <div class="num">블라인드 03</div>
+        <h3>롤스크린</h3>
+        <p class="one">공간을 차지하지 않아 좁은 공간에 알맞습니다.</p>
+        <p>천을 위로 말아 올리는 방식이라 단정하고 자리를 덜 차지해요. 원단은 빛 차단형·기능성으로도 고를 수 있습니다.</p>
+        <dl><div><dt>이런 분께</dt><dd>작은 창, 주방, 간결한 마감을 원하는 분.</dd></div><div><dt>추천 공간</dt><dd>주방, 작은 창, 욕실 인접 공간.</dd></div></dl>
+        <p class="tip"><b>참고</b> · 좌우 빛 틈이 생길 수 있어요. 용도에 맞는 원단으로 안내드립니다.</p>
+      </div>
+    </article><article class="prod" id="alum">
+      <div class="img-zoom"><img src="/images/service-aluminum-blind-v5.webp" alt="알루미늄블라인드" loading="lazy"></div>
+      <div>
+        <div class="num">블라인드 04</div>
+        <h3>알루미늄블라인드</h3>
+        <p class="one">물기·습기에 강하고 관리가 쉽습니다.</p>
+        <p>금속 슬랫이라 습한 곳에서도 변형이 적고 닦기 쉬워요.</p>
+        <dl><div><dt>이런 분께</dt><dd>주방·욕실에 관리 편한 제품을 찾는 분.</dd></div><div><dt>추천 공간</dt><dd>주방, 욕실, 다용도실.</dd></div></dl>
+        <p class="tip"><b>참고</b> · 슬랫이 얇아 충격에 휘어질 수 있어요. 사용 공간에 맞게 안내드립니다.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="sec" id="space">
+  <div class="container">
+    <div class="sec-head"><div><p class="eyebrow">By space</p><h2 class="h2">공간별 추천</h2></div><p>집안 공간마다 맞는 제품이 달라요. 자주 찾으시는 조합을 정리했습니다.</p></div>
+    <table class="space-table">
+      <thead><tr><th>공간</th><th>추천 제품</th><th>이유</th></tr></thead>
+      <tbody><tr><th>거실</th><td>쉬폰커튼 · 이중커튼</td><td>채광을 살리고, 필요할 때 암막까지 조절</td></tr><tr><th>안방·침실</th><td>암막커튼 · 이중커튼</td><td>숙면, 확실한 빛 차단</td></tr><tr><th>다이닝룸</th><td>쉬폰커튼</td><td>밝고 부드러운 분위기</td></tr><tr><th>주방</th><td>롤스크린 · 알루미늄블라인드</td><td>간결, 관리 편의</td></tr><tr><th>욕실·다용도실</th><td>알루미늄블라인드</td><td>습기에 강함</td></tr><tr><th>서재</th><td>우드블라인드</td><td>차분한 집중 분위기</td></tr><tr><th>사무실·회의실</th><td>콤비블라인드</td><td>빛 조절, 깔끔함</td></tr><tr><th>저층 (사생활 중요)</th><td>비침 적은 쉬폰 + 암막/콤비</td><td>채광은 살리되 시야 차단</td></tr></tbody>
+    </table>
+    <p class="note">카탈로그 사진과 실제 원단은 다릅니다. <a href="/문의#visit" style="color:var(--primary);font-weight:700">매장에서 원단 직접 보기 →</a></p>
+  </div>
+</section>
+
+<section class="why sec-gray" id="price">
+  <div class="container why-grid">
+    <div class="img-zoom"><img src="/images/case-living-double-ochang-v3.png" alt="오창 거실 이중커튼 시공" loading="lazy"></div>
+    <div>
+      <p class="eyebrow">Price guide</p>
+      <h2 class="h2">가격은 얼마부터<br>시작할까요?</h2>
+      <p class="why-lead">정확한 금액은 창마다 크기·원단이 달라서 미리 정해두기 어려워요. 대신 전화 한 통이면 제품별 대략적인 시작 가격대를 바로 안내해 드립니다.</p>
+      <div class="acc"><div class="acc-item open"><button aria-expanded="true"><span class="acc-ic"></span>창문 크기</button><div class="acc-panel"><p>폭과 높이, 창의 개수</p></div></div><div class="acc-item"><button aria-expanded="false"><span class="acc-ic"></span>원단 종류</button><div class="acc-panel"><p>쉬폰·암막·이중·기능성 원단</p></div></div><div class="acc-item"><button aria-expanded="false"><span class="acc-ic"></span>주름 방식</button><div class="acc-panel"><p>2배 주름·3배 주름 등</p></div></div><div class="acc-item"><button aria-expanded="false"><span class="acc-ic"></span>형상기억 여부</button><div class="acc-panel"><p>주름 형태 유지 가공 여부</p></div></div><div class="acc-item"><button aria-expanded="false"><span class="acc-ic"></span>설치비 포함 여부</button><div class="acc-panel"><p>방문 설치비 포함 견적</p></div></div></div>
+      <div class="why-foot">
+        <small>정확한 금액은 방문 실측 후 확정해 드립니다. 청주·오창·오송 지역 방문 실측 무료, 그 외 지역은 전화로 문의해 주세요.</small>
+        <a class="btn btn-dark" href={`tel:${business.phone}`}>지금 전화로 대략 안내받기 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="container row">
+    <div><p class="eyebrow">Fabric expertise</p><h2 class="h2">원단은 카탈로그가 아니라<br>소재로 고릅니다</h2></div>
+    <p>본대로홈은 패션디자인산업기사·양장기능사 자격을 바탕으로 원단의 소재 특성과 봉제 구조를 직접 보고 추천해요. 카탈로그 사진만 보고 권하는 것과 다릅니다. 미싱을 직접 보유하고 있어 기장이 안 맞거나 수선이 필요할 때 공장에 다시 보내지 않고 현장에서 바로 처리합니다.</p>
+  </div>
+</section>
+
+<section class="visit">
+  <div class="container">
+    <p class="eyebrow">Contact us</p>
+    <h2 class="h2">어떤 게 맞을지<br>함께 골라 드릴게요</h2>
+    <p>전화 한 통이면 공간에 맞는 제품과 대략적 가격대를 바로 안내해 드려요. 청주·오창·오송 방문 실측 무료입니다.</p>
+    <div class="info"><span>매장 {business.storePhone} · 휴대폰 {business.phone}</span><span>{business.hours.display} · {business.hours.holiday}</span></div>
+    <div class="actions">
+      <a class="btn btn-primary" href={`tel:${business.phone}`}>지금 전화 상담하기 <svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg></a>
+      <a class="btn btn-line" href="/문의#visit">매장 방문하기</a>
+    </div>
+  </div>
+</section>
   </main>
-  <Footer />
-  <MobileFloatingCall />
+  <SiteFooter />
 </BaseLayout>

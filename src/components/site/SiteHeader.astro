@@ -1,0 +1,30 @@
+---
+import { business, navLinks } from '../../data/business';
+
+// 현재 위치 표시: 한글 경로는 빌드 환경에 따라 NFD로 올 수 있어 디코드 후 NFC로 맞춘다.
+const path = decodeURIComponent(Astro.url.pathname).normalize('NFC').replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const links = [{ href: '/', label: '홈' }, ...navLinks];
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="/"><img src="/images/mark.png" alt="" width="34" height="34" /><span>{business.name}</span></a>
+    <nav class="gnb" aria-label="주 메뉴">
+      {links.map((l) => <a class:list={{ active: isActive(l.href) }} href={l.href} aria-current={isActive(l.href) ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <a class="hd-call" href={`tel:${business.phone}`}>상담 전화 : <b>{business.phone}</b></a>
+    <button class="menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mnav">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M8 12h12M4 17h16" /></svg>
+    </button>
+  </div>
+</header>
+<div class="mnav" id="mnav" aria-label="모바일 메뉴">
+  <div class="mnav-panel">
+    <button class="mnav-close" type="button" aria-label="메뉴 닫기">×</button>
+    <nav>
+      {links.map((l) => <a class:list={{ active: isActive(l.href) }} href={l.href}>{l.label}</a>)}
+    </nav>
+    <a class="btn btn-primary" href={`tel:${business.phone}`}>전화 상담 {business.phone}</a>
+  </div>
+</div>

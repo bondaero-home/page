@@ -1,22 +1,16 @@
 ---
+// FAQ — 디자인 v3 (2026-11). 질문·답변은 data/faq.ts 하나에서 화면과 FAQPage JSON-LD가 함께 나온다.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PromoBanner from '../components/PromoBanner.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import MobileFloatingCall from '../components/MobileFloatingCall.astro';
-import FinalCTA from '../components/FinalCTA.astro';
-import FaqIntro from '../components/faq/FaqIntro.astro';
-import CategoryNav from '../components/faq/CategoryNav.astro';
-import CategoryBlock from '../components/faq/CategoryBlock.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
-import { css } from '../lib/css';
+import { business } from '../data/business';
 import { CATEGORIES } from '../data/faq';
 
 const title = '자주 묻는 질문 — 커튼·블라인드 | 본대로홈 (청주 오창)';
 const description =
   '커튼 가격대, 방문 실측, 제작 기간, 발주 취소, 커튼 vs 블라인드, A/S까지. 청주 오창 맞춤 커튼 전문점이 자주 묻는 질문에 답해드려요.';
 
-// ── JSON-LD ──────────────────────────────────────────────
 // 답변(a)은 내부 링크가 섞인 HTML 문자열이다. FAQPage의 answer가 허용하는 태그는
 // 제한적이고 style 속성은 그 목록에 없어서, 마크업을 걷어내고 본문만 넘긴다.
 const toPlainText = (html: string) =>
@@ -44,31 +38,60 @@ const faqPage = {
     }))
   ),
 };
+const ARROW = '<svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5"/></svg>';
 ---
 <BaseLayout title={title} description={description}>
   <Fragment slot="head">
     <JsonLd schema={faqPage} />
   </Fragment>
 
-  <PromoBanner />
-  <Header />
-  <main>
-    <FaqIntro />
-    <section class="block" style={css({ paddingTop: 64 })}>
-      <div class="container" style={css({ maxWidth: 820 })}>
-        <CategoryNav />
-        {CATEGORIES.map((c, i) => (
-          <CategoryBlock cat={c} startOpen={i === 0} />
+  <SiteHeader />
+  <main id="main">
+    <section class="subhero" aria-label="FAQ">
+      <img src="/images/contact-store-interior-v3.webp" alt="" />
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="wrap"><div class="container">
+        <div class="crumb"><a href="/">홈</a> / FAQ</div>
+        <p class="eyebrow">FAQ</p>
+        <h1>자주 묻는 질문</h1>
+        <p>커튼 가격대, 방문 실측, 제작 기간, 발주 취소, 커튼 vs 블라인드, A/S까지. 자주 묻는 질문에 답해드려요.</p>
+      </div></div>
+    </section>
+
+    <section class="sec" id="faq">
+      <div class="container faq-wrap">
+        <div class="chips">{CATEGORIES.map((c) => <a class="chip" href={`#${c.id}`}>{c.title}</a>)}</div>
+        {CATEGORIES.map((c, ci) => (
+          <div class="fcat" id={c.id}>
+            <div class="fcat-head"><h2>{c.title}</h2><span>{c.desc}</span></div>
+            <div class="acc">
+              {c.items.map((item, i) => {
+                const open = ci === 0 && i === 0;
+                return (
+                  <div class:list={['acc-item', { open }]}>
+                    <button type="button" aria-expanded={open ? 'true' : 'false'}><span class="acc-ic"></span><span><span class="q">Q.</span> {item.q}</span></button>
+                    <div class="acc-panel"><p set:html={item.a} /></div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         ))}
       </div>
     </section>
-    <FinalCTA
-      titleHtml="여기 없는 질문은,<br />전화 한 통이면 됩니다"
-      leadHtml="궁금한 게 더 있으시면 편하게 전화 주세요. 진행 방법과 대략적인 가격대를 바로 알려드려요.<br />청주·오창·오송 방문 실측 무료입니다."
-      primaryLabel="지금 전화 상담하기"
-      secondaryLabel="매장 방문하기"
-    />
+
+    <section class="visit">
+      <div class="container">
+        <p class="eyebrow">Contact us</p>
+        <h2 class="h2">여기 없는 질문은,<br />전화 한 통이면 됩니다</h2>
+        <p>궁금한 게 더 있으시면 편하게 전화 주세요. 진행 방법과 대략적인 가격대를 바로 알려드려요. 청주·오창·오송 방문 실측 무료입니다.</p>
+        <div class="info"><span>매장 {business.storePhone} · 휴대폰 {business.phone}</span><span>{business.hours.display} · {business.hours.holiday}</span></div>
+        <div class="actions">
+          <a class="btn btn-primary" href={`tel:${business.phone}`}>지금 전화 상담하기 <Fragment set:html={ARROW} /></a>
+          <a class="btn btn-line" href="/문의#visit">매장 방문하기</a>
+        </div>
+      </div>
+    </section>
   </main>
-  <Footer />
-  <MobileFloatingCall />
+  <SiteFooter />
 </BaseLayout>
